@@ -47,3 +47,8 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+.Rproj.user
+
+# Annoying macOS artifacts
+.DS_Store
+

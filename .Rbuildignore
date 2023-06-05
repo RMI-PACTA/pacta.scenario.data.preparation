@@ -1,2 +1,4 @@
 ^pacta\.scenario\.data\.preparation\.Rproj$
 ^\.Rproj\.user$
+^codecov\.yml$
+^\.github$

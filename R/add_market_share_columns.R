@@ -32,7 +32,7 @@ add_market_share_columns <- function(data, reference_year) {
 
 add_technology_fair_share_ratio <- function(data) {
   data <- dplyr::ungroup(data)
-  data <- dplyr::group_by(data, !!!syms(c(common_fs_groups(), "technology")))
+  data <- dplyr::group_by(data, !!!rlang::syms(c(common_fs_groups(), "technology")))
   data <- dplyr::arrange(data, data$year, .by_group = TRUE)
   data <- dplyr::mutate(data, tmsr = (data$value - dplyr::first(data$value)) / dplyr::first(data$value))
 
@@ -47,10 +47,10 @@ add_technology_fair_share_ratio <- function(data) {
 
 add_market_fair_share_percentage <- function(data) {
   data <- dplyr::ungroup(data)
-  data <- dplyr::group_by(data, !!!syms(c(common_fs_groups(), "year")))
+  data <- dplyr::group_by(data, !!!rlang::syms(c(common_fs_groups(), "year")))
   data <- dplyr::arrange(data, data$year, .by_group = TRUE)
   data <- dplyr::mutate(data, sector_total_by_year = sum(data$value))
-  data <- dplyr::group_by(data, !!!syms(c(common_fs_groups(), "technology")))
+  data <- dplyr::group_by(data, !!!rlang::syms(c(common_fs_groups(), "technology")))
   data <- dplyr::mutate(data, smsp = (data$value - dplyr::first(data$value)) / dplyr::first(data$sector_total_by_year))
 
   dplyr::ungroup(data)

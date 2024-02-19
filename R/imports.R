@@ -1,0 +1,7 @@
+globalVariables(
+  c(
+    ".",
+    ".data",
+    ".env"
+  )
+)

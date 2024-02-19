@@ -1,6 +1,6 @@
 #' Format scenario data for P4I
 #'
-#' @param data A scenario dataset, like [pacta.scenario.preparation::weo_2021].
+#' @param data A scenario dataset.
 #' @param green_techs A list of green technologies. For these, a `direction` of
 #'   "increasing" will be assigned, and the `smsp` column will be used to assign
 #'   a `fair_share_perc`. Otherwise the `direction` will be `decreasing` and the

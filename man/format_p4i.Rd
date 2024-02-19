@@ -7,7 +7,7 @@
 format_p4i(data, green_techs)
 }
 \arguments{
-\item{data}{A scenario dataset, like \link[pacta.scenario.preparation:weo_2021]{pacta.scenario.preparation::weo_2021}.}
+\item{data}{A scenario dataset.}
 
 \item{green_techs}{A list of green technologies. For these, a \code{direction} of
 "increasing" will be assigned, and the \code{smsp} column will be used to assign

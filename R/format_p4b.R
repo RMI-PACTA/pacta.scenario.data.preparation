@@ -1,6 +1,6 @@
 #' Format scenario data for P4B
 #'
-#' @param data A scenario dataset, like [pacta.scenario.preparation::weo_2021].
+#' @param data A scenario dataset.
 
 #'
 #' @return A scenario dataset, with columns renamed to be consistent with
@@ -30,7 +30,7 @@ format_p4b <- function(data) {
     tmsr = .data$tmsr + 1,
   )
 
-  data <- dplyr::left_join(data, pacta.scenario.preparation::dictionary_p4i_p4b, by = c(source = "p4i_label"))
+  data <- dplyr::left_join(data, dictionary_p4i_p4b(), by = c(source = "p4i_label"))
   data <- dplyr::mutate(sector = ifelse(.data$sector == "oil&gas", "oil and gas", .data$sector))
 
   dplyr::transmute(

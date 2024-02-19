@@ -30,13 +30,13 @@ format_p4b_ei <- function(data) {
   check_crucial_names(data, crucial_names)
 
   data <- data %>%
-    mutate(
+    dplyr::mutate(
       scenario = tolower(.data$scenario),
       sector = tolower(.data$sector),
       technology = tolower(.data$technology),
       scenario_geography = tolower(.data$scenario_geography)
     ) %>%
-    mutate(
+    dplyr::mutate(
       emission_factor_unit = dplyr::case_when(
         .data$sector == "cement" ~ "tonnes of CO2 per tonne of cement",
         .data$sector == "aviation" ~ "tonnes of CO2 per passenger per km travelled",
@@ -45,7 +45,7 @@ format_p4b_ei <- function(data) {
       )
     ) %>%
     dplyr::left_join(pacta.scenario.preparation::dictionary_p4i_p4b, by = c(source = "p4i_label")) %>%
-    mutate(sector = ifelse(.data$sector == "oil&gas", "oil and gas", .data$sector))
+    dplyr::mutate(sector = ifelse(.data$sector == "oil&gas", "oil and gas", .data$sector))
 
   data %>%
     dplyr::transmute(

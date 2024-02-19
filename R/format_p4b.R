@@ -31,7 +31,7 @@ format_p4b <- function(data) {
   check_crucial_names(data, crucial_names)
 
   data <- data %>%
-    mutate(
+    dplyr::mutate(
       scenario = tolower(.data$scenario),
       sector = tolower(.data$sector),
       technology = tolower(.data$technology),
@@ -39,7 +39,7 @@ format_p4b <- function(data) {
       tmsr = .data$tmsr + 1,
     ) %>%
     dplyr::left_join(pacta.scenario.preparation::dictionary_p4i_p4b, by = c(source = "p4i_label")) %>%
-    mutate(sector = ifelse(.data$sector == "oil&gas", "oil and gas", .data$sector))
+    dplyr::mutate(sector = ifelse(.data$sector == "oil&gas", "oil and gas", .data$sector))
 
   data %>%
     dplyr::transmute(

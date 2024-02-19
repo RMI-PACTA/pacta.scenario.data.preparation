@@ -27,17 +27,17 @@ format_p4i <- function(data, green_techs) {
 
   data <- data %>%
     dplyr::mutate(
-      direction = if_else(.data$technology %in% .env$green_techs, "increasing", "declining"),
-      fair_share_perc = if_else(.data$direction == "declining", .data$tmsr, .data$smsp)
+      direction = dplyr::if_else(.data$technology %in% .env$green_techs, "increasing", "declining"),
+      fair_share_perc = dplyr::if_else(.data$direction == "declining", .data$tmsr, .data$smsp)
     )
 
   data <- data %>% dplyr::mutate(
-    technology = if_else(
+    technology = dplyr::if_else(
       .data$sector == "HDV",
       paste0(.data$technology, "_", .data$sector),
       .data$technology
     ),
-    sector = if_else(
+    sector = dplyr::if_else(
       .data$sector == "HDV",
       "Automotive",
       .data$sector

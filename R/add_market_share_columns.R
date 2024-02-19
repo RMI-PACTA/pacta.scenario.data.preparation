@@ -16,7 +16,7 @@ add_market_share_columns <- function(data, reference_year) {
 
   if (!(reference_year %in% data$year)) {
     rlang::abort(
-      glue(
+      glue::glue(
         "Data must contain reference year: {reference_year}."),
       class = "missing_year"
     )

@@ -25,13 +25,14 @@ format_p4i <- function(data, green_techs) {
 
   check_crucial_names(data, crucial_names)
 
-  data <- data %>%
-    dplyr::mutate(
+  data <- dplyr::mutate(
+      data,
       direction = dplyr::if_else(.data$technology %in% .env$green_techs, "increasing", "declining"),
       fair_share_perc = dplyr::if_else(.data$direction == "declining", .data$tmsr, .data$smsp)
     )
 
-  data <- data %>% dplyr::mutate(
+  data <- dplyr::mutate(
+    data,
     technology = dplyr::if_else(
       .data$sector == "HDV",
       paste0(.data$technology, "_", .data$sector),
@@ -44,8 +45,8 @@ format_p4i <- function(data, green_techs) {
     )
   )
 
-  data %>%
-    dplyr::transmute(
+  dplyr::transmute(
+      data,
       scenario_source = as.character(.data$source),
       .data$scenario_geography,
       .data$scenario,

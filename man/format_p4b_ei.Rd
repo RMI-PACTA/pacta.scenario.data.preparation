@@ -16,11 +16,3 @@ r2dii.analysis target_sda input requirements.
 \description{
 Format scenario data for P4B
 }
-\examples{
-library(dplyr)
-weo_2022 \%>\%
-  interpolate_yearly(source, scenario, sector, technology, scenario_geography, indicator, units) \%>\%
-  filter(year >= 2022) \%>\%
-  add_market_share_columns(reference_year = 2022) \%>\%
-  format_p4b_ei()
-}

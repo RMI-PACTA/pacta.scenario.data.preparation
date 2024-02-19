@@ -9,7 +9,6 @@
 #' @return A scenario dataset, with columns renamed to be consistent with
 #'   pacta.data.preparation input requirements.
 format_p4i <- function(data, green_techs) {
-
   crucial_names <- c(
     "source",
     "scenario",
@@ -26,10 +25,10 @@ format_p4i <- function(data, green_techs) {
   check_crucial_names(data, crucial_names)
 
   data <- dplyr::mutate(
-      data,
-      direction = dplyr::if_else(.data$technology %in% .env$green_techs, "increasing", "declining"),
-      fair_share_perc = dplyr::if_else(.data$direction == "declining", .data$tmsr, .data$smsp)
-    )
+    data,
+    direction = dplyr::if_else(.data$technology %in% .env$green_techs, "increasing", "declining"),
+    fair_share_perc = dplyr::if_else(.data$direction == "declining", .data$tmsr, .data$smsp)
+  )
 
   data <- dplyr::mutate(
     data,
@@ -46,15 +45,15 @@ format_p4i <- function(data, green_techs) {
   )
 
   dplyr::transmute(
-      data,
-      scenario_source = as.character(.data$source),
-      .data$scenario_geography,
-      .data$scenario,
-      ald_sector = as.character(.data$sector),
-      .data$technology,
-      .data$units,
-      .data$year,
-      .data$direction,
-      .data$fair_share_perc
-    )
+    data,
+    scenario_source = as.character(.data$source),
+    .data$scenario_geography,
+    .data$scenario,
+    ald_sector = as.character(.data$sector),
+    .data$technology,
+    .data$units,
+    .data$year,
+    .data$direction,
+    .data$fair_share_perc
+  )
 }

@@ -7,8 +7,6 @@
 #' @return A dataset with the column `value` interpolated linearly against the
 #'   column `year`.
 interpolate_yearly <- function(data, ...) {
-
-
   data <- dplyr::group_by(data, ...)
   data <- tidyr::complete(data, year = tidyr::full_seq(.data$year, 1))
   data <- dplyr::mutate(

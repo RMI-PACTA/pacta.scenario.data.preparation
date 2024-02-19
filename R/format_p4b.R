@@ -9,12 +9,11 @@
 #' @examples
 #' library(dplyr)
 #' weo_2022 %>%
-#'   interpolate_yearly(source,scenario, sector, technology, scenario_geography, indicator, units) %>%
+#'   interpolate_yearly(source, scenario, sector, technology, scenario_geography, indicator, units) %>%
 #'   filter(year >= 2022) %>%
 #'   add_market_share_columns(reference_year = 2022) %>%
 #'   format_p4b()
 format_p4b <- function(data) {
-
   crucial_names <- c(
     "source",
     "scenario",
@@ -40,7 +39,7 @@ format_p4b <- function(data) {
   )
 
   data <- dplyr::left_join(data, pacta.scenario.preparation::dictionary_p4i_p4b, by = c(source = "p4i_label"))
-    data <- dplyr::mutate(sector = ifelse(.data$sector == "oil&gas", "oil and gas", .data$sector))
+  data <- dplyr::mutate(sector = ifelse(.data$sector == "oil&gas", "oil and gas", .data$sector))
 
   dplyr::transmute(
     data,

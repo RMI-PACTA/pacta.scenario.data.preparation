@@ -9,12 +9,11 @@
 #' @examples
 #' library(dplyr)
 #' weo_2022 %>%
-#'   interpolate_yearly(source,scenario, sector, technology, scenario_geography, indicator, units) %>%
+#'   interpolate_yearly(source, scenario, sector, technology, scenario_geography, indicator, units) %>%
 #'   filter(year >= 2022) %>%
 #'   add_market_share_columns(reference_year = 2022) %>%
 #'   format_p4b_ei()
 format_p4b_ei <- function(data) {
-
   crucial_names <- c(
     "source",
     "scenario",

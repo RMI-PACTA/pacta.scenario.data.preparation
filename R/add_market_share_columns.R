@@ -17,7 +17,8 @@ add_market_share_columns <- function(data, reference_year) {
   if (!(reference_year %in% data$year)) {
     rlang::abort(
       glue::glue(
-        "Data must contain reference year: {reference_year}."),
+        "Data must contain reference year: {reference_year}."
+      ),
       class = "missing_year"
     )
   }
@@ -30,7 +31,6 @@ add_market_share_columns <- function(data, reference_year) {
 }
 
 add_technology_fair_share_ratio <- function(data) {
-
   data <- dplyr::ungroup(data)
   data <- dplyr::group_by(data, !!!syms(c(common_fs_groups(), "technology")))
   data <- dplyr::arrange(data, data$year, .by_group = TRUE)
@@ -43,11 +43,9 @@ add_technology_fair_share_ratio <- function(data) {
   data <- dplyr::mutate(data, tmsr = ifelse(data$value == 0 & dplyr::first(data$value) == 0, 0, data$tmsr))
 
   dplyr::ungroup(data)
-
 }
 
 add_market_fair_share_percentage <- function(data) {
-
   data <- dplyr::ungroup(data)
   data <- dplyr::group_by(data, !!!syms(c(common_fs_groups(), "year")))
   data <- dplyr::arrange(data, data$year, .by_group = TRUE)

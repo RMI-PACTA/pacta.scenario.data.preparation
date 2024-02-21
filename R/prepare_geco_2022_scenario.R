@@ -46,7 +46,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
   )
   geco_2022_automotive <- dplyr::rename(
     geco_2022_automotive,
-    technology = TechnologyName
+    technology = .data$TechnologyName
   )
 
   geco_2022_automotive <- tidyr::pivot_longer(
@@ -132,7 +132,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
   geco_2022_fossil_fuels <- tidyr::pivot_longer(
     geco_2022_fossil_fuels,
-    cols = matches("x20[0-9]{2}$"),
+    cols = tidyr::matches("x20[0-9]{2}$"),
     names_to = "year",
     names_prefix = "x",
     names_transform = list(year = as.numeric),
@@ -156,7 +156,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
   geco_2022_power <- dplyr::filter(
     geco_2022_power,
     # actually those technology are already included in Coal/Gas/Biomass and capacities are actually double counted if we don't filter
-    !Technology %in% c("Coal with CCUS", "Gas with CCUS", "Biomass & Waste CCUS")
+    !.data$Technology %in% c("Coal with CCUS", "Gas with CCUS", "Biomass & Waste CCUS")
   )
 
   geco_2022_power <- janitor::clean_names(geco_2022_power)

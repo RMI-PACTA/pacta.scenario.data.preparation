@@ -23,7 +23,7 @@ bridge_technologies <- function(data, technology_bridge) {
   )
 
   out <- dplyr::mutate(out, technology = NULL)
-  dplyr::rename(out, technology = .data$TechnologyName)
+  dplyr::rename(out, technology = "TechnologyName")
 }
 
 dictionary_p4i_p4b <- function() {

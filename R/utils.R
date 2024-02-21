@@ -1,4 +1,8 @@
-standardized_scenario_columns <- function() {
+prepared_scenario_names <- function() {
+  c(scenario_summary_groups(), "value")
+}
+
+scenario_summary_groups <- function() {
   c(
     "source",
     "scenario",
@@ -7,9 +11,19 @@ standardized_scenario_columns <- function() {
     "technology",
     "indicator",
     "units",
-    "year",
-    "value"
+    "year"
   )
+}
+
+bridge_technologies <- function(data, technology_bridge) {
+  out <- dplyr::left_join(
+    data,
+    technology_bridge,
+    by = c("technology" = "TechnologyAll")
+  )
+
+  out <- dplyr::mutate(out, technology = NULL)
+  dplyr::rename(out, technology = "TechnologyName")
 }
 
 dictionary_p4i_p4b <- function() {

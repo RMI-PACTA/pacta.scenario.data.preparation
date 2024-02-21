@@ -34,64 +34,11 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     geco_2022_automotive_raw
   )
 
-
-  # format fossil fuels ----------------------------------------------------------
-  geco_2022_fossil_fuels <- dplyr::bind_rows(
+  geco_2022_fossil_fuels <- prepare_geco_2022_fossil_fuels_scenario(
+    technology_bridge,
     geco_2022_fossil_fuels_15c_raw,
     geco_2022_fossil_fuels_ndc_raw,
     geco_2022_fossil_fuels_ref_raw
-  )
-
-  geco_2022_fossil_fuels <- janitor::clean_names(geco_2022_fossil_fuels)
-
-  geco_2022_fossil_fuels <- dplyr::rename(
-    geco_2022_fossil_fuels,
-    source = "geco",
-    scenario_geography = "region",
-    technology = "fuel",
-    units = "unit",
-    indicator = "variable"
-  )
-
-  geco_2022_fossil_fuels <- dplyr::mutate(
-    geco_2022_fossil_fuels,
-    x1 = NULL
-  )
-
-  geco_2022_fossil_fuels <- dplyr::mutate(
-    geco_2022_fossil_fuels,
-    sector = ifelse(.data$technology == "Coal", "Coal", "Oil&Gas")
-  )
-
-  geco_2022_fossil_fuels <- dplyr::left_join(
-    geco_2022_fossil_fuels,
-    technology_bridge,
-    by = c("technology" = "TechnologyAll")
-  )
-
-  geco_2022_fossil_fuels <- dplyr::mutate(
-    geco_2022_fossil_fuels,
-    technology = NULL
-  )
-
-  geco_2022_fossil_fuels <- dplyr::rename(
-    geco_2022_fossil_fuels,
-    technology = "TechnologyName"
-  )
-
-  geco_2022_fossil_fuels <- tidyr::pivot_longer(
-    geco_2022_fossil_fuels,
-    cols = tidyr::matches("x20[0-9]{2}$"),
-    names_to = "year",
-    names_prefix = "x",
-    names_transform = list(year = as.numeric),
-    values_to = "value",
-    values_ptypes = numeric()
-  )
-
-  geco_2022_fossil_fuels <- dplyr::mutate(
-    geco_2022_fossil_fuels,
-    year = as.double(.data$year)
   )
 
 
@@ -424,5 +371,59 @@ prepare_geco_2022_automotive_scenario <- function(technology_bridge,
     sector = ifelse(
       .data$sector == "Light vehicles", "Automotive", "HDV"
     )
+  )
+}
+
+prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
+                                                    geco_2022_fossil_fuels_15c_raw,
+                                                    geco_2022_fossil_fuels_ndc_raw,
+                                                    geco_2022_fossil_fuels_ref_raw) {
+  out <- dplyr::bind_rows(
+    geco_2022_fossil_fuels_15c_raw,
+    geco_2022_fossil_fuels_ndc_raw,
+    geco_2022_fossil_fuels_ref_raw
+  )
+
+  out <- janitor::clean_names(out)
+
+  out <- dplyr::rename(
+    out,
+    source = "geco",
+    scenario_geography = "region",
+    technology = "fuel",
+    units = "unit",
+    indicator = "variable"
+  )
+
+  out <- dplyr::mutate(out, x1 = NULL)
+
+  out <- dplyr::mutate(
+    out,
+    sector = ifelse(.data$technology == "Coal", "Coal", "Oil&Gas")
+  )
+
+  out <- dplyr::left_join(
+    out,
+    technology_bridge,
+    by = c("technology" = "TechnologyAll")
+  )
+
+  out <- dplyr::mutate(out, technology = NULL)
+
+  out <- dplyr::rename(out, technology = "TechnologyName")
+
+  out <- tidyr::pivot_longer(
+    out,
+    cols = tidyr::matches("x20[0-9]{2}$"),
+    names_to = "year",
+    names_prefix = "x",
+    names_transform = list(year = as.numeric),
+    values_to = "value",
+    values_ptypes = numeric()
+  )
+
+  dplyr::mutate(
+    out,
+    year = as.double(.data$year)
   )
 }

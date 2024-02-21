@@ -49,34 +49,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     geco_2022_power_ref_raw
   )
 
-  # format steel ------------------------------------------------------------
-  geco_2022_steel <- janitor::clean_names(geco_2022_steel_raw)
-
-  geco_2022_steel <- dplyr::rename(geco_2022_steel, scenario_geography = "region")
-
-  geco_2022_steel <- dplyr::mutate(
-    geco_2022_steel,
-    units = "tCO2/t Steel",
-    indicator = "Emission Intensity",
-    technology = NA_character_
-  )
-
-  geco_2022_steel <- tidyr::pivot_longer(
-    geco_2022_steel,
-    cols = tidyr::matches("x[0-9]{4}$"),
-    names_to = "year",
-    names_prefix = "x",
-    names_transform = list(year = as.numeric),
-    values_to = "value",
-    values_ptypes = numeric()
-  )
-
-  geco_2022_steel <- dplyr::relocate(
-    geco_2022_steel,
-    c("source", "scenario", "indicator", "sector", "technology", "units", "scenario_geography", "year", "value")
-  )
-
-  geco_2022_steel <- dplyr::mutate(geco_2022_steel, year = as.double(.data$year))
+  geco_2022_steel <- prepare_geco_2022_steel_scenario(geco_2022_steel_raw)
 
   # format aviation ------------------------------------------------------------
   geco_2022_aviation <- janitor::clean_names(geco_2022_aviation_raw)
@@ -123,7 +96,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
 
   # combine and format ------------------------------------------------------
-  geco_2022 <- rbind(
+  geco_2022 <- dplyr::bind_rows(
     geco_2022_power,
     geco_2022_automotive,
     geco_2022_fossil_fuels,
@@ -415,4 +388,31 @@ prepare_geco_2022_power_scenario <- function(technology_bridge,
     value = sum(.data$value, na.rm = TRUE),
     .by = tidyr::all_of(scenario_summary_groups())
   )
+}
+
+prepare_geco_2022_steel_scenario <- function(geco_2022_steel_raw) {
+  out <- janitor::clean_names(geco_2022_steel_raw)
+
+  out <- dplyr::rename(out, scenario_geography = "region")
+
+  out <- dplyr::mutate(
+    out,
+    units = "tCO2/t Steel",
+    indicator = "Emission Intensity",
+    technology = NA_character_
+  )
+
+  out <- tidyr::pivot_longer(
+    out,
+    cols = tidyr::matches("x[0-9]{4}$"),
+    names_to = "year",
+    names_prefix = "x",
+    names_transform = list(year = as.numeric),
+    values_to = "value",
+    values_ptypes = numeric()
+  )
+
+  out <- dplyr::select(out, prepared_scenario_names())
+
+  out <- dplyr::mutate(out, year = as.double(.data$year))
 }

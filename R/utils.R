@@ -8,12 +8,12 @@ prepared_scenario_names <- function() {
 scenario_summary_groups <- function() {
   c(
     "source",
-    "sector",
-    "scenario_geography",
     "scenario",
+    "scenario_geography",
+    "sector",
+    "technology",
     "indicator",
     "units",
-    "technology",
     "year"
   )
 }

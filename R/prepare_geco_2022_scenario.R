@@ -42,109 +42,12 @@ prepare_geco_2022_scenario <- function(technology_bridge,
   )
 
 
-  # format power -----------------------------------------------------------------
-  geco_2022_power <- dplyr::bind_rows(
+  geco_2022_power <- prepare_geco_2022_power_scenario(
+    technology_bridge,
     geco_2022_power_15c_raw,
     geco_2022_power_ndc_raw,
     geco_2022_power_ref_raw
   )
-
-  geco_2022_power <- dplyr::filter(
-    geco_2022_power,
-    # actually those technology are already included in Coal/Gas/Biomass and capacities are actually double counted if we don't filter
-    !.data$Technology %in% c("Coal with CCUS", "Gas with CCUS", "Biomass & Waste CCUS")
-  )
-
-  geco_2022_power <- janitor::clean_names(geco_2022_power)
-
-  geco_2022_power <- dplyr::rename(
-    geco_2022_power,
-    source = "geco",
-    scenario_geography = "region",
-    units = "unit",
-    indicator = "variable"
-  )
-
-
-  geco_2022_power <- dplyr::mutate(
-    geco_2022_power,
-    sector = "Power"
-  )
-
-  geco_2022_power <- dplyr::mutate(
-    geco_2022_power,
-    technology = dplyr::case_when(
-      .data$indicator == "Capacity" & grepl("Coal", .data$technology) ~ "CoalCap",
-      .data$indicator == "Capacity" & grepl("Oil", .data$technology) ~ "OilCap",
-      .data$indicator == "Capacity" & grepl("Gas", .data$technology) ~ "GasCap",
-      .data$technology == "Other" ~ "RenewablesCap",
-      TRUE ~ .data$technology
-    )
-  )
-
-  geco_2022_power <- dplyr::left_join(geco_2022_power, technology_bridge, by = c("technology" = "TechnologyAll"))
-  geco_2022_power <- dplyr::mutate(geco_2022_power, technology = NULL)
-  geco_2022_power <- dplyr::rename(geco_2022_power, technology = "TechnologyName")
-
-
-  geco_2022_power <- tidyr::pivot_longer(
-    geco_2022_power,
-    cols = tidyr::matches("x20[0-9]{2}$"),
-    names_to = "year",
-    names_prefix = "x",
-    names_transform = list(year = as.numeric),
-    values_to = "value",
-    values_ptypes = numeric()
-  )
-
-  geco_2022_power <- dplyr::mutate(
-    # raw data is off by a magnitude of 1000. Provided capacity values are MW, but
-    # unit displays GW. We fix by dividing by 1000 and thus keep ourr standardized
-    # unit of GW power capacity
-    geco_2022_power,
-    value = .data$value / 1000
-  )
-
-
-  geco_2022_power <- dplyr::mutate(
-    geco_2022_power,
-    scenario_geography = dplyr::case_when(
-      .data$scenario_geography == "United Kingdom" ~ "UK",
-      .data$scenario_geography == "Mediterranean Middle-East" ~ "Mediteranean Middle East",
-      .data$scenario_geography == "Tunisia, Morocco and Western Sahara" ~ "Morocco & Tunisia",
-      .data$scenario_geography == "Algeria and Libya" ~ "Algeria & Libya",
-      .data$scenario_geography == "Rest of Central America and Caribbean" ~ "Rest Central America",
-      .data$scenario_geography == "Rest of Balkans" ~ "Others Balkans",
-      .data$scenario_geography == "Rest of Persian Gulf" ~ "Rest Gulf",
-      .data$scenario_geography == "Rest of Pacific" ~ "Rest Pacific",
-      .data$scenario_geography == "Rest of Sub-Saharan Africa" ~ "Rest Sub Saharan Africa",
-      .data$scenario_geography == "Rest of South America" ~ "Rest South America",
-      .data$scenario_geography == "Rest of South Asia" ~ "Rest South Asia",
-      .data$scenario_geography == "Rest of South-East Asia" ~ "Rest South East Asia",
-      .data$scenario_geography == "Russian Federation" ~ "Russia",
-      .data$scenario_geography == "Saudi Arabia" ~ "SaudiArabia",
-      .data$scenario_geography == "United States" ~ "US",
-      .data$scenario_geography == "South Africa" ~ "SouthAfrica",
-      .data$scenario_geography == "European Union" ~ "EU",
-      .data$scenario_geography == "Korea (Republic)" ~ "South Korea",
-      .data$scenario_geography == "Rest of CIS" ~ "Other CIS",
-      TRUE ~ .data$scenario_geography
-    )
-  )
-
-  geco_2022_power <- dplyr::filter(
-    geco_2022_power,
-    .data$scenario_geography != "Switzerland",
-    .data$scenario_geography != "Iceland",
-    .data$scenario_geography != "Norway"
-  )
-
-  geco_2022_power <- dplyr::summarise(
-    geco_2022_power,
-    value = sum(.data$value, na.rm = TRUE),
-    .by = tidyr::all_of(scenario_summary_groups())
-  )
-
 
   # format steel ------------------------------------------------------------
   geco_2022_steel <- janitor::clean_names(geco_2022_steel_raw)
@@ -410,5 +313,106 @@ prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
   dplyr::mutate(
     out,
     year = as.double(.data$year)
+  )
+}
+
+prepare_geco_2022_power_scenario <- function(technology_bridge,
+                                             geco_2022_power_15c_raw,
+                                             geco_2022_power_ndc_raw,
+                                             geco_2022_power_ref_raw) {
+  out <- dplyr::bind_rows(
+    geco_2022_power_15c_raw,
+    geco_2022_power_ndc_raw,
+    geco_2022_power_ref_raw
+  )
+
+  out <- dplyr::filter(
+    out,
+    # actually those technology are already included in Coal/Gas/Biomass and capacities are actually double counted if we don't filter
+    !.data$Technology %in% c("Coal with CCUS", "Gas with CCUS", "Biomass & Waste CCUS")
+  )
+
+  out <- janitor::clean_names(out)
+
+  out <- dplyr::rename(
+    out,
+    source = "geco",
+    scenario_geography = "region",
+    units = "unit",
+    indicator = "variable"
+  )
+
+
+  out <- dplyr::mutate(out, sector = "Power")
+
+  out <- dplyr::mutate(
+    out,
+    technology = dplyr::case_when(
+      .data$indicator == "Capacity" & grepl("Coal", .data$technology) ~ "CoalCap",
+      .data$indicator == "Capacity" & grepl("Oil", .data$technology) ~ "OilCap",
+      .data$indicator == "Capacity" & grepl("Gas", .data$technology) ~ "GasCap",
+      .data$technology == "Other" ~ "RenewablesCap",
+      TRUE ~ .data$technology
+    )
+  )
+
+  out <- bridge_technologies(out, technology_bridge)
+
+  out <- tidyr::pivot_longer(
+    out,
+    cols = tidyr::matches("x20[0-9]{2}$"),
+    names_to = "year",
+    names_prefix = "x",
+    names_transform = list(year = as.numeric),
+    values_to = "value",
+    values_ptypes = numeric()
+  )
+
+  out <- dplyr::mutate(
+    # raw data is off by a magnitude of 1000. Provided capacity values are MW, but
+    # unit displays GW. We fix by dividing by 1000 and thus keep ourr standardized
+    # unit of GW power capacity
+    out,
+    value = .data$value / 1000
+  )
+
+
+  out <- dplyr::mutate(
+    out,
+    scenario_geography = dplyr::case_when(
+      .data$scenario_geography == "United Kingdom" ~ "UK",
+      .data$scenario_geography == "Mediterranean Middle-East" ~ "Mediteranean Middle East",
+      .data$scenario_geography == "Tunisia, Morocco and Western Sahara" ~ "Morocco & Tunisia",
+      .data$scenario_geography == "Algeria and Libya" ~ "Algeria & Libya",
+      .data$scenario_geography == "Rest of Central America and Caribbean" ~ "Rest Central America",
+      .data$scenario_geography == "Rest of Balkans" ~ "Others Balkans",
+      .data$scenario_geography == "Rest of Persian Gulf" ~ "Rest Gulf",
+      .data$scenario_geography == "Rest of Pacific" ~ "Rest Pacific",
+      .data$scenario_geography == "Rest of Sub-Saharan Africa" ~ "Rest Sub Saharan Africa",
+      .data$scenario_geography == "Rest of South America" ~ "Rest South America",
+      .data$scenario_geography == "Rest of South Asia" ~ "Rest South Asia",
+      .data$scenario_geography == "Rest of South-East Asia" ~ "Rest South East Asia",
+      .data$scenario_geography == "Russian Federation" ~ "Russia",
+      .data$scenario_geography == "Saudi Arabia" ~ "SaudiArabia",
+      .data$scenario_geography == "United States" ~ "US",
+      .data$scenario_geography == "South Africa" ~ "SouthAfrica",
+      .data$scenario_geography == "European Union" ~ "EU",
+      .data$scenario_geography == "Korea (Republic)" ~ "South Korea",
+      .data$scenario_geography == "Rest of CIS" ~ "Other CIS",
+      TRUE ~ .data$scenario_geography
+    )
+  )
+
+  out <- dplyr::filter(
+    out,
+    .data$scenario_geography != "Switzerland",
+    .data$scenario_geography != "Iceland",
+    .data$scenario_geography != "Norway"
+  )
+
+  out <- dplyr::summarise(
+    out,
+    value = sum(.data$value, na.rm = TRUE),
+    .by = tidyr::all_of(scenario_summary_groups())
   )
 }

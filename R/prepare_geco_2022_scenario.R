@@ -424,7 +424,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     rlang::abort("`NA` scenario names are not well-defined. Please review!")
   }
 
-  geco_2022 <- dplyr::select(
+  dplyr::select(
     geco_2022,
     prepared_scenario_names()
   )

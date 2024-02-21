@@ -1,14 +1,20 @@
-standardized_scenario_columns <- function() {
+prepared_scenario_names <- function() {
+  c(
+    scenario_summary_groups(),
+    "value"
+  )
+}
+
+scenario_summary_groups <- function() {
   c(
     "source",
-    "scenario",
-    "scenario_geography",
     "sector",
-    "technology",
+    "scenario_geography",
+    "scenario",
     "indicator",
     "units",
-    "year",
-    "value"
+    "technology",
+    "year"
   )
 }
 

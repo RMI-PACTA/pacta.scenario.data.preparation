@@ -72,21 +72,10 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     indicator = "variable"
   )
 
-  scenario_groups <- c(
-    "source",
-    "sector",
-    "scenario_geography",
-    "scenario",
-    "indicator",
-    "units",
-    "technology",
-    "year"
-  )
-
   geco_2022_automotive <- dplyr::summarise(
     geco_2022_automotive,
     value = sum(.data$value, na.rm = TRUE),
-    .by = tidyr::all_of(scenario_groups)
+    .by = tidyr::all_of(scenario_summary_groups())
   )
 
   geco_2022_automotive <- dplyr::mutate(
@@ -254,21 +243,10 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     .data$scenario_geography != "Norway"
   )
 
-  scenario_groups <- c(
-    "source",
-    "sector",
-    "scenario_geography",
-    "scenario",
-    "indicator",
-    "units",
-    "technology",
-    "year"
-  )
-
   geco_2022_power <- dplyr::summarise(
     geco_2022_power,
     value = sum(.data$value, na.rm = TRUE),
-    .by = tidyr::all_of(scenario_groups)
+    .by = tidyr::all_of(scenario_summary_groups())
   )
 
 
@@ -448,6 +426,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
   geco_2022 <- dplyr::select(
     geco_2022,
-    pacta.scenario.data.preparation:::standardized_scenario_columns()
+    prepared_scenario_names()
   )
 }

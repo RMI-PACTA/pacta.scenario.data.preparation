@@ -327,7 +327,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 }
 
 prepare_geco_2022_automotive_scenario <- function(technology_bridge,
-                                         geco_2022_automotive_raw) {
+                                                  geco_2022_automotive_raw) {
   # TODO: currently still using retirement rates from geco2021
   # needs to be revisited, once we get an update
   out <- janitor::clean_names(geco_2022_automotive_raw)

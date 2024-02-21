@@ -34,7 +34,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
   # TODO: currently still using retirement rates from geco2021
   # needs to be revisited, once we get an update
-  logger::log_info("Formatting GECO 2022 automotive data.")
   geco_2022_automotive <- janitor::clean_names(geco_2022_automotive_raw)
   geco_2022_automotive <- dplyr::left_join(
     geco_2022_automotive,
@@ -99,7 +98,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
 
   # format fossil fuels ----------------------------------------------------------
-  logger::log_info("Formatting GECO 2022 fossil fuels data.")
   geco_2022_fossil_fuels <- dplyr::bind_rows(
     geco_2022_fossil_fuels_15c_raw,
     geco_2022_fossil_fuels_ndc_raw,
@@ -160,7 +158,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
 
   # format power -----------------------------------------------------------------
-  logger::log_info("Formatting GECO 2022 power data.")
   geco_2022_power <- dplyr::bind_rows(
     geco_2022_power_15c_raw,
     geco_2022_power_ndc_raw,
@@ -276,7 +273,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
 
   # format steel ------------------------------------------------------------
-  logger::log_info("Formatting GECO 2022 steel data.")
   geco_2022_steel <- janitor::clean_names(geco_2022_steel_raw)
 
   geco_2022_steel <- dplyr::rename(geco_2022_steel, scenario_geography = "region")
@@ -306,7 +302,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
   geco_2022_steel <- dplyr::mutate(geco_2022_steel, year = as.double(.data$year))
 
   # format aviation ------------------------------------------------------------
-  logger::log_info("Formatting GECO 2022 aviation data.")
   geco_2022_aviation <- janitor::clean_names(geco_2022_aviation_raw)
 
   geco_2022_aviation <- dplyr::rename(
@@ -351,7 +346,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
 
   # combine and format ------------------------------------------------------
-  logger::log_info("Combining and formatting GECO 2022 data.")
   geco_2022 <- rbind(
     geco_2022_power,
     geco_2022_automotive,
@@ -449,7 +443,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
   )
 
   if (any(is.na(unique(geco_2022$scenario)))) {
-    logger::log_error("`NA` scenario names are not well-defined. Please review!")
+    rlang::abort("`NA` scenario names are not well-defined. Please review!")
   }
 
   geco_2022 <- dplyr::select(

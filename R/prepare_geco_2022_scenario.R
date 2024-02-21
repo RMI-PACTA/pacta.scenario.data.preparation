@@ -54,7 +54,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     geco_2022_fossil_fuels_ref_raw
   )
 
-
   geco_2022_power <- prepare_geco_2022_power_scenario(
     technology_bridge,
     geco_2022_power_15c_raw,
@@ -66,7 +65,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
   geco_2022_aviation <- prepare_geco_2022_aviation_scenario(geco_2022_aviation_raw)
 
-  # combine and format ------------------------------------------------------
   geco_2022 <- dplyr::bind_rows(
     geco_2022_power,
     geco_2022_automotive,
@@ -151,7 +149,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
       TRUE ~ .data$scenario_geography
     )
   )
-
 
   geco_2022 <- dplyr::mutate(
     geco_2022,

@@ -29,59 +29,10 @@ prepare_geco_2022_scenario <- function(technology_bridge,
                                        geco_2022_power_ndc_raw,
                                        geco_2022_power_ref_raw,
                                        geco_2022_steel_raw) {
-  # format automotive ----------------------------------------------------------
 
-  # TODO: currently still using retirement rates from geco2021
-  # needs to be revisited, once we get an update
-  geco_2022_automotive <- janitor::clean_names(geco_2022_automotive_raw)
-  geco_2022_automotive <- dplyr::left_join(
-    geco_2022_automotive,
+  geco_2022_automotive <- prepare_geco_2022_automotive_scenario(
     technology_bridge,
-    by = c("technology" = "TechnologyAll")
-  )
-  geco_2022_automotive <- dplyr::mutate(
-    geco_2022_automotive,
-    technology = NULL
-  )
-  geco_2022_automotive <- dplyr::rename(
-    geco_2022_automotive,
-    technology = .data$TechnologyName
-  )
-
-  geco_2022_automotive <- tidyr::pivot_longer(
-    geco_2022_automotive,
-    cols = tidyr::matches("x20[0-9]{2}$"),
-    names_to = "year",
-    names_prefix = "x",
-    names_transform = list(year = as.numeric),
-    values_to = "value",
-    values_ptypes = numeric()
-  )
-
-  geco_2022_automotive <- dplyr::mutate(
-    geco_2022_automotive,
-    vehicle = NULL
-  )
-
-  geco_2022_automotive <- dplyr::rename(
-    geco_2022_automotive,
-    source = "geco",
-    scenario_geography = "region",
-    units = "unit",
-    indicator = "variable"
-  )
-
-  geco_2022_automotive <- dplyr::summarise(
-    geco_2022_automotive,
-    value = sum(.data$value, na.rm = TRUE),
-    .by = tidyr::all_of(scenario_summary_groups())
-  )
-
-  geco_2022_automotive <- dplyr::mutate(
-    geco_2022_automotive,
-    sector = ifelse(
-      .data$sector == "Light vehicles", "Automotive", "HDV"
-    )
+    geco_2022_automotive_raw
   )
 
 
@@ -426,5 +377,54 @@ prepare_geco_2022_scenario <- function(technology_bridge,
   dplyr::select(
     geco_2022,
     prepared_scenario_names()
+  )
+}
+
+prepare_geco_2022_automotive <- function(technology_bridge,
+                                         geco_2022_automotive_raw) {
+
+  # TODO: currently still using retirement rates from geco2021
+  # needs to be revisited, once we get an update
+  out <- janitor::clean_names(geco_2022_automotive_raw)
+  out <- dplyr::left_join(
+    out,
+    technology_bridge,
+    by = c("technology" = "TechnologyAll")
+  )
+
+  out <- dplyr::mutate(geco_2022_automotive, technology = NULL)
+  out <- dplyr::rename(out, technology = .data$TechnologyName)
+
+  out <- tidyr::pivot_longer(
+    out,
+    cols = tidyr::matches("x20[0-9]{2}$"),
+    names_to = "year",
+    names_prefix = "x",
+    names_transform = list(year = as.numeric),
+    values_to = "value",
+    values_ptypes = numeric()
+  )
+
+  out <- dplyr::mutate(out, vehicle = NULL)
+
+  out <- dplyr::rename(
+    out,
+    source = "geco",
+    scenario_geography = "region",
+    units = "unit",
+    indicator = "variable"
+  )
+
+  out <- dplyr::summarise(
+    out,
+    value = sum(.data$value, na.rm = TRUE),
+    .by = tidyr::all_of(scenario_summary_groups())
+  )
+
+  dplyr::mutate(
+    out,
+    sector = ifelse(
+      .data$sector == "Light vehicles", "Automotive", "HDV"
+    )
   )
 }

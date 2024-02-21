@@ -29,6 +29,19 @@ prepare_geco_2022_scenario <- function(technology_bridge,
                                        geco_2022_power_ndc_raw,
                                        geco_2022_power_ref_raw,
                                        geco_2022_steel_raw) {
+  stopifnot(
+    is.data.frame(technology_bridge),
+    is.data.frame(geco_2022_automotive_raw),
+    is.data.frame(geco_2022_aviation_raw),
+    is.data.frame(geco_2022_fossil_fuels_15c_raw),
+    is.data.frame(geco_2022_fossil_fuels_ndc_raw),
+    is.data.frame(geco_2022_fossil_fuels_ref_raw),
+    is.data.frame(geco_2022_power_15c_raw),
+    is.data.frame(geco_2022_power_ndc_raw),
+    is.data.frame(geco_2022_power_ref_raw),
+    is.data.frame(geco_2022_steel_raw)
+  )
+
   geco_2022_automotive <- prepare_geco_2022_automotive_scenario(
     technology_bridge,
     geco_2022_automotive_raw
@@ -348,7 +361,7 @@ prepare_geco_2022_power_scenario <- function(technology_bridge,
 prepare_geco_2022_steel_scenario <- function(geco_2022_steel_raw) {
   out <- janitor::clean_names(geco_2022_steel_raw)
 
-  out <- dplyr::rename(out, scenario_geography = "region")
+  out <- dplyr::rename(out, source = "geco", scenario_geography = "region")
 
   out <- dplyr::mutate(
     out,

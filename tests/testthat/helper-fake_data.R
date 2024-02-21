@@ -21,7 +21,7 @@
 #' @noRd
 fake_technology_bridge <- function(TechnologyName = NULL,
                                    TechnologyAll = NULL) {
-  tibble::tibble(
+  dplyr::tibble(
     TechnologyName = TechnologyName %||% "Automotive",
     TechnologyAll = TechnologyAll %||% "Cars"
   )
@@ -38,7 +38,7 @@ fake_geco_2022_automotive_raw <- function(GECO = NULL,
                                           Region = NULL,
                                           `2020` = NULL,
                                           `2025` = NULL) {
-  tibble::tibble(
+  dplyr::tibble(
     GECO = GECO %||% "GECO2022",
     Scenario = Scenario %||% "NDC-LTS",
     Vehicle = Vehicle %||% "Cars",
@@ -63,7 +63,7 @@ fake_geco_2022_aviation_raw <- function(GECO = NULL,
                                         Region = NULL,
                                         `2020` = NULL,
                                         `2025` = NULL) {
-  tibble::tibble(
+  dplyr::tibble(
     GECO = GECO %||% "GECO2022",
     Scenario = Scenario %||% "NDC-LTS",
     Variable = Variable %||% "Emission Intensity",
@@ -85,7 +85,7 @@ fake_geco_2022_fossil_fuels_raw <- function(GECO = NULL,
                                             Region = NULL,
                                             `2020` = NULL,
                                             `2025` = NULL) {
-  tibble::tibble(
+  dplyr::tibble(
     GECO = GECO %||% "GECO2022",
     Scenario = Scenario %||% "1.5C",
     Variable = Variable %||% "Production",
@@ -106,7 +106,7 @@ fake_geco_2022_power_raw <- function(GECO = NULL,
                                      Technology = NULL,
                                      `2020` = NULL,
                                      `2025` = NULL) {
-  tibble::tibble(
+  dplyr::tibble(
     GECO = GECO %||% "GECO2022",
     Scenario = Scenario %||% "1.5C",
     Variable = Variable %||% "Capacity",
@@ -128,7 +128,7 @@ fake_geco_2022_steel_raw <- function(Source = NULL,
                                      Technology = NULL,
                                      `2020` = NULL,
                                      `2025` = NULL) {
-  tibble::tibble(
+  dplyr::tibble(
     Source = Source %||% "GECO2022",
     Sector = Sector %||% "Steel",
     Scenario = Scenario %||% "1.5C",

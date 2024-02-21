@@ -24,3 +24,14 @@ dictionary_p4i_p4b <- function() {
     p4b_label = c("weo_2022", "geco_2022")
   )
 }
+
+bridge_technologies <- function(data, technology_bridge) {
+  out <- dplyr::left_join(
+    data,
+    technology_bridge,
+    by = c("technology" = "TechnologyAll")
+  )
+
+  out <- dplyr::mutate(out, technology = NULL)
+  dplyr::rename(out, technology = .data$TechnologyName)
+}

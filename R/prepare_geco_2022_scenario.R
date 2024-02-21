@@ -331,14 +331,7 @@ prepare_geco_2022_automotive_scenario <- function(technology_bridge,
   # TODO: currently still using retirement rates from geco2021
   # needs to be revisited, once we get an update
   out <- janitor::clean_names(geco_2022_automotive_raw)
-  out <- dplyr::left_join(
-    out,
-    technology_bridge,
-    by = c("technology" = "TechnologyAll")
-  )
-
-  out <- dplyr::mutate(out, technology = NULL)
-  out <- dplyr::rename(out, technology = .data$TechnologyName)
+  out <- bridge_technologies(out, technology_bridge)
 
   out <- tidyr::pivot_longer(
     out,
@@ -402,15 +395,7 @@ prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
     sector = ifelse(.data$technology == "Coal", "Coal", "Oil&Gas")
   )
 
-  out <- dplyr::left_join(
-    out,
-    technology_bridge,
-    by = c("technology" = "TechnologyAll")
-  )
-
-  out <- dplyr::mutate(out, technology = NULL)
-
-  out <- dplyr::rename(out, technology = "TechnologyName")
+  out <- bridge_technologies(out, technology_bridge)
 
   out <- tidyr::pivot_longer(
     out,

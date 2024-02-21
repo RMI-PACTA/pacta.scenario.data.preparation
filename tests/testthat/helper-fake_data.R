@@ -119,7 +119,7 @@ fake_geco_2022_power_raw <- function(GECO = NULL,
 }
 #' See `fake_technology_bridge()`
 #' @noRd
-fake_geco_2022_steel_raw <- function(GECO = NULL,
+fake_geco_2022_steel_raw <- function(Source = NULL,
                                      Sector = NULL,
                                      Scenario = NULL,
                                      Variable = NULL,
@@ -129,7 +129,7 @@ fake_geco_2022_steel_raw <- function(GECO = NULL,
                                      `2020` = NULL,
                                      `2025` = NULL) {
   tibble::tibble(
-    GECO = GECO %||% "GECO2022",
+    Source = Source %||% "GECO2022",
     Sector = Sector %||% "Steel",
     Scenario = Scenario %||% "1.5C",
     Region = Region %||% "Global",

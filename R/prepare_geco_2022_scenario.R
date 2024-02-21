@@ -361,7 +361,7 @@ prepare_geco_2022_power_scenario <- function(technology_bridge,
 prepare_geco_2022_steel_scenario <- function(geco_2022_steel_raw) {
   out <- janitor::clean_names(geco_2022_steel_raw)
 
-  out <- dplyr::rename(out, source = "geco", scenario_geography = "region")
+  out <- dplyr::rename(out, scenario_geography = "region")
 
   out <- dplyr::mutate(
     out,

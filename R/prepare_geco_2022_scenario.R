@@ -20,16 +20,15 @@
 #' @return A prepared GECO 2022 scenario data-frame.
 #' @export
 prepare_geco_2022_scenario <- function(technology_bridge,
-                                      geco_2022_automotive_raw,
-                                      geco_2022_aviation_raw,
-                                      geco_2022_fossil_fuels_15c_raw,
-                                      geco_2022_fossil_fuels_ndc_raw,
-                                      geco_2022_fossil_fuels_ref_raw,
-                                      geco_2022_power_15c_raw,
-                                      geco_2022_power_ndc_raw,
-                                      geco_2022_power_ref_raw,
-                                      geco_2022_steel_raw) {
-
+                                       geco_2022_automotive_raw,
+                                       geco_2022_aviation_raw,
+                                       geco_2022_fossil_fuels_15c_raw,
+                                       geco_2022_fossil_fuels_ndc_raw,
+                                       geco_2022_fossil_fuels_ref_raw,
+                                       geco_2022_power_15c_raw,
+                                       geco_2022_power_ndc_raw,
+                                       geco_2022_power_ref_raw,
+                                       geco_2022_steel_raw) {
   # format automotive ----------------------------------------------------------
 
   # TODO: currently still using retirement rates from geco2021

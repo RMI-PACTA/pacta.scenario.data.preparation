@@ -18,5 +18,6 @@ Imports:
     glue,
     janitor,
     rlang,
+    stringr,
     tidyr,
     zoo

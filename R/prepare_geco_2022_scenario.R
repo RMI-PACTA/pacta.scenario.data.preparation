@@ -390,7 +390,7 @@ prepare_geco_2022_automotive_scenario <- function(technology_bridge,
     by = c("technology" = "TechnologyAll")
   )
 
-  out <- dplyr::mutate(geco_2022_automotive, technology = NULL)
+  out <- dplyr::mutate(out, technology = NULL)
   out <- dplyr::rename(out, technology = .data$TechnologyName)
 
   out <- tidyr::pivot_longer(

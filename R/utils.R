@@ -1,8 +1,5 @@
 prepared_scenario_names <- function() {
-  c(
-    scenario_summary_groups(),
-    "value"
-  )
+  c(scenario_summary_groups(), "value")
 }
 
 scenario_summary_groups <- function() {
@@ -18,13 +15,6 @@ scenario_summary_groups <- function() {
   )
 }
 
-dictionary_p4i_p4b <- function() {
-  dplyr::tibble(
-    p4i_label = c("WEO2022", "GECO2022"),
-    p4b_label = c("weo_2022", "geco_2022")
-  )
-}
-
 bridge_technologies <- function(data, technology_bridge) {
   out <- dplyr::left_join(
     data,
@@ -34,4 +24,11 @@ bridge_technologies <- function(data, technology_bridge) {
 
   out <- dplyr::mutate(out, technology = NULL)
   dplyr::rename(out, technology = .data$TechnologyName)
+}
+
+dictionary_p4i_p4b <- function() {
+  dplyr::tibble(
+    p4i_label = c("WEO2022", "GECO2022"),
+    p4b_label = c("weo_2022", "geco_2022")
+  )
 }

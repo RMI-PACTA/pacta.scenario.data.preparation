@@ -51,49 +51,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
 
   geco_2022_steel <- prepare_geco_2022_steel_scenario(geco_2022_steel_raw)
 
-  # format aviation ------------------------------------------------------------
-  geco_2022_aviation <- janitor::clean_names(geco_2022_aviation_raw)
-
-  geco_2022_aviation <- dplyr::rename(
-    geco_2022_aviation,
-    source = "geco",
-    scenario_geography = "region",
-    units = "unit",
-    indicator = "variable"
-  )
-
-  geco_2022_aviation <- dplyr::mutate(
-    geco_2022_aviation,
-    passenger_freight = NULL
-  )
-
-
-  geco_2022_aviation <- dplyr::mutate(
-    geco_2022_aviation,
-    sector = "Aviation",
-    indicator = stringr::str_to_title(.data$indicator)
-  )
-
-  geco_2022_aviation <- tidyr::pivot_longer(
-    geco_2022_aviation,
-    cols = tidyr::matches("x[0-9]{4}$"),
-    names_to = "year",
-    names_prefix = "x",
-    names_transform = list(year = as.numeric),
-    values_to = "value",
-    values_ptypes = numeric()
-  )
-
-  geco_2022_aviation <- dplyr::relocate(
-    geco_2022_aviation,
-    c("source", "scenario", "indicator", "sector", "technology", "units", "scenario_geography", "year", "value")
-  )
-
-  geco_2022_aviation <- dplyr::mutate(
-    geco_2022_aviation,
-    year = as.double(.data$year)
-  )
-
+  geco_2022_aviation <- prepare_geco_2022_aviation_scenario(geco_2022_aviation_raw)
 
   # combine and format ------------------------------------------------------
   geco_2022 <- dplyr::bind_rows(
@@ -196,10 +154,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     rlang::abort("`NA` scenario names are not well-defined. Please review!")
   }
 
-  dplyr::select(
-    geco_2022,
-    prepared_scenario_names()
-  )
+  dplyr::select(geco_2022, prepared_scenario_names())
 }
 
 prepare_geco_2022_automotive_scenario <- function(technology_bridge,
@@ -235,12 +190,12 @@ prepare_geco_2022_automotive_scenario <- function(technology_bridge,
     .by = tidyr::all_of(scenario_summary_groups())
   )
 
-  dplyr::mutate(
+  out <- dplyr::mutate(
     out,
-    sector = ifelse(
-      .data$sector == "Light vehicles", "Automotive", "HDV"
-    )
+    sector = ifelse(.data$sector == "Light vehicles", "Automotive", "HDV")
   )
+
+  dplyr::select(out, prepared_scenario_names())
 }
 
 prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
@@ -283,10 +238,8 @@ prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
     values_ptypes = numeric()
   )
 
-  dplyr::mutate(
-    out,
-    year = as.double(.data$year)
-  )
+  out <- dplyr::mutate(out, year = as.double(.data$year))
+  dplyr::select(out, prepared_scenario_names())
 }
 
 prepare_geco_2022_power_scenario <- function(technology_bridge,
@@ -388,6 +341,8 @@ prepare_geco_2022_power_scenario <- function(technology_bridge,
     value = sum(.data$value, na.rm = TRUE),
     .by = tidyr::all_of(scenario_summary_groups())
   )
+
+  dplyr::select(out, prepared_scenario_names())
 }
 
 prepare_geco_2022_steel_scenario <- function(geco_2022_steel_raw) {
@@ -412,7 +367,41 @@ prepare_geco_2022_steel_scenario <- function(geco_2022_steel_raw) {
     values_ptypes = numeric()
   )
 
-  out <- dplyr::select(out, prepared_scenario_names())
+  out <- dplyr::mutate(out, year = as.double(.data$year))
+
+  dplyr::select(out, prepared_scenario_names())
+}
+
+prepare_geco_2022_aviation_scenario <- function(geco_2022_aviation_raw) {
+  out <- janitor::clean_names(geco_2022_aviation_raw)
+
+  out <- dplyr::rename(
+    out,
+    source = "geco",
+    scenario_geography = "region",
+    units = "unit",
+    indicator = "variable"
+  )
+
+  out <- dplyr::mutate(out, passenger_freight = NULL)
+
+  out <- dplyr::mutate(
+    out,
+    sector = "Aviation",
+    indicator = stringr::str_to_title(.data$indicator)
+  )
+
+  out <- tidyr::pivot_longer(
+    out,
+    cols = tidyr::matches("x[0-9]{4}$"),
+    names_to = "year",
+    names_prefix = "x",
+    names_transform = list(year = as.numeric),
+    values_to = "value",
+    values_ptypes = numeric()
+  )
 
   out <- dplyr::mutate(out, year = as.double(.data$year))
+
+  dplyr::select(out, prepared_scenario_names())
 }

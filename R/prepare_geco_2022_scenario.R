@@ -330,15 +330,10 @@ prepare_geco_2022_automotive_scenario <- function(technology_bridge,
                                                   geco_2022_automotive_raw) {
   # TODO: currently still using retirement rates from geco2021
   # needs to be revisited, once we get an update
-  out <- janitor::clean_names(geco_2022_automotive_raw)
-  out <- dplyr::left_join(
-    out,
-    technology_bridge,
-    by = c("technology" = "TechnologyAll")
-  )
-
-  out <- dplyr::mutate(out, technology = NULL)
-  out <- dplyr::rename(out, technology = .data$TechnologyName)
+  out <- common_scenario_preparation(
+    geco_2022_automotive_raw,
+    technology_bridge
+    )
 
   out <- tidyr::pivot_longer(
     out,
@@ -384,7 +379,7 @@ prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
     geco_2022_fossil_fuels_ref_raw
   )
 
-  out <- janitor::clean_names(out)
+  out <- common_scenario_preparation(out, technology_bridge)
 
   out <- dplyr::rename(
     out,
@@ -395,22 +390,13 @@ prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
     indicator = "variable"
   )
 
+  #TODO: Fix this on scenario read in workflow.scenario.preparation
   out <- dplyr::mutate(out, x1 = NULL)
 
   out <- dplyr::mutate(
     out,
     sector = ifelse(.data$technology == "Coal", "Coal", "Oil&Gas")
   )
-
-  out <- dplyr::left_join(
-    out,
-    technology_bridge,
-    by = c("technology" = "TechnologyAll")
-  )
-
-  out <- dplyr::mutate(out, technology = NULL)
-
-  out <- dplyr::rename(out, technology = "TechnologyName")
 
   out <- tidyr::pivot_longer(
     out,

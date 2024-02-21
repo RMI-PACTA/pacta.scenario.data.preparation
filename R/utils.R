@@ -24,3 +24,15 @@ dictionary_p4i_p4b <- function() {
     p4b_label = c("weo_2022", "geco_2022")
   )
 }
+
+common_scenario_preparation <- function(data, technology_bridge) {
+  out <- janitor::clean_names(data)
+  out <- dplyr::left_join(
+    out,
+    technology_bridge,
+    by = c("technology" = "TechnologyAll")
+  )
+
+  out <- dplyr::mutate(out, technology = NULL)
+  out <- dplyr::rename(out, technology = .data$TechnologyName)
+}

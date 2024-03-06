@@ -13,6 +13,7 @@ Suggests:
     covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate
 Imports: 
     dplyr,
     glue,

@@ -18,7 +18,10 @@ Imports:
     dplyr,
     glue,
     janitor,
+    pacta.data.validation,
     rlang,
     stringr,
     tidyr,
     zoo
+Remotes: 
+    RMI-PACTA/pacta.data.validation

@@ -109,51 +109,13 @@ prepare_geco_2023_scenario <- function(geco_2023_aviation_15c_raw,
       geco_2023_power_cap,
       geco_2023_steel
     ) %>%
+    dplyr::left_join(
+      pacta.scenario.data.preparation::geco_2023_geography_bridge,
+      by = c("scenario_geography" = "scenario_geography_name")
+    ) %>%
     dplyr::mutate(
-      scenario_geography = dplyr::case_when(
-        .data[["scenario_geography"]] == "NOAP" ~ "Algeria & Libya",
-        .data[["scenario_geography"]] == "MEME" ~ "Mediteranean Middle East",
-        .data[["scenario_geography"]] == "NOAN" ~ "Morocco & Tunisia",
-        .data[["scenario_geography"]] == "NZL" ~ "New Zealand",
-        .data[["scenario_geography"]] == "RCIS" ~ "Other CIS",
-        .data[["scenario_geography"]] == "RCAM" ~ "Rest Central America",
-        .data[["scenario_geography"]] == "RCEU" ~ "Other Balkan",
-        .data[["scenario_geography"]] == "RSAM" ~ "Rest South America",
-        .data[["scenario_geography"]] == "RSAS" ~ "Rest South Asia",
-        .data[["scenario_geography"]] == "RSEA" ~ "Rest South East Asia",
-        .data[["scenario_geography"]] == "RSAF" ~ "Rest Sub Saharan Africa",
-        .data[["scenario_geography"]] == "RGLF" ~ "Rest Gulf",
-        .data[["scenario_geography"]] == "RPAC" ~ "Rest Pacific",
-        .data[["scenario_geography"]] == "KOR" ~ "South Korea",
-        .data[["scenario_geography"]] == "World" ~ "Global",
-        .data[["scenario_geography"]] == "THA" ~ "Thailand",
-        .data[["scenario_geography"]] == "EU" ~ "EU27",
-        .data[["scenario_geography"]] == "NOR" ~ "Norway",
-        .data[["scenario_geography"]] == "ISL" ~ "Iceland",
-        .data[["scenario_geography"]] == "CHE" ~ "Switzerland",
-        .data[["scenario_geography"]] == "TUR" ~ "Turkey",
-        .data[["scenario_geography"]] == "RUS" ~ "Russia",
-        .data[["scenario_geography"]] == "USA" ~ "US",
-        .data[["scenario_geography"]] == "CAN" ~ "Canada",
-        .data[["scenario_geography"]] == "BRA" ~ "Brazil",
-        .data[["scenario_geography"]] == "ARG" ~ "Argentina",
-        .data[["scenario_geography"]] == "CHL" ~ "Chile",
-        .data[["scenario_geography"]] == "AUS" ~ "Australia",
-        .data[["scenario_geography"]] == "JPN" ~ "Japan",
-        .data[["scenario_geography"]] == "CHN" ~ "China",
-        .data[["scenario_geography"]] == "IND" ~ "India",
-        .data[["scenario_geography"]] == "SAU" ~ "Saudi Arabia",
-        .data[["scenario_geography"]] == "IRN" ~ "Iran",
-        .data[["scenario_geography"]] == "EGY" ~ "Egypt",
-        .data[["scenario_geography"]] == "ZAF" ~ "South Africa",
-        .data[["scenario_geography"]] == "MEX" ~ "Mexico",
-        .data[["scenario_geography"]] == "IDN" ~ "Indonesia",
-        .data[["scenario_geography"]] == "UKR" ~ "Ukraine",
-        .data[["scenario_geography"]] == "MYS" ~ "Malaysia",
-        .data[["scenario_geography"]] == "VNM" ~ "Vietnam",
-        .data[["scenario_geography"]] == "GBR" ~ "UK",
-        TRUE ~ .data[["scenario_geography"]]
-      )
+      scenario_geography = .data[["standardized_geography_name"]],
+      .keep = "unused"
     )
 
   if (any(is.na(unique(out$scenario)))) {

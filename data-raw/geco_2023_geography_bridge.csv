@@ -1,42 +1,42 @@
 scenario_geography_name,standardized_geography_name
-"NOAP","Algeria & Libya"
-"MEME","Mediteranean Middle East"
-"NOAN","Morocco & Tunisia"
-"NZL","New Zealand"
-"RCIS","Other CIS"
-"RCAM","Rest Central America"
-"RCEU","Other Balkan"
-"RSAM","Rest South America"
-"RSAS","Rest South Asia"
-"RSEA","Rest South East Asia"
-"RSAF","Rest Sub Saharan Africa"
-"RGLF","Rest Gulf"
-"RPAC","Rest Pacific"
-"KOR","South Korea"
-"World","Global"
-"THA","Thailand"
-"EU","EU27"
-"NOR","Norway"
-"ISL","Iceland"
-"CHE","Switzerland"
-"TUR","Turkey"
-"RUS","Russia"
-"USA","US"
-"CAN","Canada"
-"BRA","Brazil"
-"ARG","Argentina"
-"CHL","Chile"
-"AUS","Australia"
-"JPN","Japan"
-"CHN","China"
-"IND","India"
-"SAU","Saudi Arabia"
-"IRN","Iran"
-"EGY","Egypt"
-"ZAF","South Africa"
-"MEX","Mexico"
-"IDN","Indonesia"
-"UKR","Ukraine"
-"MYS","Malaysia"
-"VNM","Vietnam"
-"GBR","UK"
+ARG,Argentina
+AUS,Australia
+BRA,Brazil
+CAN,Canada
+CHE,Switzerland
+CHL,Chile
+CHN,China
+EGY,Egypt
+EU,EU27
+GBR,UK
+IDN,Indonesia
+IND,India
+IRN,Iran
+ISL,Iceland
+JPN,Japan
+KOR,South Korea
+MEME,Mediteranean Middle East
+MEX,Mexico
+MYS,Malaysia
+NOAN,Morocco & Tunisia
+NOAP,Algeria & Libya
+NOR,Norway
+NZL,New Zealand
+RCAM,Rest Central America
+RCEU,Other Balkan
+RCIS,Other CIS
+RGLF,Rest Gulf
+RPAC,Rest Pacific
+RSAF,Rest Sub Saharan Africa
+RSAM,Rest South America
+RSAS,Rest South Asia
+RSEA,Rest South East Asia
+RUS,Russia
+SAU,Saudi Arabia
+THA,Thailand
+TUR,Turkey
+UKR,Ukraine
+USA,US
+VNM,Vietnam
+World,Global
+ZAF,South Africa

@@ -28,5 +28,4 @@ Imports:
 Remotes: 
     RMI-PACTA/pacta.data.validation
 Depends: 
-    R (>= 2.10)
-LazyData: true
+    R (>= 3.5.0)

@@ -7,8 +7,3 @@ geco_2023_technology_bridge <-
       standardized_technology_name = "c"
     )
   )
-
-usethis::use_data(
-  geco_2023_technology_bridge,
-  overwrite = TRUE
-)

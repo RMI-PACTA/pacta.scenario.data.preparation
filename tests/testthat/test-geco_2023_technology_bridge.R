@@ -11,7 +11,7 @@ test_that("exported data matches raw data", {
     )
 
   expect_equal(
-    pacta.scenario.data.preparation::geco_2023_technology_bridge,
+    geco_2023_technology_bridge,
     raw_data
   )
 })

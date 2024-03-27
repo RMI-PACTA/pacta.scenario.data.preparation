@@ -110,7 +110,7 @@ prepare_geco_2023_scenario <- function(geco_2023_aviation_15c_raw,
       geco_2023_steel
     ) %>%
     dplyr::left_join(
-      pacta.scenario.data.preparation::geco_2023_geography_bridge,
+      geco_2023_geography_bridge,
       by = c("scenario_geography" = "scenario_geography_name")
     ) %>%
     dplyr::mutate(
@@ -118,7 +118,7 @@ prepare_geco_2023_scenario <- function(geco_2023_aviation_15c_raw,
       .keep = "unused"
     ) %>%
     dplyr::left_join(
-      pacta.scenario.data.preparation::geco_2023_technology_bridge,
+      geco_2023_technology_bridge,
       by = c("technology" = "scenario_technology_name")
     ) %>%
     dplyr::mutate(
@@ -270,7 +270,7 @@ prepare_geco_2023_power_cap_scenario <- function(geco_2023_power_cap_15c_raw,
       TRUE ~ .data[["Technology"]]
     )) %>%
     dplyr::left_join(
-      pacta.scenario.data.preparation::geco_2023_technology_bridge,
+      geco_2023_technology_bridge,
       by = c("Technology" = "scenario_technology_name")
     ) %>%
     dplyr::select(-"Technology") %>%

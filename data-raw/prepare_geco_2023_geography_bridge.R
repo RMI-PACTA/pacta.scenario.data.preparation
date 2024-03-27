@@ -3,12 +3,7 @@ geco_2023_geography_bridge <-
     file = "data-raw/geco_2023_geography_bridge.csv",
     na = "",
     col_types = readr::cols(
-      sceanrio_geography_name = "c",
+      scenario_geography_name = "c",
       standardized_geography_name = "c"
     )
   )
-
-usethis::use_data(
-  geco_2023_geography_bridge,
-  overwrite = TRUE
-)

@@ -1,4 +1,4 @@
-#' An technology bridge for GECO 2023
+#' A technology bridge for GECO 2023
 #'
 #' @description
 #' Fake data about physical assets (e.g. wind turbine power plant

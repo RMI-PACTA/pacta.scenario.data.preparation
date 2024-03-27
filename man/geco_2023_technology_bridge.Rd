@@ -3,7 +3,7 @@
 \docType{data}
 \name{geco_2023_technology_bridge}
 \alias{geco_2023_technology_bridge}
-\title{An technology bridge for GECO 2023}
+\title{A technology bridge for GECO 2023}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 152 rows and 2 columns.
 }

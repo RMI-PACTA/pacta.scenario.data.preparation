@@ -116,14 +116,6 @@ prepare_geco_2023_scenario <- function(geco_2023_aviation_15c_raw,
     dplyr::mutate(
       scenario_geography = .data[["standardized_geography_name"]],
       .keep = "unused"
-    ) %>%
-    dplyr::left_join(
-      geco_2023_technology_bridge,
-      by = c("technology" = "scenario_technology_name")
-    ) %>%
-    dplyr::mutate(
-      technology = .data[["standardized_technology_name"]],
-      .keep = "unused"
     )
 
   if (any(is.na(unique(out$scenario)))) {

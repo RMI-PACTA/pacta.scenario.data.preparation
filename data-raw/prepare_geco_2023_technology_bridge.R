@@ -3,8 +3,8 @@ geco_2023_technology_bridge <-
     file = "data-raw/geco_2023_technology_bridge.csv",
     na = "",
     col_types = readr::cols(
-      TechnologyName = "c",
-      TechnologyAll = "c"
+      scenario_technology_name = "c",
+      standardized_technology_name = "c"
     )
   )
 

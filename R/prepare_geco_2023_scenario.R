@@ -220,7 +220,7 @@ prepare_geco_2023_fossil_fuels_scenario <- function(geco_2023_fossil_fuels_15c_r
     dplyr::mutate(sector = ifelse(.data[["Fuel"]] == "Coal", "Coal", "Oil&Gas")) %>%
     dplyr::left_join(
       pacta.scenario.data.preparation::geco_2023_technology_bridge,
-      by = c("Fuel" = "TechnologyAll")
+      by = c("Fuel" = "scenario_technology_name")
     ) %>%
     tidyr::pivot_longer(
       cols = dplyr::matches("20[0-9]{2}$"),
@@ -234,7 +234,7 @@ prepare_geco_2023_fossil_fuels_scenario <- function(geco_2023_fossil_fuels_15c_r
       scenario = "Scenario",
       scenario_geography = "Region",
       "sector",
-      technology = "TechnologyName",
+      technology = "standardized_technology_name",
       indicator = "Variable",
       units = "Unit",
       "year",
@@ -267,7 +267,7 @@ prepare_geco_2023_power_cap_scenario <- function(geco_2023_power_cap_15c_raw,
     )) %>%
     dplyr::left_join(
       pacta.scenario.data.preparation::geco_2023_technology_bridge,
-      by = c("Technology" = "TechnologyAll")
+      by = c("Technology" = "scenario_technology_name")
     ) %>%
     dplyr::select(-"Technology") %>%
     tidyr::pivot_longer(
@@ -292,7 +292,7 @@ prepare_geco_2023_power_cap_scenario <- function(geco_2023_power_cap_15c_raw,
       scenario = "Scenario",
       scenario_geography = "Region",
       "sector",
-      technology = "TechnologyName",
+      technology = "standardized_technology_name",
       indicator = "Variable",
       units = "Unit",
       "year",

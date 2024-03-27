@@ -5,8 +5,8 @@ test_that("exported data matches raw data", {
       file = here::here("data-raw/geco_2023_technology_bridge.csv"),
       na = "",
       col_types = readr::cols(
-        TechnologyName = "c",
-        TechnologyAll = "c"
+        scenario_technology_name = "c",
+        standardized_technology_name = "c"
       )
     )
 

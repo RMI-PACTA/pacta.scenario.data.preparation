@@ -1,0 +1,153 @@
+TechnologyName,TechnologyAll
+Automotive,Cars
+Automotive,Light trucks
+Aviation,Aviation
+Cement,Cement
+Coal,Coal
+Coal,Coal unabated
+Coal,Coal with CCUS
+Coal,CoalDemand
+Coal,CoalPro
+Coal,TotalCoalPro
+Coal,Unabated coal
+CoalCap,Coal with CCSCap
+CoalCap,Coal: unabated
+CoalCap,Coal: with CCUS
+CoalCap,CoalCap
+CoalCap,CoalCap unabated
+CoalCap,CoalCap with CCUS
+CoalCap,Hard coal (& non-renewable waste)
+CoalCap,Lignite
+Electric,BEV
+Electric,Battery electric
+Electric,EV
+Electric,Electric
+Electric,Electricity
+FuelCell,FCEV
+FuelCell,FuelCell
+FuelCell,Fuel cell
+FuelCell,Fuel Cell
+FuelCell,Gas Fuel Cell
+FuelCell,Hydrogen Fuel Cell
+Gas,Gas
+Gas,Gas unabated
+Gas,GasDemand
+Gas,GasPro
+Gas,Natural gas
+Gas,Natural gas with CCUS
+Gas,Unabated natural gas
+GasCap,Gas (w/o H2)
+GasCap,GasCap
+GasCap,GasCap unabated
+GasCap,GasCap with CCUS
+GasCap,Natural gas with CCSCap
+GasCap,Natural gas: unabated
+GasCap,Natural gas: with CCUS
+GasCap,Natural gasCap
+HDV,Heavy trucks
+Hybrid,Diesel hybrid
+Hybrid,Gasoline hybrid
+Hybrid,H2 Hybrid ICE
+Hybrid,Hybrid
+Hybrid,Hybrids
+Hybrid,PHEV
+Hybrid,Plug-in electric
+Hybrid,Plug-in hybrid
+Hybrid,Plug-in hybrid diesel
+Hybrid,Plug-in hybrid gasoline
+HydroCap,Hydro
+HydroCap,Hydro (excl. pumped storage)Cap
+HydroCap,HydroCap
+ICE,CNG/LPG
+ICE,Compressed Natural Gas
+ICE,Conventional+MildHybrid
+ICE,Diesel ICE
+ICE,Gasoline
+ICE,Gasoline ICE
+ICE,Gasoline/diesel ICE
+ICE,ICE
+ICE,Natural gas ICE
+NuclearCap,Nuclear
+NuclearCap,NuclearCap
+Oil,Oil
+Oil,OilDemand
+Oil,OilPro
+OilCap,Demand responseCap
+OilCap,Diesel
+OilCap,DieselCap
+OilCap,Oil & Diesel
+OilCap,OilCap
+OtherCap,Other flexible capacityCap
+OtherCap,OtherCap
+OtherFF,CoalEm
+RenewablesCap,BECCS
+RenewablesCap,Bioenergy
+RenewablesCap,Bioenergy and waste
+RenewablesCap,Bioenergy: with CCUS
+RenewablesCap,BioenergyCap
+RenewablesCap,Biomass
+RenewablesCap,Biomass & Waste
+RenewablesCap,Biomass & Waste CCUS
+RenewablesCap,Biomass (& renewable waste)
+RenewablesCap,Biomass and wasteCap
+RenewablesCap,Biomass with CCSCap
+RenewablesCap,BiomassCap
+RenewablesCap,Biopower
+RenewablesCap,BiopowerCap
+RenewablesCap,CSP
+RenewablesCap,CSPCap
+RenewablesCap,Concentrating solar power
+RenewablesCap,Geothermal
+RenewablesCap,GeothermalCap
+RenewablesCap,Hydrogen
+RenewablesCap,Hydrogen and ammonia
+RenewablesCap,Hydrogen based fuels
+RenewablesCap,HydrogenCap
+RenewablesCap,Marine
+RenewablesCap,MarineCap
+RenewablesCap,Modern bioenergy and renewable waste
+RenewablesCap,Ocean
+RenewablesCap,Ocean energy
+RenewablesCap,OceanCap
+RenewablesCap,Other renewables
+RenewablesCap,PV
+RenewablesCap,PVCap
+RenewablesCap,Renewables
+RenewablesCap,RenewablesCap
+RenewablesCap,Small-scale PV
+RenewablesCap,Small-scale PVCap
+RenewablesCap,Small-scale batteries
+RenewablesCap,Small-scale batteriesCap
+RenewablesCap,Solar
+RenewablesCap,Solar CSP
+RenewablesCap,Solar CSPCap
+RenewablesCap,Solar PV
+RenewablesCap,Solar PVCap
+RenewablesCap,Solar thermal
+RenewablesCap,Solar thermal power plants
+RenewablesCap,Solar thermalCap
+RenewablesCap,Solar?PVCap
+RenewablesCap,SolarCSP
+RenewablesCap,SolarCSPCap
+RenewablesCap,SolarPV
+RenewablesCap,SolarPVCap
+RenewablesCap,SolarThermal
+RenewablesCap,SolarThermalCap
+RenewablesCap,Utility-scale PV
+RenewablesCap,Utility-scale PVCap
+RenewablesCap,Utility-scale batteries
+RenewablesCap,Utility-scale batteriesCap
+RenewablesCap,Wind
+RenewablesCap,Wind offshore
+RenewablesCap,Wind offshoreCap
+RenewablesCap,Wind onshore
+RenewablesCap,Wind onshoreCap
+RenewablesCap,WindCap
+RenewablesCap,WindOffshore
+RenewablesCap,WindOffshoreCap
+RenewablesCap,WindOnshore
+RenewablesCap,WindOnshoreCap
+RenewablesCap,of which BECCS
+Shipping,Shipping
+Steel,Steel
+TechnologyName,TechnologyAll

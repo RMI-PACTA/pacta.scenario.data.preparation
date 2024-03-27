@@ -1,6 +1,5 @@
 #' Prepare GECO 2023 scenario data
 #'
-#' @param technology_bridge A technology bridge data-frame.
 #' @param geco_2023_aviation_15c_raw A raw GECO 2023 automotive 1.5 scenario data-frame.
 #' @param geco_2023_aviation_ndc_raw A raw GECO 2023 automotive NDC scenario data-frame.
 #' @param geco_2023_aviation_ref_raw A raw GECO 2023 automotive Reference scenario data-frame.
@@ -23,8 +22,7 @@
 #'
 #' @export
 
-prepare_geco_2023_scenario <- function(technology_bridge,
-                                       geco_2023_aviation_15c_raw,
+prepare_geco_2023_scenario <- function(geco_2023_aviation_15c_raw,
                                        geco_2023_aviation_ndc_raw,
                                        geco_2023_aviation_ref_raw,
                                        geco_2023_fossil_fuels_15c_raw,
@@ -40,7 +38,6 @@ prepare_geco_2023_scenario <- function(technology_bridge,
                                        geco_2023_supplement_ndc_raw,
                                        geco_2023_supplement_ref_raw) {
   stopifnot(
-    is.data.frame(technology_bridge),
     is.data.frame(geco_2023_aviation_15c_raw),
     is.data.frame(geco_2023_aviation_ndc_raw),
     is.data.frame(geco_2023_aviation_ref_raw),
@@ -85,7 +82,6 @@ prepare_geco_2023_scenario <- function(technology_bridge,
 
   geco_2023_fossil_fuels <-
     prepare_geco_2023_fossil_fuels_scenario(
-      technology_bridge,
       geco_2023_fossil_fuels_15c_raw,
       geco_2023_fossil_fuels_ndc_raw,
       geco_2023_fossil_fuels_ref_raw
@@ -93,7 +89,6 @@ prepare_geco_2023_scenario <- function(technology_bridge,
 
   geco_2023_power_cap <-
     prepare_geco_2023_power_cap_scenario(
-      technology_bridge,
       geco_2023_power_cap_15c_raw,
       geco_2023_power_cap_ndc_raw,
       geco_2023_power_cap_ref_raw
@@ -251,8 +246,7 @@ prepare_geco_2023_aviation_scenario <- function(power_emissions_intensity,
 }
 
 
-prepare_geco_2023_fossil_fuels_scenario <- function(technology_bridge,
-                                                    geco_2023_fossil_fuels_15c_raw,
+prepare_geco_2023_fossil_fuels_scenario <- function(geco_2023_fossil_fuels_15c_raw,
                                                     geco_2023_fossil_fuels_ndc_raw,
                                                     geco_2023_fossil_fuels_ref_raw) {
   out <-
@@ -262,7 +256,10 @@ prepare_geco_2023_fossil_fuels_scenario <- function(technology_bridge,
       geco_2023_fossil_fuels_ref_raw
     ) %>%
     dplyr::mutate(sector = ifelse(.data[["Fuel"]] == "Coal", "Coal", "Oil&Gas")) %>%
-    dplyr::left_join(technology_bridge, by = c("Fuel" = "TechnologyAll")) %>%
+    dplyr::left_join(
+      pacta.scenario.data.preparation::geco_2023_technology_bridge,
+      by = c("Fuel" = "TechnologyAll")
+    ) %>%
     tidyr::pivot_longer(
       cols = dplyr::matches("20[0-9]{2}$"),
       names_to = "year",
@@ -287,8 +284,7 @@ prepare_geco_2023_fossil_fuels_scenario <- function(technology_bridge,
 }
 
 
-prepare_geco_2023_power_cap_scenario <- function(technology_bridge,
-                                                 geco_2023_power_cap_15c_raw,
+prepare_geco_2023_power_cap_scenario <- function(geco_2023_power_cap_15c_raw,
                                                  geco_2023_power_cap_ndc_raw,
                                                  geco_2023_power_cap_ref_raw) {
   out <-
@@ -307,7 +303,10 @@ prepare_geco_2023_power_cap_scenario <- function(technology_bridge,
       .data[["Technology"]] == "Other" ~ "RenewablesCap",
       TRUE ~ .data[["Technology"]]
     )) %>%
-    dplyr::left_join(technology_bridge, by = c("Technology" = "TechnologyAll")) %>%
+    dplyr::left_join(
+      pacta.scenario.data.preparation::geco_2023_technology_bridge,
+      by = c("Technology" = "TechnologyAll")
+    ) %>%
     dplyr::select(-"Technology") %>%
     tidyr::pivot_longer(
       cols = dplyr::matches("20[0-9]{2}$"),

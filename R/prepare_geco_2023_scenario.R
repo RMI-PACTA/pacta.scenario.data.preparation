@@ -116,6 +116,14 @@ prepare_geco_2023_scenario <- function(geco_2023_aviation_15c_raw,
     dplyr::mutate(
       scenario_geography = .data[["standardized_geography_name"]],
       .keep = "unused"
+    ) %>%
+    dplyr::left_join(
+      pacta.scenario.data.preparation::geco_2023_technology_bridge,
+      by = c("technology" = "scenario_technology_name")
+    ) %>%
+    dplyr::mutate(
+      technology = .data[["standardized_technology_name"]],
+      .keep = "unused"
     )
 
   if (any(is.na(unique(out$scenario)))) {
@@ -218,10 +226,6 @@ prepare_geco_2023_fossil_fuels_scenario <- function(geco_2023_fossil_fuels_15c_r
       geco_2023_fossil_fuels_ref_raw
     ) %>%
     dplyr::mutate(sector = ifelse(.data[["Fuel"]] == "Coal", "Coal", "Oil&Gas")) %>%
-    dplyr::left_join(
-      pacta.scenario.data.preparation::geco_2023_technology_bridge,
-      by = c("Fuel" = "scenario_technology_name")
-    ) %>%
     tidyr::pivot_longer(
       cols = dplyr::matches("20[0-9]{2}$"),
       names_to = "year",
@@ -234,7 +238,7 @@ prepare_geco_2023_fossil_fuels_scenario <- function(geco_2023_fossil_fuels_15c_r
       scenario = "Scenario",
       scenario_geography = "Region",
       "sector",
-      technology = "standardized_technology_name",
+      technology = "Fuel",
       indicator = "Variable",
       units = "Unit",
       "year",

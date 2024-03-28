@@ -1,5 +1,8 @@
 raw_data_env <- new.env()
 
+source(file = "data-raw/prepare_geco_2022_geography_bridge.R", local = raw_data_env)
+source(file = "data-raw/prepare_geco_2022_technology_bridge.R", local = raw_data_env)
+
 source(file = "data-raw/prepare_geco_2023_geography_bridge.R", local = raw_data_env)
 source(file = "data-raw/prepare_geco_2023_technology_bridge.R", local = raw_data_env)
 

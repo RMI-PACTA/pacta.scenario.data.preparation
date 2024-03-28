@@ -15,15 +15,29 @@ scenario_summary_groups <- function() {
   )
 }
 
+bridge_geographies <- function(data, geography_bridge) {
+  out <- dplyr::left_join(
+    data,
+    geography_bridge,
+    by = c("scenario_geography" = "scenario_geography_name")
+  )
+
+  dplyr::mutate(
+    out,
+    scenario_geography = .data[["standardized_geography_name"]],
+    .keep = "unused"
+  )
+}
+
 bridge_technologies <- function(data, technology_bridge) {
   out <- dplyr::left_join(
     data,
     technology_bridge,
-    by = c("technology" = "TechnologyAll")
+    by = c("technology" = "scenario_technology_name")
   )
 
   out <- dplyr::mutate(out, technology = NULL)
-  dplyr::rename(out, technology = "TechnologyName")
+  dplyr::rename(out, technology = "standardized_technology_name")
 }
 
 dictionary_p4i_p4b <- function() {

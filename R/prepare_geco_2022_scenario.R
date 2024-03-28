@@ -1,6 +1,5 @@
 #' Prepare GECO 2022 scenario data
 #'
-#' @param technology_bridge A technology bridge data-frame.
 #' @param geco_2022_automotive_raw A raw GECO 2022 automotive scenario
 #'   data-frame.
 #' @param geco_2022_aviation_raw A raw GECO 2022 aviation scenario data-frame.
@@ -19,8 +18,7 @@
 #'
 #' @return A prepared GECO 2022 scenario data-frame.
 #' @export
-prepare_geco_2022_scenario <- function(technology_bridge,
-                                       geco_2022_automotive_raw,
+prepare_geco_2022_scenario <- function(geco_2022_automotive_raw,
                                        geco_2022_aviation_raw,
                                        geco_2022_fossil_fuels_15c_raw,
                                        geco_2022_fossil_fuels_ndc_raw,
@@ -30,7 +28,6 @@ prepare_geco_2022_scenario <- function(technology_bridge,
                                        geco_2022_power_ref_raw,
                                        geco_2022_steel_raw) {
   stopifnot(
-    is.data.frame(technology_bridge),
     is.data.frame(geco_2022_automotive_raw),
     is.data.frame(geco_2022_aviation_raw),
     is.data.frame(geco_2022_fossil_fuels_15c_raw),
@@ -43,19 +40,16 @@ prepare_geco_2022_scenario <- function(technology_bridge,
   )
 
   geco_2022_automotive <- prepare_geco_2022_automotive_scenario(
-    technology_bridge,
     geco_2022_automotive_raw
   )
 
   geco_2022_fossil_fuels <- prepare_geco_2022_fossil_fuels_scenario(
-    technology_bridge,
     geco_2022_fossil_fuels_15c_raw,
     geco_2022_fossil_fuels_ndc_raw,
     geco_2022_fossil_fuels_ref_raw
   )
 
   geco_2022_power <- prepare_geco_2022_power_scenario(
-    technology_bridge,
     geco_2022_power_15c_raw,
     geco_2022_power_ndc_raw,
     geco_2022_power_ref_raw
@@ -102,53 +96,7 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     )
   )
 
-  geco_2022 <- dplyr::mutate(
-    geco_2022,
-    scenario_geography = dplyr::case_when(
-      .data$scenario_geography == "NOAP" ~ "Algeria & Libya",
-      .data$scenario_geography == "MEME" ~ "Mediteranean Middle East",
-      .data$scenario_geography == "NOAN" ~ "Morocco & Tunisia",
-      .data$scenario_geography == "NZL" ~ "New Zealand",
-      .data$scenario_geography == "RCIS" ~ "Other CIS",
-      .data$scenario_geography == "RCAM" ~ "Rest Central America",
-      .data$scenario_geography == "RCEU" ~ "Other Balkan",
-      .data$scenario_geography == "RSAM" ~ "Rest South America",
-      .data$scenario_geography == "RSAS" ~ "Rest South Asia",
-      .data$scenario_geography == "RSEA" ~ "Rest South East Asia",
-      .data$scenario_geography == "RSAF" ~ "Rest Sub Saharan Africa",
-      .data$scenario_geography == "RGLF" ~ "Rest Gulf",
-      .data$scenario_geography == "RPAC" ~ "Rest Pacific",
-      .data$scenario_geography == "KOR" ~ "South Korea",
-      .data$scenario_geography == "World" ~ "Global",
-      .data$scenario_geography == "THA" ~ "Thailand",
-      .data$scenario_geography == "EU" ~ "EU27",
-      .data$scenario_geography == "NOR" ~ "Norway",
-      .data$scenario_geography == "ISL" ~ "Iceland",
-      .data$scenario_geography == "CHE" ~ "Switzerland",
-      .data$scenario_geography == "TUR" ~ "Turkey",
-      .data$scenario_geography == "RUS" ~ "Russia",
-      .data$scenario_geography == "USA" ~ "US",
-      .data$scenario_geography == "CAN" ~ "Canada",
-      .data$scenario_geography == "BRA" ~ "Brazil",
-      .data$scenario_geography == "ARG" ~ "Argentina",
-      .data$scenario_geography == "CHL" ~ "Chile",
-      .data$scenario_geography == "AUS" ~ "Australia",
-      .data$scenario_geography == "JPN" ~ "Japan",
-      .data$scenario_geography == "CHN" ~ "China",
-      .data$scenario_geography == "IND" ~ "India",
-      .data$scenario_geography == "SAU" ~ "Saudi Arabia",
-      .data$scenario_geography == "IRN" ~ "Iran",
-      .data$scenario_geography == "EGY" ~ "Egypt",
-      .data$scenario_geography == "ZAF" ~ "South Africa",
-      .data$scenario_geography == "MEX" ~ "Mexico",
-      .data$scenario_geography == "IDN" ~ "Indonesia",
-      .data$scenario_geography == "UKR" ~ "Ukraine",
-      .data$scenario_geography == "MYS" ~ "Malaysia",
-      .data$scenario_geography == "VNM" ~ "Vietnam",
-      .data$scenario_geography == "GBR" ~ "UK",
-      TRUE ~ .data$scenario_geography
-    )
-  )
+  geco_2022 <- bridge_geographies(geco_2022, geco_2022_geography_bridge)
 
   geco_2022 <- dplyr::mutate(
     geco_2022,
@@ -164,15 +112,17 @@ prepare_geco_2022_scenario <- function(technology_bridge,
     rlang::abort("`NA` scenario names are not well-defined. Please review!")
   }
 
-  dplyr::select(geco_2022, prepared_scenario_names())
+  out <- dplyr::select(geco_2022, prepared_scenario_names())
+
+  # pacta.data.validation::validate_intermediate_scenario_output(out)
+  out
 }
 
-prepare_geco_2022_automotive_scenario <- function(technology_bridge,
-                                                  geco_2022_automotive_raw) {
+prepare_geco_2022_automotive_scenario <- function(geco_2022_automotive_raw) {
   # TODO: currently still using retirement rates from geco2021
   # needs to be revisited, once we get an update
   out <- janitor::clean_names(geco_2022_automotive_raw)
-  out <- bridge_technologies(out, technology_bridge)
+  out <- bridge_technologies(out, geco_2022_technology_bridge)
 
   out <- tidyr::pivot_longer(
     out,
@@ -208,8 +158,7 @@ prepare_geco_2022_automotive_scenario <- function(technology_bridge,
   dplyr::select(out, prepared_scenario_names())
 }
 
-prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
-                                                    geco_2022_fossil_fuels_15c_raw,
+prepare_geco_2022_fossil_fuels_scenario <- function(geco_2022_fossil_fuels_15c_raw,
                                                     geco_2022_fossil_fuels_ndc_raw,
                                                     geco_2022_fossil_fuels_ref_raw) {
   out <- dplyr::bind_rows(
@@ -236,7 +185,7 @@ prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
     sector = ifelse(.data$technology == "Coal", "Coal", "Oil&Gas")
   )
 
-  out <- bridge_technologies(out, technology_bridge)
+  out <- bridge_technologies(out, geco_2022_technology_bridge)
 
   out <- tidyr::pivot_longer(
     out,
@@ -252,8 +201,7 @@ prepare_geco_2022_fossil_fuels_scenario <- function(technology_bridge,
   dplyr::select(out, prepared_scenario_names())
 }
 
-prepare_geco_2022_power_scenario <- function(technology_bridge,
-                                             geco_2022_power_15c_raw,
+prepare_geco_2022_power_scenario <- function(geco_2022_power_15c_raw,
                                              geco_2022_power_ndc_raw,
                                              geco_2022_power_ref_raw) {
   out <- dplyr::bind_rows(
@@ -292,7 +240,7 @@ prepare_geco_2022_power_scenario <- function(technology_bridge,
     )
   )
 
-  out <- bridge_technologies(out, technology_bridge)
+  out <- bridge_technologies(out, geco_2022_technology_bridge)
 
   out <- tidyr::pivot_longer(
     out,

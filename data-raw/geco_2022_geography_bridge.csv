@@ -1,0 +1,43 @@
+scenario_geography_name,standardized_geography_name
+ARG,Argentina
+AUS,Australia
+BRA,Brazil
+CAN,Canada
+CHE,Switzerland
+CHL,Chile
+CHN,China
+EGY,Egypt
+EU,EU27
+GBR,UK
+Global,Global
+IDN,Indonesia
+IND,India
+IRN,Iran
+ISL,Iceland
+JPN,Japan
+KOR,South Korea
+MEME,Mediteranean Middle East
+MEX,Mexico
+MYS,Malaysia
+NOAN,Morocco & Tunisia
+NOAP,Algeria & Libya
+NOR,Norway
+NZL,New Zealand
+RCAM,Rest Central America
+RCEU,Other Balkan
+RCIS,Other CIS
+RGLF,Rest Gulf
+RPAC,Rest Pacific
+RSAF,Rest Sub Saharan Africa
+RSAM,Rest South America
+RSAS,Rest South Asia
+RSEA,Rest South East Asia
+RUS,Russia
+SAU,Saudi Arabia
+THA,Thailand
+TUR,Turkey
+UKR,Ukraine
+USA,US
+VNM,Vietnam
+World,Global
+ZAF,South Africa

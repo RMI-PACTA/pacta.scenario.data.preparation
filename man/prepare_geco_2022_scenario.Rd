@@ -5,7 +5,6 @@
 \title{Prepare GECO 2022 scenario data}
 \usage{
 prepare_geco_2022_scenario(
-  technology_bridge,
   geco_2022_automotive_raw,
   geco_2022_aviation_raw,
   geco_2022_fossil_fuels_15c_raw,
@@ -18,8 +17,6 @@ prepare_geco_2022_scenario(
 )
 }
 \arguments{
-\item{technology_bridge}{A technology bridge data-frame.}
-
 \item{geco_2022_automotive_raw}{A raw GECO 2022 automotive scenario
 data-frame.}
 

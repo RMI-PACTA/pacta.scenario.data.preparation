@@ -1,0 +1,19 @@
+scenario_technology_name,standardized_technology_name
+Biomass & Waste,RenewablesCap
+Coal,Coal
+CoalCap,CoalCap
+Compressed Natural Gas,ICE
+Conventional+MildHybrid,ICE
+Electric,Electric
+Gas,Gas
+Gas Fuel Cell,FuelCell
+GasCap,GasCap
+Hydro,HydroCap
+Hydrogen Fuel Cell,FuelCell
+Nuclear,NuclearCap
+Oil,Oil
+OilCap,OilCap
+Plug-in hybrid,Hybrid
+RenewablesCap,RenewablesCap
+Solar,RenewablesCap
+Wind,RenewablesCap

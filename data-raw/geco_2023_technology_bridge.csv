@@ -1,0 +1,10 @@
+scenario_technology_name,standardized_technology_name
+Biomass & Waste,RenewablesCap
+CoalCap,CoalCap
+GasCap,GasCap
+Hydro,HydroCap
+Nuclear,NuclearCap
+OilCap,OilCap
+RenewablesCap,RenewablesCap
+Solar,RenewablesCap
+Wind,RenewablesCap

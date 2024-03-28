@@ -108,15 +108,9 @@ prepare_geco_2023_scenario <- function(geco_2023_aviation_15c_raw,
       geco_2023_fossil_fuels,
       geco_2023_power_cap,
       geco_2023_steel
-    ) %>%
-    dplyr::left_join(
-      geco_2023_geography_bridge,
-      by = c("scenario_geography" = "scenario_geography_name")
-    ) %>%
-    dplyr::mutate(
-      scenario_geography = .data[["standardized_geography_name"]],
-      .keep = "unused"
     )
+
+  out <- bridge_geographies(out, geco_2023_geography_bridge)
 
   if (any(is.na(unique(out$scenario)))) {
     stop("Unique scenario names are not well-defined. Please review!")

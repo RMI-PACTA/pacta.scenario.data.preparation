@@ -1,0 +1,18 @@
+scenario_technology_name,standardized_technology_name
+- Biomass (& renewable waste),RenewablesCap
+- Coal,Coal
+- Diesel,OilCap
+- Gas,Gas
+- Gas (w/o H2),GasCap
+- Geothermal,RenewablesCap
+- Hard coal (& non-renewable waste),CoalCap
+- Hydro,HydroCap
+- Lignite,CoalCap
+- Natural gas,Gas
+- Nuclear,NuclearCap
+- Ocean energy,RenewablesCap
+- Oil,Oil
+- Oil & Diesel,OilCap
+- PV,RenewablesCap
+- Solar thermal power plants,RenewablesCap
+- Wind,RenewablesCap

@@ -2,7 +2,11 @@
 #'
 #' @param isf_2023_scope_global_raw A tidyxl data frame (with a `formats`
 #'   attribute) with a raw ISF Scope Global 2023 import.
-#' @param isf_2023_annex_countries_raw A list of tidyxl data frames (with a `formats` attribute) containing the raw import of each of the Annex Countries xlsx files for ISF 2023.
+#' @param isf_2023_s_global_raw A tidyxl data frame (with a `formats` attribute)
+#'   with a raw ISF S_Global 2023 import.
+#' @param isf_2023_annex_countries_raw A list of tidyxl data frames (with a
+#'   `formats` attribute) containing the raw import of each of the Annex
+#'   Countries xlsx files for ISF 2023.
 #'
 #' @return A prepared ISF 2023 scenario data-frame.
 #'
@@ -11,6 +15,7 @@
 #' @export
 
 prepare_isf_2023_scenario <- function(isf_2023_scope_global_raw,
+                                      isf_2023_s_global_raw,
                                       isf_2023_annex_countries_raw) {
   isf_2023_power <-
     isf_2023_annex_countries_raw %>%
@@ -22,9 +27,15 @@ prepare_isf_2023_scenario <- function(isf_2023_scope_global_raw,
     purrr::map(extract_final_energy_demand) %>%
     purrr::list_rbind()
 
+  # isf_2023_steel_cement <-
+  #   extract_steel_cement(
+  #     isf_2023_scope_global_raw,
+  #     isf_2023_s_global_raw
+  #   )
+
   out <-
     dplyr::bind_rows(
-      # final_steel_cement,
+      # isf_2023_steel_cement,
       isf_2023_fossil_fuels,
       isf_2023_power
     )
@@ -44,6 +55,7 @@ prepare_isf_2023_scenario <- function(isf_2023_scope_global_raw,
         "year"
       )
     ) %>%
+    # bridge_geographies(isf_2023_geography_bridge) %>%
     dplyr::arrange(
       .data[["scenario_geography"]],
       .data[["sector"]],
@@ -186,4 +198,42 @@ extract_final_energy_demand <- function(x) {
         .data$indicator
       )
     )
+}
+
+
+extract_steel_cement <- function(isf_2023_scope_global_raw,
+                                 isf_2023_s_global_raw) {
+  formats <- attr(isf_2023_scope_global_raw, "formats")
+  indent <- formats$local$alignment$indent
+
+  isf_2023_scope_global_raw %>%
+    dplyr::filter(!.data[["is_blank"]]) %>%
+    dplyr::filter(!dplyr::between(.data[["row"]], 1, 3)) %>%
+    dplyr::filter(.data[["col"]] != 1) %>%
+    dplyr::filter(!(.data[["row"]] == 4 & dplyr::between(.data[["col"]], 2, 3))) %>%
+    dplyr::filter(.data[["col"]] != 16) %>%
+    unpivotr::behead("right", "remarks") %>%
+    unpivotr::behead_if(
+      indent[.data[["local_format_id"]]] == 0,
+      direction = "left-up",
+      name = "sector"
+    ) %>%
+    unpivotr::behead_if(
+      indent[.data[["local_format_id"]]] == 1,
+      direction = "left-up",
+      name = "sub_sector"
+    ) %>%
+    unpivotr::behead_if(
+      indent[.data[["local_format_id"]]] == 2,
+      direction = "left",
+      name = "comparison"
+    ) %>%
+    unpivotr::behead("left", "unit") %>%
+    dplyr::filter(!is.na(.data[["unit"]])) %>%
+    unpivotr::behead("left-up", "production_type") %>%
+    unpivotr::behead("up", "year", formatters = list(numeric = as.double)) %>%
+    unpivotr::behead("left", "technology")
+
+
+
 }

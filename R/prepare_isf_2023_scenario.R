@@ -150,9 +150,9 @@ extract_final_energy_demand <- function(x) {
     dplyr::filter(
       .data[["technology"]] %in% c(
         # remove double counting
-        # "- Oil products",
+        "- Oil products",
         "- Natural gas",
-        # "- Hard coal & lignite",
+        "- Hard coal & lignite",
         "- Gas",
         "- Oil",
         "- Coal"

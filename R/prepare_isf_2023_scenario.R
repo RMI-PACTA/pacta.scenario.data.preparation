@@ -283,18 +283,18 @@ extract_steel_cement <- function(isf_2023_scope_global_raw,
       cement_production
     )
 
-  steel_cement_emissions |>
+  steel_cement_emissions %>%
     dplyr::left_join(
       steel_cement_production,
       by = c("year", "sector"),
       suffix = c("_emissions", "_production")
-    ) |>
+    ) %>%
     dplyr::mutate(
       value = (.data[["scope_1"]] + .data[["scope_2"]]) / .data[["production"]],
       indicator = "Emission Intensity",
       scenario_geography = "Global",
       technology = NA_character_
-    ) |>
+    ) %>%
     dplyr::mutate(
       units = dplyr::case_when(
         .data[["sector"]] == "Steel" ~ "tCO2/t Steel",

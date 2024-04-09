@@ -6,12 +6,14 @@ scenario_technology_name,standardized_technology_name
 - Gas (w/o H2),GasCap
 - Geothermal,RenewablesCap
 - Hard coal (& non-renewable waste),CoalCap
+- Hard coal & lignite,Coal
 - Hydro,HydroCap
 - Lignite,CoalCap
 - Natural gas,Gas
 - Nuclear,NuclearCap
 - Ocean energy,RenewablesCap
 - Oil,Oil
+- Oil products,Oil
 - Oil & Diesel,OilCap
 - PV,RenewablesCap
 - Solar thermal power plants,RenewablesCap

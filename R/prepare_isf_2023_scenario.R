@@ -208,7 +208,7 @@ extract_steel_cement <- function(isf_2023_scope_global_raw,
 
   steel_cement_emissions <-
     isf_2023_scope_global_raw %>%
-    dplyr::filter(sheet == "Scope_Global") %>%
+    dplyr::filter(.data[["sheet"]] == "Scope_Global") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 429, 480)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 2, 14)) %>%
     unpivotr::behead_if(
@@ -221,31 +221,31 @@ extract_steel_cement <- function(isf_2023_scope_global_raw,
     unpivotr::behead("left-up", "metric_type") %>%
     unpivotr::behead("up", "year") %>%
     dplyr::mutate(
-      sector = sub("^Total Materials / ", "", sector),
-      indicator = sub(".*: ", "", scope),
+      sector = sub("^Total Materials / ", "", .data[["sector"]]),
+      indicator = sub(".*: ", "", .data[["scope"]]),
       scope = dplyr::case_when(
-        grepl("Scope 1", scope)  ~ "scope_1",
-        grepl("Scope 2", scope)  ~ "scope_2",
-        grepl("Scope 3", scope)  ~ "scope_3"
+        grepl("Scope 1", .data[["scope"]])  ~ "scope_1",
+        grepl("Scope 2", .data[["scope"]])  ~ "scope_2",
+        grepl("Scope 3", .data[["scope"]])  ~ "scope_3"
       )
     ) %>%
-    dplyr::filter(metric_type == "Production Centric  GHG") %>%
-    dplyr::filter(indicator == "Total CO2 equivalent") %>%
-    dplyr::filter(scope %in% c("scope_1", "scope_2")) %>%
+    dplyr::filter(.data[["metric_type"]] == "Production Centric  GHG") %>%
+    dplyr::filter(.data[["indicator"]] == "Total CO2 equivalent") %>%
+    dplyr::filter(.data[["scope"]] %in% c("scope_1", "scope_2")) %>%
     dplyr::select("units", "metric_type", "sector", "year", "scope", "numeric") %>%
     tidyr::pivot_wider(names_from = "scope", values_from = "numeric")
 
   steel_production <-
     isf_2023_s_global_raw %>%
-    dplyr::filter(sheet == "S_Global") %>%
+    dplyr::filter(.data[["sheet"]] == "S_Global") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 100, 119)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 2, 15)) %>%
     unpivotr::behead("up", "year") %>%
     unpivotr::behead("left-up", "class") %>%
     unpivotr::behead("left", "scope") %>%
     unpivotr::behead("left", "units") %>%
-    dplyr::filter(!is_blank) %>%
-    dplyr::filter(scope == "Annual production volume- Iron & Steel Industry") %>%
+    dplyr::filter(!.data[["is_blank"]]) %>%
+    dplyr::filter(.data[["scope"]] == "Annual production volume- Iron & Steel Industry") %>%
     dplyr::select("scope", "units", "year", production = "numeric") %>%
     dplyr::mutate(year = as.numeric(.data[["year"]])) %>%
     dplyr::mutate(
@@ -258,15 +258,15 @@ extract_steel_cement <- function(isf_2023_scope_global_raw,
 
   cement_production <-
     isf_2023_s_global_raw %>%
-    dplyr::filter(sheet == "S_Global") %>%
+    dplyr::filter(.data[["sheet"]] == "S_Global") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 143, 163)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 2, 15)) %>%
     unpivotr::behead("up", "year") %>%
     unpivotr::behead("left-up", "class") %>%
     unpivotr::behead("left", "scope") %>%
     unpivotr::behead("left", "units") %>%
-    dplyr::filter(!is_blank) %>%
-    dplyr::filter(scope == "Cement - production volume in mega tonnes per year") %>%
+    dplyr::filter(!.data[["is_blank"]]) %>%
+    dplyr::filter(.data[["scope"]] == "Cement - production volume in mega tonnes per year") %>%
     dplyr::select("scope", "units", "year", production = "numeric") %>%
     dplyr::mutate(year = as.numeric(.data[["year"]])) %>%
     dplyr::mutate(
@@ -290,15 +290,15 @@ extract_steel_cement <- function(isf_2023_scope_global_raw,
       suffix = c("_emissions", "_production")
     ) |>
     dplyr::mutate(
-      value = (scope_1 + scope_2)/production,
+      value = (.data[["scope_1"]] + .data[["scope_2"]]) / .data[["production"]],
       indicator = "Emission Intensity",
       scenario_geography = "Global",
       technology = NA_character_
     ) |>
     dplyr::mutate(
       units = dplyr::case_when(
-        sector == "Steel" ~ "tCO2/t Steel",
-        sector == "Cement" ~ "tCO2/t Cement",
+        .data[["sector"]] == "Steel" ~ "tCO2/t Steel",
+        .data[["sector"]] == "Cement" ~ "tCO2/t Cement",
         TRUE ~ "Error"
       )
     ) %>%

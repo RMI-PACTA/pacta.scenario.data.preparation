@@ -55,7 +55,7 @@ prepare_isf_2023_scenario <- function(isf_2023_scope_global_raw,
         "year"
       )
     ) %>%
-    # bridge_geographies(isf_2023_geography_bridge) %>%
+    bridge_geographies(isf_2023_geography_bridge) %>%
     dplyr::arrange(
       .data[["scenario_geography"]],
       .data[["sector"]],

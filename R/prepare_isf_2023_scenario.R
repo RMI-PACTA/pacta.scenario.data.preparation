@@ -252,7 +252,7 @@ extract_steel_cement <- function(isf_2023_scope_global_raw,
       region = "Global",
       sector = "Steel",
       source = "ISF2023",
-      scenario = "1.5°C",
+      scenario = "1.5\xc2\xb0C",
       .before = "year"
     )
 
@@ -273,7 +273,7 @@ extract_steel_cement <- function(isf_2023_scope_global_raw,
       region = "Global",
       sector = "Cement",
       source = "ISF2023",
-      scenario = "1.5°C",
+      scenario = "1.5\xc2\xb0C",
       .before = "year"
     )
 

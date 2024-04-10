@@ -26,17 +26,33 @@ prepare_weo_2023_scenario <- function(weo_2023_ext_data_regions_raw,
   # weo_2023_automotive <- weo_2023_extract_automotive(weo_2023_fig_chptr_3_raw)
   weo_2023_aviation <- weo_2023_extract_aviation(mpp_ats_raw, weo_2023_ext_data_world_raw)
   weo_2023_fossil_fuels <- weo_2023_extract_fossil_fuels(weo_2023_fig_chptr_3_raw)
-  # weo_2023_power <- weo_2023_extract_power()
-  weo_2023_steel_cement <- weo_2023_extract_steel_and_cement(weo_2023_ext_data_world_raw, weo_2023_fig_chptr_3_raw)
+  weo_2023_power <- weo_2023_extract_power(weo_2023_ext_data_regions_raw, weo_2023_ext_data_world_raw)
+  weo_2023_steel_cement <- weo_2023_extract_steel_cement(weo_2023_ext_data_world_raw, weo_2023_fig_chptr_3_raw)
 
   out <-
     dplyr::bind_rows(
       # weo_2023_automotive,
       weo_2023_aviation,
       weo_2023_fossil_fuels,
-      # weo_2023_power,
+      weo_2023_power,
       weo_2023_steel_cement
     ) %>%
+    dplyr::mutate(
+      source =
+        dplyr::if_else(source == "World Energy Outlook 2023", "WEO2023", source)
+    ) %>%
+    dplyr::mutate(
+      scenario = dplyr::case_when(
+        scenario == "Announced Pledges Scenario" ~ "APS",
+        scenario == "Sustainable Development Scenario" ~ "SDS",
+        scenario == "Stated Policies Scenario" ~ "STEPS",
+        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE_2050",
+        scenario == "NZE" ~ "NZE_2050",
+        TRUE ~ scenario,
+      )
+    ) %>%
+    bridge_technologies(weo_2023_technology_bridge) %>%
+    bridge_geographies(weo_2023_geography_bridge) %>%
     dplyr::relocate(
       "source",
       "scenario",
@@ -47,89 +63,193 @@ prepare_weo_2023_scenario <- function(weo_2023_ext_data_regions_raw,
       "year",
       "technology",
       "value"
-    )
+    ) %>%
+    dplyr::summarize(value = sum(value), .by = -value)
 
   validate_intermediate_scenario_output(out)
 
   out
-
-  #   dplyr::mutate(
-  #     scenario = dplyr::case_when(
-  #       scenario == "Announced Pledges Scenario" ~ "APS",
-  #       scenario == "Sustainable Development Scenario" ~ "SDS",
-  #       scenario == "Stated Policies Scenario" ~ "STEPS",
-  #       scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE",
-  #       TRUE ~ scenario,
-  #     )
-  #   ) %>%
-  #   dplyr::mutate(
-  #     scenario = dplyr::if_else(scenario == "NZE", "NZE_2050", scenario)
-  #   ) %>%
-  #   dplyr::mutate(
-  #     source = dplyr::case_when(
-  #       source == "World Energy Outlook 2023" ~ "WEO2023",
-  #       TRUE ~ "WEO2023"
-  #     )
-  #   ) %>%
-  #   dplyr::summarize(value = sum(value), .by = -value)
-  #
-  #   bridge_geographies(weo_2023_geography_bridge) %>%
-  #   bridge_technologies(weo_2023_technology_bridge)
-  #   dplyr::mutate(
-  #     scenario_geography = dplyr::if_else(
-  #       scenario_geography == "World",
-  #       "Global",
-  #       scenario_geography
-  #     )
-  #   ) %>%
-  #   dplyr::left_join(
-  #     technology_bridge,
-  #     by = c(technology = "TechnologyAll")
-  #   ) %>%
-  #   dplyr::select(-"technology") %>%
-  #   dplyr::rename(technology = "TechnologyName") %>%
-  #   dplyr::summarize(value = sum(value), .by = -value)
-  #
-  # out %>%
-  #   bridge_technologies(weo_2023_technology_bridge) %>%
-  #   dplyr::summarize(
-  #     value = sum(.data[["value"]], na.rm = TRUE),
-  #     .by = c(
-  #       "source",
-  #       "scenario",
-  #       "scenario_geography",
-  #       "sector",
-  #       "technology",
-  #       "indicator",
-  #       "units",
-  #       "year"
-  #     )
-  #   ) %>%
-  #   bridge_geographies(weo_2023_geography_bridge) %>%
-  #   dplyr::arrange(
-  #     .data[["scenario_geography"]],
-  #     .data[["sector"]],
-  #     .data[["technology"]],
-  #     .data[["year"]]
-  #   ) %>%
-  #   dplyr::relocate(
-  #     "source",
-  #     "scenario",
-  #     "scenario_geography",
-  #     "sector",
-  #     "technology",
-  #     "indicator",
-  #     "units",
-  #     "year",
-  #     "value"
-  #   )
 }
 
 
-weo_2023_extract_power <- function() {
+weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
+                                   weo_2023_ext_data_world_raw) {
+  techs_out_of_pacta_scope <- c(
+    # the following technologies are removed either because:
+    # * they are out of PACTA scope
+    # * to avoid double counting
+    "Total", # avoid double counting
+    "Battery storage",
+    "Modern biomass",
+    "Traditional use of biomass",
+    "Total liquids",
+    "Electricity",
+    "Hydrogen and H2-based fuels",
+    "Hydrogen-based fuels: liquid",
+    "Total gases",
+    "Hydrogen-based fuels: gaseous",
+    "Total solid fuels",
+    "District heat",
+    "Modern bioenergy: liquid",
+    "Ammonia" ,
+    "Synthetic oil products",
+    "Biomethane",
+    "Hydrogen",
+    "Synthetic methane",
+    "Solid bioenergy incl. TUOB",
+    "Other",
+    "Fossil fuels: with CCUS",
+    "Fossil fuels: unabated",
+    "Bioenergy: with CCUS"
+  )
 
+  weo_2023_extended_regions <-
+    weo_2023_ext_data_regions_raw |>
+    dplyr::rename(
+      source = "PUBLICATION",
+      scenario = "SCENARIO",
+      variable = "CATEGORY",
+      technology = "PRODUCT",
+      flow = "FLOW",
+      unit = "UNIT",
+      region = "REGION",
+      year = "YEAR",
+      value = "VALUE"
+    ) |>
+    dplyr::filter(
+      unit == "GW",
+      !(technology %in% techs_out_of_pacta_scope)
+    )
 
-  validate_intermediate_scenario_output(weo_2023_power)
+  weo_2023_extended_world <-
+    weo_2023_ext_data_world_raw |>
+    dplyr::rename(
+      source = "PUBLICATION",
+      scenario = "SCENARIO",
+      variable = "CATEGORY",
+      technology = "PRODUCT",
+      flow = "FLOW",
+      unit = "UNIT",
+      region = "REGION",
+      year = "YEAR",
+      value = "VALUE"
+    )
+
+  weo_2023_power_regions_aps_baseline <-
+    weo_2023_extended_regions |>
+    dplyr::filter(
+      # assumption: prior to and inclusive 2022, APS is consistent with STEPS
+      year <= 2022
+    ) |>
+    dplyr::filter(scenario == "Stated Policies Scenario") |>
+    dplyr::mutate(scenario = "Announced Pledges Scenario")
+
+  weo_2023_power_regions_nze_baseline <-
+    weo_2023_extended_regions |>
+    dplyr::filter(
+      # assumption: prior to and inclusive 2022, NZE is consistent with STEPS
+      year <= 2022
+    ) |>
+    dplyr::filter(
+      scenario == "Stated Policies Scenario",
+      region == "Advanced economies"
+    ) |>
+    dplyr::mutate(scenario = "Net Zero Emissions by 2050 Scenario")
+
+  weo_2023_extended_regions <-
+    weo_2023_extended_regions |>
+    dplyr::filter(
+      !(year < 2030 & scenario == "Net Zero Emissions by 2050 Scenario")
+    )
+
+  weo_2023_power_regions <-
+    dplyr::bind_rows(
+      weo_2023_extended_regions,
+      weo_2023_power_regions_aps_baseline,
+      weo_2023_power_regions_nze_baseline
+    )
+
+  weo_2023_power_no_renewables <-
+    dplyr::bind_rows(
+      weo_2023_power_regions,
+      weo_2023_extended_world
+    ) |>
+    dplyr::filter(
+      # for regional pathways, we must calculate renewables capacity in a more involved way below
+      technology != "RenewablesCap" | region == "World"
+    )
+
+  # If we sum all sub technology, we would miss geothermal or solar cpv
+  # we'll obtain renewables capacities by subtracting hydro from total renewables
+  # (total renewables contains hydro)
+  weo_2023_power_regions_renewables <-
+    weo_2023_extended_regions |>
+    dplyr::filter(technology %in% c("Hydro", "Renewables")) |>
+    tidyr::pivot_wider(
+      names_from = technology,
+      values_from = value
+    ) |>
+    dplyr::mutate(
+      value = .data[["Renewables"]] - .data[["Hydro"]],
+      Renewables = NULL,
+      Hydro = NULL,
+      technology = "RenewablesCap"
+    ) |>
+    dplyr::mutate(
+      scenario = dplyr::if_else(
+        is.na(scenario),
+        "Stated Policies Scenario",
+        scenario
+      )
+    )
+
+  weo_2023_power_regions_renewables_aps_baseline <-
+    weo_2023_power_regions_renewables |>
+    # assumption: prior to 2030, APS is consistent with STEPS
+    dplyr::filter(year < 2030) |>
+    dplyr::mutate(scenario = "Announced Pledges Scenario")
+
+  weo_2023_power_regions_renewables_nze_baseline <-
+    weo_2023_power_regions_renewables |>
+    # assumption: prior to 2030, NZE is consistent with STEPS
+    dplyr::filter(year < 2030) |>
+    dplyr::filter(region == "Advanced economies") |> # only region that we have a granular pathway for NZE2050
+    dplyr::mutate(scenario = "Net Zero Emissions by 2050 Scenario")
+
+  weo_2023_power <-
+    dplyr::bind_rows(
+      weo_2023_power_no_renewables,
+      weo_2023_power_regions_renewables,
+      weo_2023_power_regions_renewables_aps_baseline,
+      weo_2023_power_regions_renewables_nze_baseline
+    ) |>
+    dplyr::filter(unit == "GW", !(technology %in% techs_out_of_pacta_scope)) |>
+    dplyr::rename(
+      units = "unit",
+      scenario_geography = "region",
+      indicator = "variable"
+    ) |>
+    dplyr::mutate(
+      sector = "Power",
+      technology = dplyr::if_else(
+        technology == "Oil",
+        "OilCap",
+        technology
+      )
+    ) %>%
+    dplyr::select(
+      c(
+        "source",
+        "scenario",
+        "scenario_geography",
+        "sector",
+        "technology",
+        "indicator",
+        "units",
+        "year",
+        "value"
+      )
+    )
 
   weo_2023_power
 }
@@ -176,7 +296,7 @@ weo_2023_extract_fossil_fuels <- function(weo_2023_fig_chptr_3_raw) {
 }
 
 
-weo_2023_extract_steel_and_cement <- function(weo_2023_ext_data_world_raw,
+weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
                                  weo_2023_fig_chptr_3_raw) {
   weo_2023_steel_cement_electricity_demand_raw <-
     weo_2023_fig_chptr_3_raw %>%

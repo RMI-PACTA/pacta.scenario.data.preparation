@@ -13,7 +13,8 @@ Suggests:
     covr,
     here,
     readr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tidyxl
 Config/testthat/edition: 3
 Config/Needs/website: rmi-pacta/pacta.pkgdown.rmitemplate
 Imports: 
@@ -21,6 +22,7 @@ Imports:
     glue,
     janitor,
     pacta.data.validation,
+    purrr,
     rlang,
     stringr,
     tidyr,

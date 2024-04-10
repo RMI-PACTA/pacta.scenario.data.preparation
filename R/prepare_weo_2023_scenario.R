@@ -104,7 +104,7 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
   )
 
   weo_2023_extended_regions <-
-    weo_2023_ext_data_regions_raw |>
+    weo_2023_ext_data_regions_raw %>%
     dplyr::rename(
       source = "PUBLICATION",
       scenario = "SCENARIO",
@@ -115,14 +115,14 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
       region = "REGION",
       year = "YEAR",
       value = "VALUE"
-    ) |>
+    ) %>%
     dplyr::filter(
       unit == "GW",
       !(technology %in% techs_out_of_pacta_scope)
     )
 
   weo_2023_extended_world <-
-    weo_2023_ext_data_world_raw |>
+    weo_2023_ext_data_world_raw %>%
     dplyr::rename(
       source = "PUBLICATION",
       scenario = "SCENARIO",
@@ -136,28 +136,28 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
     )
 
   weo_2023_power_regions_aps_baseline <-
-    weo_2023_extended_regions |>
+    weo_2023_extended_regions %>%
     dplyr::filter(
       # assumption: prior to and inclusive 2022, APS is consistent with STEPS
       year <= 2022
-    ) |>
-    dplyr::filter(scenario == "Stated Policies Scenario") |>
+    ) %>%
+    dplyr::filter(scenario == "Stated Policies Scenario") %>%
     dplyr::mutate(scenario = "Announced Pledges Scenario")
 
   weo_2023_power_regions_nze_baseline <-
-    weo_2023_extended_regions |>
+    weo_2023_extended_regions %>%
     dplyr::filter(
       # assumption: prior to and inclusive 2022, NZE is consistent with STEPS
       year <= 2022
-    ) |>
+    ) %>%
     dplyr::filter(
       scenario == "Stated Policies Scenario",
       region == "Advanced economies"
-    ) |>
+    ) %>%
     dplyr::mutate(scenario = "Net Zero Emissions by 2050 Scenario")
 
   weo_2023_extended_regions <-
-    weo_2023_extended_regions |>
+    weo_2023_extended_regions %>%
     dplyr::filter(
       !(year < 2030 & scenario == "Net Zero Emissions by 2050 Scenario")
     )
@@ -173,7 +173,7 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
     dplyr::bind_rows(
       weo_2023_power_regions,
       weo_2023_extended_world
-    ) |>
+    ) %>%
     dplyr::filter(
       # for regional pathways, we must calculate renewables capacity in a more involved way below
       technology != "RenewablesCap" | region == "World"
@@ -183,18 +183,18 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
   # we'll obtain renewables capacities by subtracting hydro from total renewables
   # (total renewables contains hydro)
   weo_2023_power_regions_renewables <-
-    weo_2023_extended_regions |>
-    dplyr::filter(technology %in% c("Hydro", "Renewables")) |>
+    weo_2023_extended_regions %>%
+    dplyr::filter(technology %in% c("Hydro", "Renewables")) %>%
     tidyr::pivot_wider(
       names_from = technology,
       values_from = value
-    ) |>
+    ) %>%
     dplyr::mutate(
       value = .data[["Renewables"]] - .data[["Hydro"]],
       Renewables = NULL,
       Hydro = NULL,
       technology = "RenewablesCap"
-    ) |>
+    ) %>%
     dplyr::mutate(
       scenario = dplyr::if_else(
         is.na(scenario),
@@ -204,16 +204,16 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
     )
 
   weo_2023_power_regions_renewables_aps_baseline <-
-    weo_2023_power_regions_renewables |>
+    weo_2023_power_regions_renewables %>%
     # assumption: prior to 2030, APS is consistent with STEPS
-    dplyr::filter(year < 2030) |>
+    dplyr::filter(year < 2030) %>%
     dplyr::mutate(scenario = "Announced Pledges Scenario")
 
   weo_2023_power_regions_renewables_nze_baseline <-
-    weo_2023_power_regions_renewables |>
+    weo_2023_power_regions_renewables %>%
     # assumption: prior to 2030, NZE is consistent with STEPS
-    dplyr::filter(year < 2030) |>
-    dplyr::filter(region == "Advanced economies") |> # only region that we have a granular pathway for NZE2050
+    dplyr::filter(year < 2030) %>%
+    dplyr::filter(region == "Advanced economies") %>% # only region that we have a granular pathway for NZE2050
     dplyr::mutate(scenario = "Net Zero Emissions by 2050 Scenario")
 
   weo_2023_power <-
@@ -222,13 +222,13 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
       weo_2023_power_regions_renewables,
       weo_2023_power_regions_renewables_aps_baseline,
       weo_2023_power_regions_renewables_nze_baseline
-    ) |>
-    dplyr::filter(unit == "GW", !(technology %in% techs_out_of_pacta_scope)) |>
+    ) %>%
+    dplyr::filter(unit == "GW", !(technology %in% techs_out_of_pacta_scope)) %>%
     dplyr::rename(
       units = "unit",
       scenario_geography = "region",
       indicator = "variable"
-    ) |>
+    ) %>%
     dplyr::mutate(
       sector = "Power",
       technology = dplyr::if_else(

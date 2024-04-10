@@ -24,6 +24,7 @@ Imports:
     rlang,
     stringr,
     tidyr,
+    unpivotr,
     zoo
 Remotes: 
     RMI-PACTA/pacta.data.validation

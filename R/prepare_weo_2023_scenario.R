@@ -43,12 +43,12 @@ prepare_weo_2023_scenario <- function(weo_2023_ext_data_regions_raw,
     ) %>%
     dplyr::mutate(
       scenario = dplyr::case_when(
-        scenario == "Announced Pledges Scenario" ~ "APS",
-        scenario == "Sustainable Development Scenario" ~ "SDS",
-        scenario == "Stated Policies Scenario" ~ "STEPS",
-        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE_2050",
-        scenario == "NZE" ~ "NZE_2050",
-        TRUE ~ scenario,
+        .data[["scenario"]] == "Announced Pledges Scenario" ~ "APS",
+        .data[["scenario"]] == "Sustainable Development Scenario" ~ "SDS",
+        .data[["scenario"]] == "Stated Policies Scenario" ~ "STEPS",
+        .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario" ~ "NZE_2050",
+        .data[["scenario"]] == "NZE" ~ "NZE_2050",
+        TRUE ~ .data[["scenario"]],
       )
     ) %>%
     bridge_technologies(weo_2023_technology_bridge) %>%
@@ -64,9 +64,9 @@ prepare_weo_2023_scenario <- function(weo_2023_ext_data_regions_raw,
       "technology",
       "value"
     ) %>%
-    dplyr::summarize(value = sum(value), .by = -value)
+    dplyr::summarize(value = sum(.data[["value"]]), .by = -c("value"))
 
-  validate_intermediate_scenario_output(out)
+  pacta.data.validation::validate_intermediate_scenario_output(out)
 
   out
 }
@@ -117,8 +117,8 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
       value = "VALUE"
     ) %>%
     dplyr::filter(
-      unit == "GW",
-      !(technology %in% techs_out_of_pacta_scope)
+      .data[["unit"]] == "GW",
+      !(.data[["technology"]] %in% techs_out_of_pacta_scope)
     )
 
   weo_2023_extended_world <-
@@ -139,27 +139,27 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
     weo_2023_extended_regions %>%
     dplyr::filter(
       # assumption: prior to and inclusive 2022, APS is consistent with STEPS
-      year <= 2022
+      .data[["year"]] <= 2022
     ) %>%
-    dplyr::filter(scenario == "Stated Policies Scenario") %>%
+    dplyr::filter(.data[["scenario"]] == "Stated Policies Scenario") %>%
     dplyr::mutate(scenario = "Announced Pledges Scenario")
 
   weo_2023_power_regions_nze_baseline <-
     weo_2023_extended_regions %>%
     dplyr::filter(
       # assumption: prior to and inclusive 2022, NZE is consistent with STEPS
-      year <= 2022
+      .data[["year"]] <= 2022
     ) %>%
     dplyr::filter(
-      scenario == "Stated Policies Scenario",
-      region == "Advanced economies"
+      .data[["scenario"]] == "Stated Policies Scenario",
+      .data[["region"]] == "Advanced economies"
     ) %>%
     dplyr::mutate(scenario = "Net Zero Emissions by 2050 Scenario")
 
   weo_2023_extended_regions <-
     weo_2023_extended_regions %>%
     dplyr::filter(
-      !(year < 2030 & scenario == "Net Zero Emissions by 2050 Scenario")
+      !(.data[["year"]] < 2030 & .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario")
     )
 
   weo_2023_power_regions <-
@@ -176,7 +176,7 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
     ) %>%
     dplyr::filter(
       # for regional pathways, we must calculate renewables capacity in a more involved way below
-      technology != "RenewablesCap" | region == "World"
+      .data[["technology"]] != "RenewablesCap" | .data[["region"]] == "World"
     )
 
   # If we sum all sub technology, we would miss geothermal or solar cpv
@@ -184,10 +184,10 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
   # (total renewables contains hydro)
   weo_2023_power_regions_renewables <-
     weo_2023_extended_regions %>%
-    dplyr::filter(technology %in% c("Hydro", "Renewables")) %>%
+    dplyr::filter(.data[["technology"]] %in% c("Hydro", "Renewables")) %>%
     tidyr::pivot_wider(
-      names_from = technology,
-      values_from = value
+      names_from = "technology",
+      values_from = "value"
     ) %>%
     dplyr::mutate(
       value = .data[["Renewables"]] - .data[["Hydro"]],
@@ -197,23 +197,23 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
     ) %>%
     dplyr::mutate(
       scenario = dplyr::if_else(
-        is.na(scenario),
+        is.na(.data[["scenario"]]),
         "Stated Policies Scenario",
-        scenario
+        .data[["scenario"]]
       )
     )
 
   weo_2023_power_regions_renewables_aps_baseline <-
     weo_2023_power_regions_renewables %>%
     # assumption: prior to 2030, APS is consistent with STEPS
-    dplyr::filter(year < 2030) %>%
+    dplyr::filter(.data[["year"]] < 2030) %>%
     dplyr::mutate(scenario = "Announced Pledges Scenario")
 
   weo_2023_power_regions_renewables_nze_baseline <-
     weo_2023_power_regions_renewables %>%
     # assumption: prior to 2030, NZE is consistent with STEPS
-    dplyr::filter(year < 2030) %>%
-    dplyr::filter(region == "Advanced economies") %>% # only region that we have a granular pathway for NZE2050
+    dplyr::filter(.data[["year"]] < 2030) %>%
+    dplyr::filter(.data[["region"]] == "Advanced economies") %>% # only region that we have a granular pathway for NZE2050
     dplyr::mutate(scenario = "Net Zero Emissions by 2050 Scenario")
 
   weo_2023_power <-
@@ -223,7 +223,7 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
       weo_2023_power_regions_renewables_aps_baseline,
       weo_2023_power_regions_renewables_nze_baseline
     ) %>%
-    dplyr::filter(unit == "GW", !(technology %in% techs_out_of_pacta_scope)) %>%
+    dplyr::filter(.data[["unit"]] == "GW", !(.data[["technology"]] %in% techs_out_of_pacta_scope)) %>%
     dplyr::rename(
       units = "unit",
       scenario_geography = "region",
@@ -232,9 +232,9 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
     dplyr::mutate(
       sector = "Power",
       technology = dplyr::if_else(
-        technology == "Oil",
+        .data[["technology"]] == "Oil",
         "OilCap",
-        technology
+        .data[["technology"]]
       )
     ) %>%
     dplyr::select(
@@ -261,7 +261,7 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
 
   weo_2023_passenger_car_totals <-
     weo_2023_fig_chptr_3_raw %>%
-    dplyr::filter(sheet == "3.8") %>%
+    dplyr::filter(.data[["sheet"]] == "3.8") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 41, 49)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 1, 20)) %>%
     dplyr::mutate(content =
@@ -274,9 +274,9 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
     dplyr::select(-"row/col") %>%
     dplyr::rename("scenario" = 1L, "technology" = 2L) %>%
     dplyr::rename_with(.fn = ~ as.character(c(2010:2022, seq(2030, 2050, by = 5))), .cols = 3:20) %>%
-    dplyr::filter(technology %in% c("ICE cars", "Zero-emissions cars")) %>%
-    dplyr::mutate(scenario = zoo::na.locf(scenario)) %>%
-    dplyr::arrange(technology) %>%
+    dplyr::filter(.data[["technology"]] %in% c("ICE cars", "Zero-emissions cars")) %>%
+    dplyr::mutate(scenario = zoo::na.locf(.data[["scenario"]])) %>%
+    dplyr::arrange(.data[["technology"]]) %>%
     # WEO doesn't fill in values all the way down the table for year < 2022
     # so we need to fill in the NAs from the first written value
     zoo::na.locf() %>%
@@ -288,18 +288,18 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
     ) %>%
     dplyr::mutate(
       technology = dplyr::case_when(
-        technology == "ICE cars" ~ "ICE",
-        technology == "Zero-emissions cars" ~ "ZEC",
+        .data[["technology"]] == "ICE cars" ~ "ICE",
+        .data[["technology"]] == "Zero-emissions cars" ~ "ZEC",
       ),
-      value = value * 1000000,
+      value = .data[["value"]] * 1000000,
       units = "Vehicles",
       region = "World"
     ) %>%
     dplyr::filter(
-      year %in% c("2022", "2030")
+      .data[["year"]] %in% c("2022", "2030")
     ) %>%
     dplyr::mutate(
-      value_sector = sum(value),
+      value_sector = sum(.data[["value"]]),
       .by = c(
         "scenario",
         "year",
@@ -309,17 +309,17 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
 
   iea_ev_sales_aps_steps <-
     iea_global_ev_raw %>%
-    dplyr::filter(category %in% c("Projection-APS", "Projection-STEPS")) %>%
+    dplyr::filter(.data[["category"]] %in% c("Projection-APS", "Projection-STEPS")) %>%
     dplyr::filter(
-      parameter == "EV sales",
-      year %in% c("2022", "2030"),
-      region == "World"
+      .data[["parameter"]] == "EV sales",
+      .data[["year"]] %in% c("2022", "2030"),
+      .data[["region"]] == "World"
     ) %>%
     dplyr::mutate(
       scenario = stringr::str_remove(.data[["category"]], "Projection-")
     ) %>%
     dplyr::summarize(
-      value = sum(value, na.rm = TRUE),
+      value = sum(.data[["value"]], na.rm = TRUE),
       .by = c(
         "region",
         "scenario",
@@ -339,7 +339,7 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
       iea_ev_sales_aps_steps
     ) %>%
     dplyr::mutate(
-      value_sector = zoo::na.locf(value_sector),
+      value_sector = zoo::na.locf(.data[["value_sector"]]),
       .by = c("scenario", "year")
     )
 
@@ -350,8 +350,8 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
       values_from = "value"
     ) %>%
     dplyr::mutate(
-      FuelCell = ZEC - BEV,
-      Total = BEV + PHEV + FuelCell
+      FuelCell = .data[["ZEC"]] - .data[["BEV"]],
+      Total = .data[["BEV"]] + .data[["PHEV"]] + .data[["FuelCell"]]
     ) %>%
     dplyr::select(-"ZEC") %>%
     tidyr::pivot_longer(
@@ -376,7 +376,7 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
     weo_2023_automotive_aps_steps_with_fuel_cell %>%
     dplyr::filter(
       # Assumption: NZE shares baseline values to all other scenarios
-      year == 2022
+      .data[["year"]] == 2022
     ) %>%
     dplyr::select(-"scenario") %>%
     dplyr::distinct() %>%
@@ -405,13 +405,13 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
     weo_2023_automotive_with_share %>%
     dplyr::mutate(
       value_sector = dplyr::if_else(
-        scenario == "NZE" & year == 2030,
-        value / value_share,
-        value_sector
+        .data[["scenario"]] == "NZE" & .data[["year"]] == 2030,
+        .data[["value"]] / .data[["value_share"]],
+        .data[["value_sector"]]
       )
     ) %>%
     dplyr::mutate(
-      value_sector = zoo::na.locf(value_sector),
+      value_sector = zoo::na.locf(.data[["value_sector"]]),
       .by = c(
         "scenario",
         "year",
@@ -420,9 +420,9 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
     ) %>%
     dplyr::mutate(
       value = dplyr::if_else(
-        is.na(value),
-        value_sector * value_share,
-        value
+        is.na(.data[["value"]]),
+        .data[["value_sector"]] * .data[["value_share"]],
+        .data[["value"]]
       ),
       value_share = NULL
     )
@@ -432,13 +432,13 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
     # Big Assumption:
     # By WEO standards, "Total" indicates anything PHEV, BEV and Fuel Cell
     # By AI standards, this means the "inverse" of Total = "ICE"
-    dplyr::filter(year == "2030", scenario == "NZE") %>%
+    dplyr::filter(.data[["year"]] == "2030", .data[["scenario"]] == "NZE") %>%
     tidyr::pivot_wider(
       names_from = "technology",
-      values_from = c("value")
+      values_from = "value"
     ) %>%
     dplyr::mutate(
-      ICE = value_sector - (BEV + PHEV + FuelCell)
+      ICE = .data[["value_sector"]] - (.data[["BEV"]] + .data[["PHEV"]] + .data[["FuelCell"]])
     ) %>%
     tidyr::pivot_longer(
       cols = c("Total", "BEV", "PHEV", "FuelCell", "ICE"),
@@ -449,7 +449,7 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
 
   weo_2023_automotive <-
     dplyr::bind_rows(
-      dplyr::filter(weo_2023_automotive_with_share, !(scenario == "NZE" & year == 2030)),
+      dplyr::filter(weo_2023_automotive_with_share, !(.data[["scenario"]] == "NZE" & .data[["year"]] == 2030)),
       weo_2023_automotive_nze_with_ice
     ) %>%
     dplyr::mutate(
@@ -457,14 +457,14 @@ weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
       scenario_geography = "Global",
       sector = "Automotive",
       variable = "Sales",
-      value = value / 1000000,
+      value = .data[["value"]] / 1000000,
       units = "# (in million)",
       indicator = "Sales"
     ) %>%
     dplyr::filter(
-      technology != c("Total"),
+      .data[["technology"]] != c("Total"),
     ) %>%
-    dplyr::summarize(value = sum(value), .by = -value) %>%
+    dplyr::summarize(value = sum(.data[["value"]]), .by = -c("value")) %>%
     dplyr::select(
       "source",
       "scenario",
@@ -505,7 +505,7 @@ weo_2023_extract_fossil_fuels <- function(weo_2023_fig_chptr_3_raw) {
       "value"
     )
 
-  validate_intermediate_scenario_output(weo_2023_fossil_fuels)
+  pacta.data.validation::validate_intermediate_scenario_output(weo_2023_fossil_fuels)
 
   weo_2023_fossil_fuels
 }
@@ -515,7 +515,7 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
                                  weo_2023_fig_chptr_3_raw) {
   weo_2023_steel_cement_electricity_demand_raw <-
     weo_2023_fig_chptr_3_raw %>%
-    dplyr::filter(sheet == "3.6") %>%
+    dplyr::filter(.data[["sheet"]] == "3.6") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 42, 51)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 2, 11)) %>%
     unpivotr::rectify() %>%
@@ -549,16 +549,16 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
   weo_2023_extended_data_steel_cement_nze <-
     weo_2023_extended_data_world %>%
     dplyr::filter(
-      scenario == "Net Zero Emissions by 2050 Scenario",
-      flow %in%  c("Iron and steel", "Non-metallic minerals: cement")
+      .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario",
+      .data[["flow"]] %in%  c("Iron and steel", "Non-metallic minerals: cement")
     )
 
   weo_2023_steel_cement_production <-
     weo_2023_extended_data_steel_cement_nze %>%
-    dplyr::filter(category == "Industrial material production") %>%
+    dplyr::filter(.data[["category"]] == "Industrial material production") %>%
     dplyr::mutate(
       sector = dplyr::if_else(
-        flow == "Iron and steel",
+        .data[["flow"]] == "Iron and steel",
         "Steel",
         "Cement"
       )
@@ -568,10 +568,10 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
 
   weo_2023_steel_cement_emissions_scope1 <-
     weo_2023_extended_data_steel_cement_nze %>%
-    dplyr::filter(category == "CO2 combustion and process") %>%
+    dplyr::filter(.data[["category"]] == "CO2 combustion and process") %>%
     dplyr::mutate(
       sector = dplyr::if_else(
-        flow == "Iron and steel",
+        .data[["flow"]] == "Iron and steel",
         "Steel",
         "Cement")
     ) %>%
@@ -607,21 +607,21 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
       sep = "_"
     ) %>%
     dplyr::mutate(
-      year = as.integer(year),
-      electricity_demand = as.double(electricity_demand)) %>%
+      year = as.integer(.data[["year"]]),
+      electricity_demand = as.double(.data[["electricity_demand"]])) %>%
     dplyr::filter(
-      sector %in% c("Iron and steel", "Cement"),
-      scenario == "NZE") %>%
+      .data[["sector"]] %in% c("Iron and steel", "Cement"),
+      .data[["scenario"]] == "NZE") %>%
     dplyr::mutate(
-      sector = ifelse(sector == "Iron and steel", "Steel", "Cement")
+      sector = ifelse(.data[["sector"]] == "Iron and steel", "Steel", "Cement")
     )
 
   weo_2023_electricity_generation_nze <-
     weo_2023_extended_data_world %>%
     dplyr::filter(
-      scenario == "Net Zero Emissions by 2050 Scenario",
-      flow %in%  c("Electricity generation"),
-      category == "CO2 total intensity"
+      .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario",
+      .data[["flow"]] %in%  c("Electricity generation"),
+      .data[["category"]] == "CO2 total intensity"
     ) %>%
     dplyr::mutate(scenario = "NZE") %>%
     dplyr::rename(emission_intensity_power = "value")
@@ -652,14 +652,14 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
       suffix = c("_emission_scope2", "_emission_scope1")
     ) %>%
     dplyr::mutate(
-      value = (absolute_emission_scope1 + absolute_emission_scope2) / production,
+      value = (.data[["absolute_emission_scope1"]] + .data[["absolute_emission_scope2"]]) / .data[["production"]],
       source = "WEO2023"
     ) %>%
-    dplyr::distinct(source, scenario, sector, year, value) %>%
+    dplyr::distinct(source, .data[["scenario"]], .data[["sector"]], .data[["year"]], .data[["value"]]) %>%
     dplyr::mutate(
       scenario_geography = "Global",
       units = dplyr::if_else(
-        sector == "Steel",
+        .data[["sector"]] == "Steel",
         "tCO2/t Steel",
         "tCO2/t Cement"
       ),
@@ -668,7 +668,7 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
     ) %>%
     dplyr::filter(!is.na(.data[["value"]]))
 
-  validate_intermediate_scenario_output(weo_2023_steel_cement)
+  pacta.data.validation::validate_intermediate_scenario_output(weo_2023_steel_cement)
 
   weo_2023_steel_cement
 }
@@ -676,7 +676,7 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
 
 weo_2023_extract_oil <- function(weo_2023_fig_chptr_3_raw) {
   weo_2023_fig_chptr_3_raw %>%
-    dplyr::filter(sheet == "Table.3.5") %>%
+    dplyr::filter(.data[["sheet"]] == "Table.3.5") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 13, 32)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 2, 12)) %>%
     unpivotr::rectify() %>%
@@ -696,12 +696,12 @@ weo_2023_extract_oil <- function(weo_2023_fig_chptr_3_raw) {
     ) %>%
     dplyr::select(-c("empty_1", "empty_2", "historic_2010")) %>%
     dplyr::filter(
-      technology %in% c("World oil supply", "Natural gas liquids")
+      .data[["technology"]] %in% c("World oil supply", "Natural gas liquids")
     ) %>%
     dplyr::mutate(
       # assumption: all scenarios share same baseline
-      APS_2022 = STEPS_2022,
-      NZE_2022 = STEPS_2022
+      APS_2022 = .data[["STEPS_2022"]],
+      NZE_2022 = .data[["STEPS_2022"]]
     ) %>%
     tidyr::pivot_longer(
       cols = -"technology",
@@ -728,7 +728,7 @@ weo_2023_extract_oil <- function(weo_2023_fig_chptr_3_raw) {
 
 weo_2023_extract_gas <- function(weo_2023_fig_chptr_3_raw) {
   weo_2023_fig_chptr_3_raw %>%
-    dplyr::filter(sheet == "Table.3.6") %>%
+    dplyr::filter(.data[["sheet"]] == "Table.3.6") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 11, 33)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 2, 12)) %>%
     unpivotr::rectify() %>%
@@ -747,10 +747,10 @@ weo_2023_extract_gas <- function(weo_2023_fig_chptr_3_raw) {
       "NZE_2050" = 11L
     ) %>%
     dplyr::select(-c("empty_1", "empty_2", "historic_2010")) %>%
-    dplyr::filter(sector == "Natural gas production (bcm)") %>%
+    dplyr::filter(.data[["sector"]] == "Natural gas production (bcm)") %>%
     dplyr::mutate(
-      APS_2022 = STEPS_2022,
-      NZE_2022 = STEPS_2022
+      APS_2022 = .data[["STEPS_2022"]],
+      NZE_2022 = .data[["STEPS_2022"]]
     ) %>%
     tidyr::pivot_longer(
       cols = c(
@@ -770,7 +770,7 @@ weo_2023_extract_gas <- function(weo_2023_fig_chptr_3_raw) {
       names = c("scenario", "year"),
       delim = "_"
     ) %>%
-    dplyr::mutate(year = as.integer(year)) %>%
+    dplyr::mutate(year = as.integer(.data[["year"]])) %>%
     dplyr::mutate(
       sector = "Oil&Gas",
       technology = "Gas",
@@ -781,7 +781,7 @@ weo_2023_extract_gas <- function(weo_2023_fig_chptr_3_raw) {
 
 weo_2023_extract_coal <- function(weo_2023_fig_chptr_3_raw) {
   weo_2023_fig_chptr_3_raw %>%
-    dplyr::filter(sheet == "3.28") %>%
+    dplyr::filter(.data[["sheet"]] == "3.28") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 41, 44)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 2, 20)) %>%
     dplyr::mutate(content =
@@ -813,7 +813,7 @@ weo_2023_extract_coal <- function(weo_2023_fig_chptr_3_raw) {
       "2045" = 18L,
       "2050" = 19L
     ) %>%
-    dplyr::filter(scenario != "Historical") %>%
+    dplyr::filter(.data[["scenario"]] != "Historical") %>%
     dplyr::select("scenario", "2022","2030", "2035", "2040", "2045", "2050") %>%
     tidyr::pivot_longer(
       cols = c("2022","2030", "2035", "2040", "2045", "2050"),
@@ -864,7 +864,7 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
   mpp_mutual_preparation <- function(data) {
     data %>%
       dplyr::filter(
-        variable == "Annual GHG Emissions in tCO2e - PRU"
+        .data[["variable"]] == "Annual GHG Emissions in tCO2e - PRU"
       ) %>%
       tidyr::pivot_longer(
         cols = tidyr::matches("20[0-9]{2}$"),
@@ -872,7 +872,7 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
         names_transform = as.integer,
         values_to = "value"
       ) %>%
-      dplyr::filter(value != 0)
+      dplyr::filter(.data[["value"]] != 0)
   }
 
   mpp_commercial_passenger_aviation <-
@@ -899,9 +899,9 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
     weo_2023_ext_data_world_raw %>%
     dplyr::rename_with(.fn = tolower) %>%
     dplyr::filter(
-      flow == "Total aviation (domestic and bunkers)",
-      scenario == "Net Zero Emissions by 2050 Scenario",
-      category == "CO2 combustion"
+      .data[["flow"]] == "Total aviation (domestic and bunkers)",
+      .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario",
+      .data[["category"]] == "CO2 combustion"
     ) %>%
     dplyr::rename(emissions = "value")
 
@@ -909,9 +909,9 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
     weo_2023_ext_data_world_raw %>%
     dplyr::rename_with(.fn = tolower) %>%
     dplyr::filter(
-      flow == "Total aviation (domestic and bunkers)",
-      scenario == "Net Zero Emissions by 2050 Scenario",
-      category == "Activity of stock"
+      .data[["flow"]] == "Total aviation (domestic and bunkers)",
+      .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario",
+      .data[["category"]] == "Activity of stock"
     ) %>%
     dplyr::rename(passenger_km = "value")
 
@@ -947,7 +947,7 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
       technology = "Passenger"
     )
 
-  validate_intermediate_scenario_output(weo_2023_aviation)
+  pacta.data.validation::validate_intermediate_scenario_output(weo_2023_aviation)
 
   weo_2023_aviation
 }
@@ -955,7 +955,7 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
 
 weo_2023_extract_auto_tech_share <- function(weo_2023_fig_chptr_3_raw) {
   weo_2023_fig_chptr_3_raw %>%
-    dplyr::filter(sheet == "3.34") %>%
+    dplyr::filter(.data[["sheet"]] == "3.34") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 39, 42)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 2, 8)) %>%
     unpivotr::rectify() %>%
@@ -970,19 +970,19 @@ weo_2023_extract_auto_tech_share <- function(weo_2023_fig_chptr_3_raw) {
       "NZE_2030" = 7L
     ) %>%
     dplyr::select(-c("empty_1", "empty_2")) %>%
-    dplyr::filter(!is.na(technology)) %>%
+    dplyr::filter(!is.na(.data[["technology"]])) %>%
     dplyr::mutate(
       technology = dplyr::case_when(
-        technology == "Battery electric" ~ "BEV",
-        technology == "Fuel cell electric" ~ "FuelCell",
-        technology == "Plug-in hybrid electric" ~ "PHEV",
-        TRUE ~ technology
+        .data[["technology"]] == "Battery electric" ~ "BEV",
+        .data[["technology"]] == "Fuel cell electric" ~ "FuelCell",
+        .data[["technology"]] == "Plug-in hybrid electric" ~ "PHEV",
+        TRUE ~ .data[["technology"]]
       )
     ) %>%
     dplyr::mutate(
       # assumption: shared baseline
-      APS_2022 = STEPS_2022,
-      NZE_2022 = STEPS_2022
+      APS_2022 = .data[["STEPS_2022"]],
+      NZE_2022 = .data[["STEPS_2022"]]
     )  %>%
     tidyr::pivot_longer(
       cols = c(
@@ -1002,7 +1002,7 @@ weo_2023_extract_auto_tech_share <- function(weo_2023_fig_chptr_3_raw) {
       delim = "_"
     ) %>%
     dplyr::mutate(
-      year = as.integer(year),
+      year = as.integer(.data[["year"]]),
       region = "World",
       units = "Vehicles"
     )

@@ -23,7 +23,7 @@ prepare_weo_2023_scenario <- function(weo_2023_ext_data_regions_raw,
                                       weo_2023_fig_chptr_3_raw,
                                       iea_global_ev_raw,
                                       mpp_ats_raw) {
-  # weo_2023_automotive <- weo_2023_extract_automotive(weo_2023_fig_chptr_3_raw)
+  weo_2023_automotive <- weo_2023_extract_automotive(weo_2023_fig_chptr_3_raw, iea_global_ev_raw)
   weo_2023_aviation <- weo_2023_extract_aviation(mpp_ats_raw, weo_2023_ext_data_world_raw)
   weo_2023_fossil_fuels <- weo_2023_extract_fossil_fuels(weo_2023_fig_chptr_3_raw)
   weo_2023_power <- weo_2023_extract_power(weo_2023_ext_data_regions_raw, weo_2023_ext_data_world_raw)
@@ -31,7 +31,7 @@ prepare_weo_2023_scenario <- function(weo_2023_ext_data_regions_raw,
 
   out <-
     dplyr::bind_rows(
-      # weo_2023_automotive,
+      weo_2023_automotive,
       weo_2023_aviation,
       weo_2023_fossil_fuels,
       weo_2023_power,
@@ -255,12 +255,227 @@ weo_2023_extract_power <- function(weo_2023_ext_data_regions_raw,
 }
 
 
-weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw) {
+weo_2023_extract_automotive <- function(weo_2023_fig_chptr_3_raw,
+                                        iea_global_ev_raw) {
   weo_2023_auto_tech_share <- weo_2023_extract_auto_tech_share(weo_2023_fig_chptr_3_raw)
 
+  weo_2023_passenger_car_totals <-
+    weo_2023_fig_chptr_3_raw %>%
+    dplyr::filter(sheet == "3.8") %>%
+    dplyr::filter(dplyr::between(.data[["row"]], 41, 49)) %>%
+    dplyr::filter(dplyr::between(.data[["col"]], 1, 20)) %>%
+    dplyr::mutate(content =
+                    dplyr::if_else(.data[["content"]] == "#N/A", NA, .data[["content"]])
+    ) %>%
+    dplyr::mutate(data_type =
+                    dplyr::if_else(.data[["data_type"]] == "error", "numeric", .data[["data_type"]])
+    ) %>%
+    unpivotr::rectify() %>%
+    dplyr::select(-"row/col") %>%
+    dplyr::rename("scenario" = 1L, "technology" = 2L) %>%
+    dplyr::rename_with(.fn = ~ as.character(c(2010:2022, seq(2030, 2050, by = 5))), .cols = 3:20) %>%
+    dplyr::filter(technology %in% c("ICE cars", "Zero-emissions cars")) %>%
+    dplyr::mutate(scenario = zoo::na.locf(scenario)) %>%
+    dplyr::arrange(technology) %>%
+    # WEO doesn't fill in values all the way down the table for year < 2022
+    # so we need to fill in the NAs from the first written value
+    zoo::na.locf() %>%
+    tidyr::pivot_longer(
+      cols = tidyr::matches("20[0-9]{2}$"),
+      names_to = "year",
+      names_transform = as.integer,
+      values_to = "value"
+    ) %>%
+    dplyr::mutate(
+      technology = dplyr::case_when(
+        technology == "ICE cars" ~ "ICE",
+        technology == "Zero-emissions cars" ~ "ZEC",
+      ),
+      value = value * 1000000,
+      units = "Vehicles",
+      region = "World"
+    ) %>%
+    dplyr::filter(
+      year %in% c("2022", "2030")
+    ) %>%
+    dplyr::mutate(
+      value_sector = sum(value),
+      .by = c(
+        "scenario",
+        "year",
+        "units"
+      )
+    )
 
+  iea_ev_sales_aps_steps <-
+    iea_global_ev_raw %>%
+    dplyr::filter(category %in% c("Projection-APS", "Projection-STEPS")) %>%
+    dplyr::filter(
+      parameter == "EV sales",
+      year %in% c("2022", "2030"),
+      region == "World"
+    ) %>%
+    dplyr::mutate(
+      scenario = stringr::str_remove(.data[["category"]], "Projection-")
+    ) %>%
+    dplyr::summarize(
+      value = sum(value, na.rm = TRUE),
+      .by = c(
+        "region",
+        "scenario",
+        "powertrain",
+        "year",
+        "unit"
+      )
+    ) %>%
+    dplyr::rename(
+      units = "unit",
+      technology = "powertrain"
+    )
 
-  validate_intermediate_scenario_output(weo_2023_automotive)
+  weo_2023_automotive_aps_steps <-
+    dplyr::bind_rows(
+      weo_2023_passenger_car_totals,
+      iea_ev_sales_aps_steps
+    ) %>%
+    dplyr::mutate(
+      value_sector = zoo::na.locf(value_sector),
+      .by = c("scenario", "year")
+    )
+
+  weo_2023_automotive_aps_steps_with_fuel_cell <-
+    weo_2023_automotive_aps_steps %>%
+    tidyr::pivot_wider(
+      names_from = "technology",
+      values_from = "value"
+    ) %>%
+    dplyr::mutate(
+      FuelCell = ZEC - BEV,
+      Total = BEV + PHEV + FuelCell
+    ) %>%
+    dplyr::select(-"ZEC") %>%
+    tidyr::pivot_longer(
+      cols = c("Total", "BEV", "PHEV", "FuelCell", "ICE"),
+      names_to = "technology",
+      values_to = "value"
+    )
+
+  # This data-frame is manually created using data from this chart:
+  # https://www.iea.org/data-and-statistics/charts/electric-car-sales-and-sales-share-in-the-net-zero-scenario-2015-2030
+  weo_2023_automotive_nze_2030 <-
+    dplyr::tibble(
+      scenario = "NZE",
+      region = "World",
+      technology = "Total",
+      year =  2030,
+      units = "Vehicles",
+      value = 59.25 * 1000000
+    )
+
+  weo_2023_automotive_nze_2022 <-
+    weo_2023_automotive_aps_steps_with_fuel_cell %>%
+    dplyr::filter(
+      # Assumption: NZE shares baseline values to all other scenarios
+      year == 2022
+    ) %>%
+    dplyr::select(-"scenario") %>%
+    dplyr::distinct() %>%
+    dplyr::mutate(scenario = "NZE")
+
+  weo_2023_automotive_nze <-
+    dplyr::bind_rows(
+      weo_2023_automotive_nze_2022,
+      weo_2023_automotive_nze_2030
+    )
+
+  weo_2023_automotive <-
+    dplyr::bind_rows(
+      weo_2023_automotive_aps_steps_with_fuel_cell,
+      weo_2023_automotive_nze
+    )
+
+  weo_2023_automotive_with_share <-
+    weo_2023_automotive %>%
+    dplyr::full_join(
+      weo_2023_auto_tech_share,
+      by = c("scenario", "technology", "year", "region", "units")
+    )
+
+  weo_2023_automotive_with_completed_nze <-
+    weo_2023_automotive_with_share %>%
+    dplyr::mutate(
+      value_sector = dplyr::if_else(
+        scenario == "NZE" & year == 2030,
+        value / value_share,
+        value_sector
+      )
+    ) %>%
+    dplyr::mutate(
+      value_sector = zoo::na.locf(value_sector),
+      .by = c(
+        "scenario",
+        "year",
+        "units"
+      )
+    ) %>%
+    dplyr::mutate(
+      value = dplyr::if_else(
+        is.na(value),
+        value_sector * value_share,
+        value
+      ),
+      value_share = NULL
+    )
+
+  weo_2023_automotive_nze_with_ice <-
+    weo_2023_automotive_with_completed_nze %>%
+    # Big Assumption:
+    # By WEO standards, "Total" indicates anything PHEV, BEV and Fuel Cell
+    # By AI standards, this means the "inverse" of Total = "ICE"
+    dplyr::filter(year == "2030", scenario == "NZE") %>%
+    tidyr::pivot_wider(
+      names_from = "technology",
+      values_from = c("value")
+    ) %>%
+    dplyr::mutate(
+      ICE = value_sector - (BEV + PHEV + FuelCell)
+    ) %>%
+    tidyr::pivot_longer(
+      cols = c("Total", "BEV", "PHEV", "FuelCell", "ICE"),
+      names_to = "technology",
+      names_prefix = "value_",
+      values_to = "value"
+    )
+
+  weo_2023_automotive <-
+    dplyr::bind_rows(
+      dplyr::filter(weo_2023_automotive_with_share, !(scenario == "NZE" & year == 2030)),
+      weo_2023_automotive_nze_with_ice
+    ) %>%
+    dplyr::mutate(
+      source = "WEO2023",
+      scenario_geography = "Global",
+      sector = "Automotive",
+      variable = "Sales",
+      value = value / 1000000,
+      units = "# (in million)",
+      indicator = "Sales"
+    ) %>%
+    dplyr::filter(
+      technology != c("Total"),
+    ) %>%
+    dplyr::summarize(value = sum(value), .by = -value) %>%
+    dplyr::select(
+      "source",
+      "scenario",
+      "scenario_geography",
+      "sector",
+      "technology",
+      "indicator",
+      "units",
+      "year",
+      "value"
+    )
 
   weo_2023_automotive
 }

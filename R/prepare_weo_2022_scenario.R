@@ -28,10 +28,6 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
                                       weo_2022_nze_steel_raw,
                                       weo_2022_sales_aps_auto_raw,
                                       weo_2022_electric_sales_aps_auto_raw) {
-  scenario_region_raw <- weo_2022_ext_data_regions_raw
-
-  scenario_region_world_raw <- weo_2022_ext_data_world_raw
-
   fossil_fuel <-
     weo_2022_fossil_fuels_raw %>%
     dplyr::filter(.data[["Variable"]] == "Supply")
@@ -97,7 +93,7 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
 
   # format scenario_region Power -----------------------------------------------
 
-  scenario_region_clean_names <- janitor::clean_names(scenario_region_raw)
+  scenario_region_clean_names <- janitor::clean_names(weo_2022_ext_data_regions_raw)
 
   scenario_region <-
     scenario_region_clean_names %>%
@@ -152,9 +148,10 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
   # format scenario_region_world Power -----------------------------------------
 
   scenario_region_world_cleaned_names <-
-    janitor::clean_names(scenario_region_world_raw)
+    janitor::clean_names(weo_2022_ext_data_world_raw)
 
-  scenario_region_world <- scenario_region_world_cleaned_names %>%
+  scenario_region_world <-
+    scenario_region_world_cleaned_names %>%
     dplyr::rename(
       source = "publication",
       variable = "category",
@@ -225,15 +222,26 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
 
   # combine and format ---------------------------------------------------------
 
-  scenario_region_total <-
+  renewable_techs <-
+    c(
+      "Concentrating solar power",
+      "Geothermal",
+      "Marine",
+      "Modern bioenergy and renewable waste",
+      "Solar PV",
+      "Wind"
+    )
+
+  scen_joined <-
     dplyr::bind_rows(
       oil_formatted,
       fossil_fuel_formatted,
       scenario_region,
       scenario_region_world
-    )
-
-  scen_joined <- scenario_region_total
+    ) %>%
+    # for granular pathway, we miss some sub technology in renewables and we
+    # can't sum them to have renewables total capacities
+    dplyr::filter(!.data[["technology"]] %in% renewable_techs | .data[["region"]] == "World")
 
   # add regional renewables pathway
   # if we sum all sub technology, we miss still small one as geothermical or
@@ -271,8 +279,7 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     dplyr::filter(.data[["region"]] == "Advanced economies") %>% # only region where we get granular pathway for NZE2050
     dplyr::mutate(scenario = "Net Zero Emissions by 2050 Scenario")
 
-  scen_joined <-
-    scen_joined %>%
+  scenario_region_total <-
     dplyr::bind_rows(
       scen_joined,
       renewables_region,
@@ -281,25 +288,26 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     )
 
   scen_complete <-
-    scen_joined %>%
+    scenario_region_total %>%
+    # scen_joined_old %>%
     dplyr::rename(
       indicator = "variable",
       scenario_geography = "region",
       units = "unit"
     ) %>%
-    dplyr::summarise(
-      value = sum(.data[["value"]]),
-      .by = c(
-        "source",
-        "scenario",
-        "scenario_geography",
-        "indicator",
-        "sector",
-        "units",
-        "technology",
-        "year"
-      )
-    ) %>%
+    # dplyr::summarise(
+    #   value = sum(.data[["value"]]),
+    #   .by = c(
+    #     "source",
+    #     "scenario",
+    #     "scenario_geography",
+    #     "indicator",
+    #     "sector",
+    #     "units",
+    #     "technology",
+    #     "year"
+    #   )
+    # ) %>%
     dplyr::mutate(year = as.double(.data[["year"]]))
 
   scen_total <-
@@ -460,27 +468,22 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
   # Economies and Emerging market too they are subgroup of region and can't be
   # one as such
 
-  weo_2022_aggregated_by_region <-
-    weo_2022_harmonized_geographies %>%
-    dplyr::summarise(
-      value = sum(.data[["value"]]),
-      .by = c(
-        "source",
-        "scenario",
-        "scenario_geography",
-        "indicator",
-        "sector",
-        "technology",
-        "units",
-        "year"
-      )
-    )
-
   out <-
-    weo_2022_aggregated_by_region %>%
-    bridge_geographies(weo_2022_geography_bridge) %>%
+    weo_2022_harmonized_geographies %>%
     bridge_technologies(weo_2022_technology_bridge) %>%
-    dplyr::select(
+    bridge_geographies(weo_2022_geography_bridge) %>%
+    dplyr::summarise(value = sum(.data[["value"]]), .by = -"value") %>%
+    dplyr::arrange(
+      .data[["source"]],
+      .data[["scenario"]],
+      .data[["scenario_geography"]],
+      .data[["sector"]],
+      .data[["technology"]],
+      .data[["indicator"]],
+      .data[["units"]],
+      .data[["year"]]
+    ) %>%
+    dplyr::relocate(
       "source",
       "scenario",
       "scenario_geography",
@@ -490,10 +493,9 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
       "units",
       "year",
       "value"
-    ) %>%
-    dplyr::arrange(.data[["scenario"]], .data[["scenario_geography"]], .data[["sector"]], .data[["technology"]])
+    )
 
-  # pacta.data.validation::validate_intermediate_scenario_output(out)
+  pacta.data.validation::validate_intermediate_scenario_output(out)
 
   out
 }

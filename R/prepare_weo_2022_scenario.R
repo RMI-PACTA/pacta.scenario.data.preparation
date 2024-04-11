@@ -164,7 +164,8 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     dplyr::filter(.data[["unit"]] == "GW") %>%
     dplyr::rename(sector = "flow") %>%
     dplyr::filter(!(.data[["technology"]] %in% techs_out_of_pacta_scope)) %>%
-    dplyr::mutate(technology = dplyr::if_else(.data[["technology"]] == "Oil", "OilCap", .data[["technology"]])) %>% #if we don't do this, Oil capacity goes under Oil&Gas sector
+    #if we don't do this, Oil capacity goes under Oil&Gas sector
+    dplyr::mutate(technology = dplyr::if_else(.data[["technology"]] == "Oil", "OilCap", .data[["technology"]])) %>%
     dplyr::filter(.data[["sector"]] == "Power")
 
 

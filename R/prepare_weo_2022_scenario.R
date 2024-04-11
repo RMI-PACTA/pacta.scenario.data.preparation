@@ -173,7 +173,8 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
 
   fossil_fuel_formatted <-
     fossil_fuel %>%
-    dplyr::filter(.data[["Sector"]] != "Oil") %>% # we need to remove Natural Gas Liquids from Oil so it needs "special treatment"
+    # we need to remove Natural Gas Liquids from Oil so it needs "special treatment"
+    dplyr::filter(.data[["Sector"]] != "Oil") %>%
     dplyr::select(-c("2015", "2020", "2035", "2040", "2045")) %>% # we don't have data for those year
     tidyr::pivot_longer(
       cols = dplyr::matches("20[0-9]{2}$"),

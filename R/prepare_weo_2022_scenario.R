@@ -64,7 +64,7 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     dplyr::mutate(year = as.integer(.data[["year"]]))
 
 
-  # format scenario region -------------------------------------------------------
+  # format scenario region -----------------------------------------------------
 
   techs_out_of_pacta_scope <- c(
     # All not in PACTA scope + Renewables to avoid double counting
@@ -95,7 +95,7 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
   )
 
 
-  # format scenario_region Power --------------------------------------------------
+  # format scenario_region Power -----------------------------------------------
 
   scenario_region_clean_names <- janitor::clean_names(scenario_region_raw)
 
@@ -149,7 +149,7 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     dplyr::filter(!is.na(.data[["scenario"]]))
 
 
-  # format scenario_region_world Power --------------------------------------------------
+  # format scenario_region_world Power -----------------------------------------
 
   scenario_region_world_cleaned_names <-
     janitor::clean_names(scenario_region_world_raw)
@@ -170,7 +170,7 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     dplyr::filter(.data[["sector"]] == "Power")
 
 
-  # format scenario FF --------------------------------------------------
+  # format scenario FF ---------------------------------------------------------
 
   fossil_fuel_formatted <-
     fossil_fuel %>%
@@ -223,7 +223,7 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     dplyr::select(-c("Data Source", "oil", "natural_gas_liquids"))
 
 
-  # combine and format ------------------------------------------------------
+  # combine and format ---------------------------------------------------------
 
   scenario_region_total <-
     dplyr::bind_rows(
@@ -235,10 +235,11 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
 
   scen_joined <- scenario_region_total
 
-
   # add regional renewables pathway
-  # if we sum all sub technology, we miss still small one as geothermical or solar cpv
-  # we'll obtain renewables capacities by substractinghydro to total renewables (total renewables contains hydro)
+  # if we sum all sub technology, we miss still small one as geothermical or
+  # solar cpv
+  # we'll obtain renewables capacities by substractinghydro to total renewables
+  # (total renewables contains hydro)
 
   renewables_region <-
     scenario_region_clean_names %>%
@@ -301,7 +302,6 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     ) %>%
     dplyr::mutate(year = as.double(.data[["year"]]))
 
-
   scen_total <-
     scen_complete %>%
     dplyr::mutate(
@@ -328,15 +328,15 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
       )
     )
 
-
-  # Issue - scope are not the same for COalCap and GsCap
+  # Issue - scope are not the same for CoalCap and GasCap
   # global includes CCUS in the forecast
   # regional don't include CCUS in the forecast
 
-  # process automotive sector ------------------------------------------------------
-  # Add NZE scenario for Auto from May 2021 release
-  # Data not updated since that report - confirmation from WEO this data remain accurate for WEO2022
 
+  # process automotive sector --------------------------------------------------
+  # Add NZE scenario for Auto from May 2021 release
+  # Data not updated since that report - confirmation from WEO this data remain
+  # accurate for WEO2022
 
   nze2050_auto_cleaned <- janitor::clean_names(NZE2050_auto)
 
@@ -355,8 +355,6 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     dplyr::filter(.data[["year"]] <= 2030) %>% # no scenario data after 2030 - not hard coded
     dplyr::mutate(value = .data[["value"]] / 1000000) %>%
     dplyr::mutate(units = "# (in million)")
-
-
 
   # Add APS and STEPS data for Automotive
 
@@ -389,7 +387,8 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
     dplyr::mutate(indicator = "Sales") %>%
     dplyr::select("source","scenario","scenario_geography","sector","technology","indicator","units","year","value")
 
-  # process Cement and Steel sectors ---------------------------------------------
+
+  # process Cement and Steel sectors -------------------------------------------
 
   # Add NZE Emission intensity for Steel and Cement
   nze_ei_cleaned <- janitor::clean_names(NZE_EI)
@@ -456,24 +455,10 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
         "Global",
         .data[["scenario_geography"]]
       )
-      # ) %>%
-      # #OPEC/NonOPEC not included yet as GlobalAggregate not for O&G yet,
-      # #Advanced Economies and Emerging market too they are subgroup of region and
-      # #can't be one as such
-      # mutate(
-      #   scenario_geography = case_when(
-      #     scenario_geography == "United States"~ "US",
-      #     scenario_geography == "Asia Pacific"~ "AsiaPacific",
-      #     scenario_geography == "Central and South America"~ "LatinAmerica", #not the same name - same country definition
-      #     scenario_geography == "Middle East"~ "MiddleEast",
-      #     scenario_geography == "Non-OECD"~ "NonOECD",
-      #     scenario_geography == "North America"~ "NorthAmerica",
-      #     scenario_geography == "Middle East"~ "MiddleEast",
-      #     scenario_geography == "Southeast Asia"~ "NonOECD",
-      #     scenario_geography == "European Union"~ "EU27",
-      #     TRUE ~ scenario_geography
-      #   )
     )
+  # OPEC/NonOPEC not included yet as GlobalAggregate not for O&G yet, Advanced
+  # Economies and Emerging market too they are subgroup of region and can't be
+  # one as such
 
   weo_2022_aggregated_by_region <-
     weo_2022_harmonized_geographies %>%

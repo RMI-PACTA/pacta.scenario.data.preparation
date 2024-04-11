@@ -1,0 +1,27 @@
+scenario_technology_name,standardized_technology_name
+BEV,Electric
+Coal,Coal
+Coal: unabated,CoalCap
+Coal: with CCUS,CoalCap
+Concentrating solar power,RenewablesCap
+Electric,Electric
+FCEV,FuelCell
+FuelCell,FuelCell
+Gas,Gas
+Gasoline/diesel ICE,ICE
+Geothermal,RenewablesCap
+Hybrid,Hybrid
+Hydro,HydroCap
+ICE,ICE
+Marine,RenewablesCap
+Modern bioenergy and renewable waste,RenewablesCap
+Natural Gas ICE,ICE
+Natural Gas: unabated,GasCap
+Natural Gas: with CCUS,GasCap
+Nuclear,NuclearCap
+Oil,Oil
+OilCap,OilCap
+PHEV,Hybrid
+RenewablesCap,RenewablesCap
+Solar PV,RenewablesCap
+Wind,RenewablesCap

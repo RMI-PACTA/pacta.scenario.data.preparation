@@ -299,19 +299,6 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
       scenario_geography = "region",
       units = "unit"
     ) %>%
-    # dplyr::summarise(
-    #   value = sum(.data[["value"]]),
-    #   .by = c(
-    #     "source",
-    #     "scenario",
-    #     "scenario_geography",
-    #     "indicator",
-    #     "sector",
-    #     "units",
-    #     "technology",
-    #     "year"
-    #   )
-    # ) %>%
     dplyr::mutate(year = as.double(.data[["year"]]))
 
   scen_total <-

@@ -1,0 +1,11 @@
+scenario_technology_name,standardized_technology_name
+Coal,Coal
+CoalCap,CoalCap
+Gas,Gas
+GasCap,GasCap
+HydroCap,HydroCap
+Nuclear,NuclearCap
+Oil,Oil
+OilCap,OilCap
+Passenger,Passenger
+RenewablesCap,RenewablesCap

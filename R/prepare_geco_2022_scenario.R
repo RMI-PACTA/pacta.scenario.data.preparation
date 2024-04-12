@@ -331,14 +331,15 @@ prepare_geco_2022_steel_scenario <- function(geco_2022_steel_raw) {
 }
 
 prepare_geco_2022_aviation_scenario <- function(geco_2022_aviation_raw) {
-  out <- janitor::clean_names(geco_2022_aviation_raw)
-
   out <- dplyr::rename(
-    out,
-    source = "geco",
-    scenario_geography = "region",
-    units = "unit",
-    indicator = "variable"
+    geco_2022_aviation_raw,
+    source = "GECO",
+    scenario = "Scenario",
+    indicator = "Variable",
+    passenger_freight = "Passenger/Freight",
+    technology = "Technology",
+    units = "Unit",
+    scenario_geography = "Region"
   )
 
   out <- dplyr::mutate(out, passenger_freight = NULL)
@@ -351,9 +352,8 @@ prepare_geco_2022_aviation_scenario <- function(geco_2022_aviation_raw) {
 
   out <- tidyr::pivot_longer(
     out,
-    cols = tidyr::matches("x[0-9]{4}$"),
+    cols = tidyr::matches("[0-9]{4}$"),
     names_to = "year",
-    names_prefix = "x",
     names_transform = list(year = as.numeric),
     values_to = "value",
     values_ptypes = numeric()

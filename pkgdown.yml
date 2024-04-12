@@ -2,5 +2,8 @@ pandoc: 3.1.11
 pkgdown: 2.0.8
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-04-12T10:17Z
+last_built: 2024-04-12T11:15Z
+urls:
+  reference: https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference
+  article: https://rmi-pacta.github.io/pacta.scenario.data.preparation/articles
 

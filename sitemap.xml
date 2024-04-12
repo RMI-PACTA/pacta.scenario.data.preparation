@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/index.html</loc>
   </url>
   <url>
-    <loc>/reference/add_market_share_columns.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/add_market_share_columns.html</loc>
   </url>
   <url>
-    <loc>/reference/format_p4b.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/format_p4b.html</loc>
   </url>
   <url>
-    <loc>/reference/format_p4b_ei.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/format_p4b_ei.html</loc>
   </url>
   <url>
-    <loc>/reference/format_p4i.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/format_p4i.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/interpolate_yearly.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/interpolate_yearly.html</loc>
   </url>
   <url>
-    <loc>/reference/prepare_geco_2022_scenario.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/prepare_geco_2022_scenario.html</loc>
   </url>
   <url>
-    <loc>/reference/prepare_geco_2023_scenario.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/prepare_geco_2023_scenario.html</loc>
   </url>
   <url>
-    <loc>/reference/prepare_isf_2021_scenario.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/prepare_isf_2021_scenario.html</loc>
   </url>
   <url>
-    <loc>/reference/prepare_isf_2023_scenario.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/prepare_isf_2023_scenario.html</loc>
   </url>
   <url>
-    <loc>/reference/prepare_weo_2022_scenario.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/prepare_weo_2022_scenario.html</loc>
   </url>
   <url>
-    <loc>/reference/prepare_weo_2023_scenario.html</loc>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/prepare_weo_2023_scenario.html</loc>
   </url>
 </urlset>

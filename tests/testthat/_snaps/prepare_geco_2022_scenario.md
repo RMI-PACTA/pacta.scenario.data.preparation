@@ -20,8 +20,8 @@
       12 GECO2022 NDC_LTS   Global             Coal   Coal       Producti~ mtoe   2025
       13 GECO2022 Reference Global             Coal   Coal       Producti~ mtoe   2020
       14 GECO2022 Reference Global             Coal   Coal       Producti~ mtoe   2025
-      15 GECO2022 NDC_LTS   Global             Aviat~ Passenger  Emission~ gCO2~  2020
-      16 GECO2022 NDC_LTS   Global             Aviat~ Passenger  Emission~ gCO2~  2025
+      15 GECO2022 NDC_LTS   Global             Aviat~ Passenger  Emission~ tCO2~  2020
+      16 GECO2022 NDC_LTS   Global             Aviat~ Passenger  Emission~ tCO2~  2025
       17 GECO2022 1.5C      Global             Steel  <NA>       Emission~ tCO2~  2020
       18 GECO2022 1.5C      Global             Steel  <NA>       Emission~ tCO2~  2025
       # i 1 more variable: value <dbl>

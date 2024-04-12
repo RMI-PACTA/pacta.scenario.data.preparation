@@ -361,5 +361,8 @@ prepare_geco_2022_aviation_scenario <- function(geco_2022_aviation_raw) {
 
   out <- dplyr::mutate(out, year = as.double(.data$year))
 
+  # "raw" data mislables values as "gCO2/pkm"
+  out <- dplyr::mutate(out, units = "tCO2/pkm")
+
   dplyr::select(out, prepared_scenario_names())
 }

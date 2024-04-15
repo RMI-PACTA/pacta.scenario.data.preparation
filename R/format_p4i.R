@@ -8,6 +8,9 @@
 #'
 #' @return A scenario dataset, with columns renamed to be consistent with
 #'   pacta.data.preparation input requirements.
+#'
+#' @export
+
 format_p4i <- function(data, green_techs) {
   crucial_names <- c(
     "source",

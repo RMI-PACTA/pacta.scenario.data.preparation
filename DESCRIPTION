@@ -42,3 +42,4 @@ Remotes:
     RMI-PACTA/pacta.data.validation
 Depends: 
     R (>= 3.5.0)
+LazyData: true

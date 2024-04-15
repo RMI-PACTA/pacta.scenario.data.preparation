@@ -11,7 +11,7 @@ add_market_share_columns(data, reference_year)
 
 \item{reference_year}{The baseline year, against which the technology- and
 sector- market shares will be calculated. Note: At the start year, tmsr = 1
-and smsp =0 respectively.}
+and smsp = 0 respectively.}
 }
 \value{
 A scenario dataset, with the new columns \code{tmsr} and \code{smsp}.

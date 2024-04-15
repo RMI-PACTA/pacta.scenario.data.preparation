@@ -51,4 +51,10 @@
   <url>
     <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/prepare_weo_2023_scenario.html</loc>
   </url>
+  <url>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/scenario_regions.html</loc>
+  </url>
+  <url>
+    <loc>https://rmi-pacta.github.io/pacta.scenario.data.preparation/reference/scenario_source_pacta_geography_bridge.html</loc>
+  </url>
 </urlset>

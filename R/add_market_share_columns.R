@@ -7,9 +7,12 @@
 #' @param data A scenario dataset, like FIXME: Define an exported demo scenario.
 #' @param reference_year The baseline year, against which the technology- and
 #'   sector- market shares will be calculated. Note: At the start year, tmsr = 1
-#'   and smsp =0 respectively.
+#'   and smsp = 0 respectively.
 #'
 #' @return A scenario dataset, with the new columns `tmsr` and `smsp`.
+#'
+#' @export
+
 add_market_share_columns <- function(data, reference_year) {
   old_groups <- dplyr::groups(data)
   data <- dplyr::ungroup(data)

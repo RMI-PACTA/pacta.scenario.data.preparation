@@ -1,0 +1,1493 @@
+scenario_geography,country,country_iso,reg_count
+Global,Afghanistan,AF,281
+Global,Albania,AL,281
+Global,Algeria,DZ,281
+Global,American Samoa,AS,281
+Global,Andorra,AD,281
+Global,Angola,AO,281
+Global,Anguilla,AI,281
+Global,Antigua And Barbuda,AG,281
+Global,Argentina,AR,281
+Global,Armenia,AM,281
+Global,Aruba,AW,281
+Global,Australia,AU,281
+Global,Austria,AT,281
+Global,Azerbaijan,AZ,281
+Global,Bahamas,BS,281
+Global,Bahrain,BH,281
+Global,Bangladesh,BD,281
+Global,Barbados,BB,281
+Global,Belarus,BY,281
+Global,Belgium,BE,281
+Global,Belize,BZ,281
+Global,Benin,BJ,281
+Global,Bermuda,BM,281
+Global,Bhutan,BT,281
+Global,Bolivia,BO,281
+Global,Bosnia and Herzegovina,BA,281
+Global,Botswana,BW,281
+Global,Brazil,BR,281
+Global,British Virgin Islands,VG,281
+Global,Brunei Darussalam,BN,281
+Global,Bulgaria,BG,281
+Global,Burkina Faso,BF,281
+Global,Burundi,BI,281
+Global,Cambodia,KH,281
+Global,Cameroon,CM,281
+Global,Canada,CA,281
+Global,Cape Verde,CV,281
+Global,Cayman Islands,KY,281
+Global,Chad,TD,281
+Global,Chile,CL,281
+Global,China,CN,281
+Global,Colombia,CO,281
+Global,Cook Islands,CK,281
+Global,Costa Rica,CR,281
+Global,Croatia,HR,281
+Global,Cuba,CU,281
+Global,Curacao,CW,281
+Global,Cyprus,CY,281
+Global,Czech Republic,CZ,281
+Global,Democratic People's Republic of Korea,KR,281
+Global,Democratic Republic of the Congo,CD,281
+Global,Denmark,DK,281
+Global,Djibouti,DJ,281
+Global,Dominica,DM,281
+Global,Dominican Republic,DO,281
+Global,Ecuador,EC,281
+Global,Egypt,EG,281
+Global,El Salvador,SV,281
+Global,Equatorial Guinea,GQ,281
+Global,Eritrea,ER,281
+Global,Estonia,EE,281
+Global,Ethiopia,ET,281
+Global,Faroe Islands,FO,281
+Global,Fiji,FJ,281
+Global,Finland,FI,281
+Global,France,FR,281
+Global,French Guiana,GF,281
+Global,French Polynesia,PF,281
+Global,Gabon,GA,281
+Global,Gambia,GM,281
+Global,Georgia,GE,281
+Global,Germany,DE,281
+Global,Ghana,GH,281
+Global,Gibraltar,GI,281
+Global,Greece,GR,281
+Global,Greenland,GL,281
+Global,Grenada,GD,281
+Global,Guadeloupe,GP,281
+Global,Guam,GU,281
+Global,Guatemala,GT,281
+Global,Guernsey,GG,281
+Global,Guinea,GN,281
+Global,GuineaBissau,GW,281
+Global,Guyana,GY,281
+Global,Haiti,HT,281
+Global,Honduras,HN,281
+Global,Hong Kong Special Administrative Region of China,HK,281
+Global,Hungary,HU,281
+Global,Iceland,IS,281
+Global,India,IN,281
+Global,Indonesia,ID,281
+Global,Iran (Islamic Republic of Iran),IR,281
+Global,Iraq,IQ,281
+Global,Ireland,IE,281
+Global,Islamic Republic of Mauritania,MR,281
+Global,Isle of Man,IM,281
+Global,Israel,IL,281
+Global,Italy,IT,281
+Global,Ivory Coast,CI,281
+Global,Jamaica,JM,281
+Global,Japan,JP,281
+Global,Jersey,JE,281
+Global,Jordan,JO,281
+Global,Kazakhstan,KZ,281
+Global,Kenya,KE,281
+Global,Kiribati,KI,281
+Global,Kosovo,RS,281
+Global,Kuwait,KW,281
+Global,Kyrgyzstan,KG,281
+Global,Lao People's Democratic Republic,LA,281
+Global,Latvia,LV,281
+Global,Lebanon,LB,281
+Global,Lesotho,LS,281
+Global,Liberia,LR,281
+Global,Libyan Arab Jamahiriya,LY,281
+Global,Lithuania,LT,281
+Global,Luxembourg,LU,281
+Global,Macau Special Administrative Region of China,MO,281
+Global,Madagascar,MG,281
+Global,Malawi,MW,281
+Global,Malaysia,MY,281
+Global,Maldives,MV,281
+Global,Mali,ML,281
+Global,Malta,MT,281
+Global,Marshall Islands,MH,281
+Global,Martinique,MQ,281
+Global,Mauritius,MU,281
+Global,Mayotte,YT,281
+Global,Mexico,MX,281
+Global,Micronesia (Federated States of),FM,281
+Global,Mongolia,MN,281
+Global,Montenegro,ME,281
+Global,Morocco,MA,281
+Global,Mozambique,MZ,281
+Global,Myanmar,MM,281
+Global,Nepal,NP,281
+Global,Netherlands,NL,281
+Global,New Caledonia,NC,281
+Global,New Zealand,NZ,281
+Global,Nicaragua,NI,281
+Global,Niger,NE,281
+Global,Nigeria,NG,281
+Global,Norway,NO,281
+Global,Oman,OM,281
+Global,Pakistan,PK,281
+Global,Palau,PW,281
+Global,Panama,PA,281
+Global,Papua New Guinea,PG,281
+Global,Paraguay,PY,281
+Global,Peru,PE,281
+Global,Philippines,PH,281
+Global,Poland,PL,281
+Global,Portugal,PT,281
+Global,Puerto Rico,PR,281
+Global,Qatar,QA,281
+Global,Republic of Congo,CG,281
+Global,Republic of Korea,KP,281
+Global,Republic of Macedonia,MK,281
+Global,Republic of Moldova,MD,281
+Global,Reunion,RE,281
+Global,Romania,RO,281
+Global,Russian Federation,RU,281
+Global,Rwanda,RW,281
+Global,Samoa,WS,281
+Global,Saudi Arabia,SA,281
+Global,Senegal,SN,281
+Global,Serbia,RS,281
+Global,Seychelles,SC,281
+Global,Sierra Leone,SL,281
+Global,Singapore,SG,281
+Global,Slovakia,SK,281
+Global,Slovenia,SI,281
+Global,Solomon Islands,SB,281
+Global,Somalia,SO,281
+Global,Somaliland,SO,281
+Global,South Africa,ZA,281
+Global,Spain,ES,281
+Global,Sri Lanka,LK,281
+Global,Sudan,SD,281
+Global,Suriname,SR,281
+Global,Swaziland,SZ,281
+Global,Sweden,SE,281
+Global,Switzerland,CH,281
+Global,Syrian Arab Republic,SY,281
+Global,Taiwan,TW,281
+Global,Tajikistan,TJ,281
+Global,Thailand,TH,281
+Global,TimorLeste,TL,281
+Global,Togo,TG,281
+Global,Tokelau,TK,281
+Global,Tonga,TO,281
+Global,Trinidad and Tobago,TT,281
+Global,Tunisia,TN,281
+Global,Turkey,TR,281
+Global,Turkmenistan,TM,281
+Global,Tuvalu,TV,281
+Global,Uganda,UG,281
+Global,Ukraine,UA,281
+Global,United Arab Emirates,AE,281
+Global,United Kingdom,GB,281
+Global,United Republic Of Tanzania,TZ,281
+Global,United States,US,281
+Global,Uruguay,UY,281
+Global,Uzbekistan,UZ,281
+Global,Vanuatu,VU,281
+Global,Venezuela,VE,281
+Global,Vietnam,VN,281
+Global,Virgin Islands (US),VI,281
+Global,Yemen,YE,281
+Global,Zambia,ZM,281
+Global,Zimbabwe,ZW,281
+Global,AngolaCongo Republic Joint Development Area,AO,281
+Global,Brunei,BN,281
+Global,Comoros,KM,281
+Global,Congo Republic,CG,281
+Global,Cote d'Ivoire,CI,281
+Global,Falkland Islands,FK,281
+Global,Iran,IR,281
+Global,KuwaitSaudi Arabia Partitioned Neutral Zone,KW,281
+Global,Libya,LY,281
+Global,Malaysia Thailand Joint Development Area,MY,281
+Global,Malaysia Vietnam PM3 Commercial Arrangement Area,MY,281
+Global,Mauritania,MR,281
+Global,Russia,RU,281
+Global,South Korea,KR,281
+Global,South Sudan,SS,281
+Global,Syria,SY,281
+Global,Tanzania,TZ,281
+Global,Timor Sea Joint Petroleum Development Area,TL,281
+Global,Saint Barthelemy,BL,281
+Global,"Saint Helena, Ascension and Tristan da Cunha",SH,281
+Global,Saint Kitts and Nevis,KN,281
+Global,Saint Lucia,LC,281
+Global,Saint Pierre and Miquelon,PM,281
+Global,Saint Vincent and the Grenadines,VC,281
+Global,Sint Maarten,MF,281
+Global,Antarctica,AQ,281
+Global,Bonaire,BQ,281
+Global,Bouvet Island,BV,281
+Global,British Indian Ocean Territory,IO,281
+Global,Central African Republic,CF,281
+Global,Christmas Island,CX,281
+Global,Cocos (Keeling) Islands,CC,281
+Global,Congo,CG,281
+Global,Falkland Islands (Malvinas),FK,281
+Global,French Southern Territories,TF,281
+Global,Heard Island and McDonald Mcdonald Islands,HM,281
+Global,Holy See (Vatican City State),VA,281
+Global,Hong Kong,HK,281
+Global,"Iran, Islamic Republic of",IR,281
+Global,"Korea, Democratic People's Republic of",KP,281
+Global,"Korea, Republic of",KR,281
+Global,Liechtenstein,LI,281
+Global,Macao,MO,281
+Global,"Macedonia, the Former Yugoslav Republic of",MK,281
+Global,"Micronesia, Federated States of",FM,281
+Global,"Moldova, Republic of",MD,281
+Global,Monaco,MC,281
+Global,Montserrat,MS,281
+Global,Namibia,"NA",281
+Global,Nauru,NR,281
+Global,Niue,NU,281
+Global,Norfolk Island,NF,281
+Global,Northern Mariana Islands,MP,281
+Global,"Palestine, State of",PS,281
+Global,Pitcairn,PN,281
+Global,Saint Helena,SH,281
+Global,Saint Martin (French part),MF,281
+Global,San Marino,SM,281
+Global,Sao Tome and Principe,ST,281
+Global,Sint Maarten (Dutch part),SX,281
+Global,South Georgia and the South Sandwich Islands,GS,281
+Global,Svalbard and Jan Mayen,SJ,281
+Global,"Taiwan, Province of China",TW,281
+Global,Turks and Caicos Islands,TC,281
+Global,United States Minor Outlying Islands,UM,281
+Global,Viet Nam,VN,281
+Global,US Virgin Islands,VI,281
+Global,Wallis and Futuna,WF,281
+Global,Western Sahara,EH,281
+Global,Aland Islands,AX,281
+Africa,Algeria,DZ,56
+Africa,Angola,AO,56
+Africa,Benin,BJ,56
+Africa,Botswana,BW,56
+Africa,Burkina Faso,BF,56
+Africa,Burundi,BI,56
+Africa,Cape Verde,CV,56
+Africa,Cameroon,CM,56
+Africa,Central African Republic,CF,56
+Africa,Chad,TD,56
+Africa,Comoros,KM,56
+Africa,Cote d'Ivoire,CI,56
+Africa,Djibouti,DJ,56
+Africa,Egypt,EG,56
+Africa,Equatorial Guinea,GQ,56
+Africa,Eritrea,ER,56
+Africa,Ethiopia,ET,56
+Africa,Gabon,GA,56
+Africa,Gambia,GM,56
+Africa,Ghana,GH,56
+Africa,Guinea,GN,56
+Africa,GuineaBissau,GW,56
+Africa,Kenya,KE,56
+Africa,Lesotho,LS,56
+Africa,Liberia,LR,56
+Africa,Libya,LY,56
+Africa,Madagascar,MG,56
+Africa,Malawi,MW,56
+Africa,Mali,ML,56
+Africa,Mauritania,MR,56
+Africa,Mauritius,MU,56
+Africa,Morocco,MA,56
+Africa,Mozambique,MZ,56
+Africa,Namibia,"NA",56
+Africa,Niger,NE,56
+Africa,Nigeria,NG,56
+Africa,Reunion,RE,56
+Africa,Rwanda,RW,56
+Africa,Sao Tome and Principe,ST,56
+Africa,Senegal,SN,56
+Africa,Seychelles,SC,56
+Africa,Sierra Leone,SL,56
+Africa,Somalia,SO,56
+Africa,South Africa,ZA,56
+Africa,South Sudan,SS,56
+Africa,Sudan,SD,56
+Africa,Swaziland,SZ,56
+Africa,Democratic Republic of the Congo,CD,56
+Africa,Congo Republic,CG,56
+Africa,United Republic of Tanzania,TZ,56
+Africa,Togo,TG,56
+Africa,Tunisia,TN,56
+Africa,Uganda,UG,56
+Africa,Western Sahara,EH,56
+Africa,Zambia,ZM,56
+Africa,Zimbabwe,ZW,56
+Brazil,Brazil,BR,1
+China,China,CN,2
+China,Hong Kong Special Administrative Region of China,HK,2
+EEurope_Eurasia,Albania,AL,26
+EEurope_Eurasia,Armenia,AM,26
+EEurope_Eurasia,Azerbaijan,AZ,26
+EEurope_Eurasia,Belarus,BY,26
+EEurope_Eurasia,Bosnia and Herzegovina,BA,26
+EEurope_Eurasia,Bulgaria,BG,26
+EEurope_Eurasia,Croatia,HR,26
+EEurope_Eurasia,Cyprus,CY,26
+EEurope_Eurasia,Georgia,GE,26
+EEurope_Eurasia,Gibraltar,GI,26
+EEurope_Eurasia,Kazakhstan,KZ,26
+EEurope_Eurasia,Kosovo,RS,26
+EEurope_Eurasia,Kyrgyzstan,KG,26
+EEurope_Eurasia,Latvia,LV,26
+EEurope_Eurasia,Lithuania,LT,26
+EEurope_Eurasia,Malta,MT,26
+EEurope_Eurasia,Montenegro,ME,26
+EEurope_Eurasia,Republic of Macedonia,MK,26
+EEurope_Eurasia,Romania,RO,26
+EEurope_Eurasia,Russian Federation,RU,26
+EEurope_Eurasia,Serbia,RS,26
+EEurope_Eurasia,Tajikistan,TJ,26
+EEurope_Eurasia,Republic of Moldova,MD,26
+EEurope_Eurasia,Turkmenistan,TM,26
+EEurope_Eurasia,Ukraine,UA,26
+EEurope_Eurasia,Uzbekistan,UZ,26
+EU,Austria,AT,28
+EU,Belgium,BE,28
+EU,Bulgaria,BG,28
+EU,Croatia,HR,28
+EU,Cyprus,CY,28
+EU,Czech Republic,CZ,28
+EU,Denmark,DK,28
+EU,Estonia,EE,28
+EU,Finland,FI,28
+EU,France,FR,28
+EU,Germany,DE,28
+EU,Greece,GR,28
+EU,Hungary,HU,28
+EU,Ireland,IE,28
+EU,Italy,IT,28
+EU,Latvia,LV,28
+EU,Lithuania,LT,28
+EU,Luxembourg,LU,28
+EU,Malta,MT,28
+EU,Netherlands,NL,28
+EU,Poland,PL,28
+EU,Portugal,PT,28
+EU,Romania,RO,28
+EU,Slovakia,SK,28
+EU,Slovenia,SI,28
+EU,Spain,ES,28
+EU,Sweden,SE,28
+EU,United Kingdom,GB,28
+India,India,IN,1
+Japan,Japan,JP,1
+LatinAmerica,Antigua and Barbuda,AG,45
+LatinAmerica,Argentina,AR,45
+LatinAmerica,Aruba,AW,45
+LatinAmerica,Bahamas,BS,45
+LatinAmerica,Barbados,BB,45
+LatinAmerica,Belize,BZ,45
+LatinAmerica,Bermuda,BM,45
+LatinAmerica,Bolivia,BO,45
+LatinAmerica,Bonaire,BQ,45
+LatinAmerica,Brazil,BR,45
+LatinAmerica,British Virgin Islands,VG,45
+LatinAmerica,Caicos Islands,TC,45
+LatinAmerica,Cayman Islands,KY,45
+LatinAmerica,Colombia,CO,45
+LatinAmerica,Costa Rica,CR,45
+LatinAmerica,Cuba,CU,45
+LatinAmerica,Curacao,CW,45
+LatinAmerica,Dominica,DM,45
+LatinAmerica,Dominican Republic,DO,45
+LatinAmerica,Ecuador,EC,45
+LatinAmerica,El Salvador,SV,45
+LatinAmerica,Falkland Islands,FK,45
+LatinAmerica,French Guiana,GF,45
+LatinAmerica,Grenada,GD,45
+LatinAmerica,Guadeloupe,GP,45
+LatinAmerica,Guatemala,GT,45
+LatinAmerica,Guyana,GY,45
+LatinAmerica,Haiti,HT,45
+LatinAmerica,Honduras,HN,45
+LatinAmerica,Jamaica,JM,45
+LatinAmerica,Martinique,MQ,45
+LatinAmerica,Montserrat,MS,45
+LatinAmerica,Nicaragua,NI,45
+LatinAmerica,Panama,PA,45
+LatinAmerica,Paraguay,PY,45
+LatinAmerica,Peru,PE,45
+LatinAmerica,Saint Kitts and Nevis,KN,45
+LatinAmerica,Saint Lucia,LC,45
+LatinAmerica,Sint Maarten,MF,45
+LatinAmerica,Saint Vincent and the Grenadines,VC,45
+LatinAmerica,Suriname,SR,45
+LatinAmerica,Trinidad and Tobago,TT,45
+LatinAmerica,Turks,TC,45
+LatinAmerica,Uruguay,UY,45
+LatinAmerica,Venezuela,VE,45
+MiddleEast,Bahrain,BH,12
+MiddleEast,Iran,IR,12
+MiddleEast,Iraq,IQ,12
+MiddleEast,Jordan,JO,12
+MiddleEast,Kuwait,KW,12
+MiddleEast,Lebanon,LB,12
+MiddleEast,Oman,OM,12
+MiddleEast,Qatar,QA,12
+MiddleEast,Saudi Arabia,SA,12
+MiddleEast,Syria,SY,12
+MiddleEast,United Arab Emirates,AE,12
+MiddleEast,Yemen,YE,12
+NonOECD,Afghanistan,AF,245
+NonOECD,Albania,AL,245
+NonOECD,Algeria,DZ,245
+NonOECD,American Samoa,AS,245
+NonOECD,Andorra,AD,245
+NonOECD,Angola,AO,245
+NonOECD,Anguilla,AI,245
+NonOECD,Antigua And Barbuda,AG,245
+NonOECD,Argentina,AR,245
+NonOECD,Armenia,AM,245
+NonOECD,Aruba,AW,245
+NonOECD,Azerbaijan,AZ,245
+NonOECD,Bahamas,BS,245
+NonOECD,Bahrain,BH,245
+NonOECD,Bangladesh,BD,245
+NonOECD,Barbados,BB,245
+NonOECD,Belarus,BY,245
+NonOECD,Belize,BZ,245
+NonOECD,Benin,BJ,245
+NonOECD,Bermuda,BM,245
+NonOECD,Bhutan,BT,245
+NonOECD,Bolivia,BO,245
+NonOECD,Bosnia and Herzegovina,BA,245
+NonOECD,Botswana,BW,245
+NonOECD,Brazil,BR,245
+NonOECD,British Virgin Islands,VG,245
+NonOECD,Brunei Darussalam,BN,245
+NonOECD,Bulgaria,BG,245
+NonOECD,Burkina Faso,BF,245
+NonOECD,Burundi,BI,245
+NonOECD,Cambodia,KH,245
+NonOECD,Cameroon,CM,245
+NonOECD,Cape Verde,CV,245
+NonOECD,Cayman Islands,KY,245
+NonOECD,Chad,TD,245
+NonOECD,China,CN,245
+NonOECD,Colombia,CO,245
+NonOECD,Cook Islands,CK,245
+NonOECD,Costa Rica,CR,245
+NonOECD,Croatia,HR,245
+NonOECD,Cuba,CU,245
+NonOECD,Curacao,CW,245
+NonOECD,Cyprus,CY,245
+NonOECD,Democratic Republic of the Congo,CD,245
+NonOECD,Djibouti,DJ,245
+NonOECD,Dominica,DM,245
+NonOECD,Dominican Republic,DO,245
+NonOECD,Ecuador,EC,245
+NonOECD,Egypt,EG,245
+NonOECD,El Salvador,SV,245
+NonOECD,Equatorial Guinea,GQ,245
+NonOECD,Eritrea,ER,245
+NonOECD,Ethiopia,ET,245
+NonOECD,Faroe Islands,FO,245
+NonOECD,Fiji,FJ,245
+NonOECD,French Guiana,GF,245
+NonOECD,French Polynesia,PF,245
+NonOECD,Gabon,GA,245
+NonOECD,Gambia,GM,245
+NonOECD,Georgia,GE,245
+NonOECD,Ghana,GH,245
+NonOECD,Gibraltar,GI,245
+NonOECD,Greenland,GL,245
+NonOECD,Grenada,GD,245
+NonOECD,Guadeloupe,GP,245
+NonOECD,Guam,GU,245
+NonOECD,Guatemala,GT,245
+NonOECD,Guernsey,GG,245
+NonOECD,Guinea,GN,245
+NonOECD,GuineaBissau,GW,245
+NonOECD,Guyana,GY,245
+NonOECD,Haiti,HT,245
+NonOECD,Honduras,HN,245
+NonOECD,Hong Kong Special Administrative Region of China,HK,245
+NonOECD,India,IN,245
+NonOECD,Indonesia,ID,245
+NonOECD,Iran (Islamic Republic of Iran),IR,245
+NonOECD,Iraq,IQ,245
+NonOECD,Islamic Republic of Mauritania,MR,245
+NonOECD,Isle of Man,IM,245
+NonOECD,Ivory Coast,CI,245
+NonOECD,Jamaica,JM,245
+NonOECD,Jersey,JE,245
+NonOECD,Jordan,JO,245
+NonOECD,Kazakhstan,KZ,245
+NonOECD,Kenya,KE,245
+NonOECD,Kiribati,KI,245
+NonOECD,Kosovo,RS,245
+NonOECD,Kuwait,KW,245
+NonOECD,Kyrgyzstan,KG,245
+NonOECD,Lao People's Democratic Republic,LA,245
+NonOECD,Latvia,LV,245
+NonOECD,Lebanon,LB,245
+NonOECD,Lesotho,LS,245
+NonOECD,Liberia,LR,245
+NonOECD,Libyan Arab Jamahiriya,LY,245
+NonOECD,Lithuania,LT,245
+NonOECD,Macau Special Administrative Region of China,MO,245
+NonOECD,Madagascar,MG,245
+NonOECD,Malawi,MW,245
+NonOECD,Malaysia,MY,245
+NonOECD,Maldives,MV,245
+NonOECD,Mali,ML,245
+NonOECD,Malta,MT,245
+NonOECD,Marshall Islands,MH,245
+NonOECD,Martinique,MQ,245
+NonOECD,Mauritius,MU,245
+NonOECD,Mayotte,YT,245
+NonOECD,Micronesia (Federated States of),FM,245
+NonOECD,Mongolia,MN,245
+NonOECD,Montenegro,ME,245
+NonOECD,Morocco,MA,245
+NonOECD,Mozambique,MZ,245
+NonOECD,Myanmar,MM,245
+NonOECD,Nepal,NP,245
+NonOECD,New Caledonia,NC,245
+NonOECD,Nicaragua,NI,245
+NonOECD,Niger,NE,245
+NonOECD,Nigeria,NG,245
+NonOECD,Oman,OM,245
+NonOECD,Pakistan,PK,245
+NonOECD,Palau,PW,245
+NonOECD,Panama,PA,245
+NonOECD,Papua New Guinea,PG,245
+NonOECD,Paraguay,PY,245
+NonOECD,Peru,PE,245
+NonOECD,Philippines,PH,245
+NonOECD,Puerto Rico,PR,245
+NonOECD,Qatar,QA,245
+NonOECD,Republic of Congo,CG,245
+NonOECD,Republic of Korea,KP,245
+NonOECD,Republic of Macedonia,MK,245
+NonOECD,Republic of Moldova,MD,245
+NonOECD,Reunion,RE,245
+NonOECD,Romania,RO,245
+NonOECD,Russian Federation,RU,245
+NonOECD,Rwanda,RW,245
+NonOECD,Samoa,WS,245
+NonOECD,Saudi Arabia,SA,245
+NonOECD,Senegal,SN,245
+NonOECD,Serbia,RS,245
+NonOECD,Seychelles,SC,245
+NonOECD,Sierra Leone,SL,245
+NonOECD,Singapore,SG,245
+NonOECD,Solomon Islands,SB,245
+NonOECD,Somalia,SO,245
+NonOECD,Somaliland,SO,245
+NonOECD,South Africa,ZA,245
+NonOECD,Sri Lanka,LK,245
+NonOECD,Sudan,SD,245
+NonOECD,Suriname,SR,245
+NonOECD,Swaziland,SZ,245
+NonOECD,Syrian Arab Republic,SY,245
+NonOECD,Taiwan,TW,245
+NonOECD,Tajikistan,TJ,245
+NonOECD,Thailand,TH,245
+NonOECD,TimorLeste,TL,245
+NonOECD,Togo,TG,245
+NonOECD,Tokelau,TK,245
+NonOECD,Tonga,TO,245
+NonOECD,Trinidad and Tobago,TT,245
+NonOECD,Tunisia,TN,245
+NonOECD,Turkmenistan,TM,245
+NonOECD,Tuvalu,TV,245
+NonOECD,Uganda,UG,245
+NonOECD,Ukraine,UA,245
+NonOECD,United Arab Emirates,AE,245
+NonOECD,United Republic Of Tanzania,TZ,245
+NonOECD,Uruguay,UY,245
+NonOECD,Uzbekistan,UZ,245
+NonOECD,Vanuatu,VU,245
+NonOECD,Venezuela,VE,245
+NonOECD,Vietnam,VN,245
+NonOECD,Virgin Islands (US),VI,245
+NonOECD,Yemen,YE,245
+NonOECD,Zambia,ZM,245
+NonOECD,Zimbabwe,ZW,245
+NonOECD,AngolaCongo Republic Joint Development Area,AO,245
+NonOECD,Brunei,BN,245
+NonOECD,Comoros,KM,245
+NonOECD,Congo Republic,CG,245
+NonOECD,Cote d'Ivoire,CI,245
+NonOECD,Falkland Islands,FK,245
+NonOECD,Iran,IR,245
+NonOECD,KuwaitSaudi Arabia Partitioned Neutral Zone,KW,245
+NonOECD,Libya,LY,245
+NonOECD,Malaysia Thailand Joint Development Area,MY,245
+NonOECD,Malaysia Vietnam PM3 Commercial Arrangement Area,MY,245
+NonOECD,Mauritania,MR,245
+NonOECD,Russia,RU,245
+NonOECD,South Sudan,SS,245
+NonOECD,Syria,SY,245
+NonOECD,Tanzania,TZ,245
+NonOECD,Timor Sea Joint Petroleum Development Area,TL,245
+NonOECD,Saint Barthelemy,BL,245
+NonOECD,"Saint Helena, Ascension and Tristan da Cunha",SH,245
+NonOECD,Saint Kitts and Nevis,KN,245
+NonOECD,Saint Lucia,LC,245
+NonOECD,Saint Pierre and Miquelon,PM,245
+NonOECD,Saint Vincent and the Grenadines,VC,245
+NonOECD,Sint Maarten,MF,245
+NonOECD,Antarctica,AQ,245
+NonOECD,Bonaire,BQ,245
+NonOECD,Bouvet Island,BV,245
+NonOECD,British Indian Ocean Territory,IO,245
+NonOECD,Central African Republic,CF,245
+NonOECD,Christmas Island,CX,245
+NonOECD,Cocos (Keeling) Islands,CC,245
+NonOECD,Congo,CG,245
+NonOECD,Falkland Islands (Malvinas),FK,245
+NonOECD,French Southern Territories,TF,245
+NonOECD,Heard Island and McDonald Mcdonald Islands,HM,245
+NonOECD,Holy See (Vatican City State),VA,245
+NonOECD,Hong Kong,HK,245
+NonOECD,"Iran, Islamic Republic of",IR,245
+NonOECD,"Korea, Democratic People's Republic of",KP,245
+NonOECD,Liechtenstein,LI,245
+NonOECD,Macao,MO,245
+NonOECD,"Macedonia, the Former Yugoslav Republic of",MK,245
+NonOECD,"Micronesia, Federated States of",FM,245
+NonOECD,"Moldova, Republic of",MD,245
+NonOECD,Monaco,MC,245
+NonOECD,Montserrat,MS,245
+NonOECD,Namibia,"NA",245
+NonOECD,Nauru,NR,245
+NonOECD,Niue,NU,245
+NonOECD,Norfolk Island,NF,245
+NonOECD,Northern Mariana Islands,MP,245
+NonOECD,"Palestine, State of",PS,245
+NonOECD,Pitcairn,PN,245
+NonOECD,Saint Helena,SH,245
+NonOECD,Saint Martin (French part),MF,245
+NonOECD,San Marino,SM,245
+NonOECD,Sao Tome and Principe,ST,245
+NonOECD,Sint Maarten (Dutch part),SX,245
+NonOECD,South Georgia and the South Sandwich Islands,GS,245
+NonOECD,Svalbard and Jan Mayen,SJ,245
+NonOECD,"Taiwan, Province of China",TW,245
+NonOECD,Turks and Caicos Islands,TC,245
+NonOECD,United States Minor Outlying Islands,UM,245
+NonOECD,Viet Nam,VN,245
+NonOECD,US Virgin Islands,VI,245
+NonOECD,Wallis and Futuna,WF,245
+NonOECD,Western Sahara,EH,245
+NonOECD,Aland Islands,AX,245
+NonOECDAsia,Bangladesh,BD,34
+NonOECDAsia,Afghanistan,AF,34
+NonOECDAsia,Bhutan,BT,34
+NonOECDAsia,Brunei Darussalam,BN,34
+NonOECDAsia,Cambodia,KH,34
+NonOECDAsia,China,CN,34
+NonOECDAsia,Cook Islands,CK,34
+NonOECDAsia,Democratic People's Republic of Korea,KP,34
+NonOECDAsia,Fiji,FJ,34
+NonOECDAsia,French Polynesia,PF,34
+NonOECDAsia,India,IN,34
+NonOECDAsia,Indonesia,ID,34
+NonOECDAsia,Kiribati,KI,34
+NonOECDAsia,Lao People's Democratic Republic,LA,34
+NonOECDAsia,Macau Special Administrative Region of China,MO,34
+NonOECDAsia,Malaysia,MY,34
+NonOECDAsia,Maldives,MV,34
+NonOECDAsia,Mongolia,MN,34
+NonOECDAsia,Myanmar,MM,34
+NonOECDAsia,Nepal,NP,34
+NonOECDAsia,New Caledonia,NC,34
+NonOECDAsia,Pakistan,PK,34
+NonOECDAsia,Palau,PW,34
+NonOECDAsia,Papua New Guinea,PG,34
+NonOECDAsia,Philippines,PH,34
+NonOECDAsia,Samoa,WS,34
+NonOECDAsia,Singapore,SG,34
+NonOECDAsia,Solomon Islands,SB,34
+NonOECDAsia,Sri Lanka,LK,34
+NonOECDAsia,Thailand,TH,34
+NonOECDAsia,TimorLeste,TL,34
+NonOECDAsia,Tonga,TO,34
+NonOECDAsia,Vanuatu,VU,34
+NonOECDAsia,Vietnam,VN,34
+OECD,Austria,AT,34
+OECD,Belgium,BE,34
+OECD,Czech Republic,CZ,34
+OECD,Denmark,DK,34
+OECD,Estonia,EE,34
+OECD,Finland,FI,34
+OECD,France,FR,34
+OECD,Germany,DE,34
+OECD,Greece,GR,34
+OECD,Hungary,HU,34
+OECD,Iceland,IS,34
+OECD,Ireland,IE,34
+OECD,Italy,IT,34
+OECD,Luxembourg,LU,34
+OECD,Netherlands,NL,34
+OECD,Norway,NO,34
+OECD,Poland,PL,34
+OECD,Portugal,PT,34
+OECD,Slovakia,SK,34
+OECD,Slovenia,SI,34
+OECD,Spain,ES,34
+OECD,Sweden,SE,34
+OECD,Switzerland,CH,34
+OECD,Turkey,TR,34
+OECD,United Kingdom,GB,34
+OECD,Israel,IL,34
+OECD,Canada,CA,34
+OECD,Chile,CL,34
+OECD,Mexico,MX,34
+OECD,United States,US,34
+OECD,Australia,AU,34
+OECD,Japan,JP,34
+OECD,South Korea,KR,34
+OECD,New Zealand,NZ,34
+OECDAmericas,Canada,CA,4
+OECDAmericas,Chile,CL,4
+OECDAmericas,Mexico,MX,4
+OECDAmericas,United States,US,4
+OECDAsiaOceania,Australia,AU,4
+OECDAsiaOceania,Japan,JP,4
+OECDAsiaOceania,South Korea,KR,4
+OECDAsiaOceania,New Zealand,NZ,4
+OECDEurope,Austria,AT,26
+OECDEurope,Belgium,BE,26
+OECDEurope,Czech Republic,CZ,26
+OECDEurope,Denmark,DK,26
+OECDEurope,Estonia,EE,26
+OECDEurope,Finland,FI,26
+OECDEurope,France,FR,26
+OECDEurope,Germany,DE,26
+OECDEurope,Greece,GR,26
+OECDEurope,Hungary,HU,26
+OECDEurope,Iceland,IS,26
+OECDEurope,Ireland,IE,26
+OECDEurope,Italy,IT,26
+OECDEurope,Luxembourg,LU,26
+OECDEurope,Netherlands,NL,26
+OECDEurope,Norway,NO,26
+OECDEurope,Poland,PL,26
+OECDEurope,Portugal,PT,26
+OECDEurope,Slovakia,SK,26
+OECDEurope,Slovenia,SI,26
+OECDEurope,Spain,ES,26
+OECDEurope,Sweden,SE,26
+OECDEurope,Switzerland,CH,26
+OECDEurope,Turkey,TR,26
+OECDEurope,United Kingdom,GB,26
+OECDEurope,Israel,IL,26
+Russia,Russian Federation,RU,1
+SouthAfrica,South Africa,ZA,1
+US,United States,US,1
+OECDAsiaOceaniaWoJP,Australia,AU,3
+OECDAsiaOceaniaWoJP,South Korea,KR,3
+OECDAsiaOceaniaWoJP,New Zealand,NZ,3
+OECDAmericasWoUS,Canada,CA,3
+OECDAmericasWoUS,Chile,CL,3
+OECDAmericasWoUS,Mexico,MX,3
+LatinAmericaExBrazil,Antigua and Barbuda,AG,44
+LatinAmericaExBrazil,Argentina,AR,44
+LatinAmericaExBrazil,Aruba,AW,44
+LatinAmericaExBrazil,Bahamas,BS,44
+LatinAmericaExBrazil,Barbados,BB,44
+LatinAmericaExBrazil,Belize,BZ,44
+LatinAmericaExBrazil,Bermuda,BM,44
+LatinAmericaExBrazil,Bolivia,BO,44
+LatinAmericaExBrazil,Bonaire,BQ,44
+LatinAmericaExBrazil,British Virgin Islands,VG,44
+LatinAmericaExBrazil,Caicos Islands,TC,44
+LatinAmericaExBrazil,Cayman Islands,KY,44
+LatinAmericaExBrazil,Colombia,CO,44
+LatinAmericaExBrazil,Costa Rica,CR,44
+LatinAmericaExBrazil,Cuba,CU,44
+LatinAmericaExBrazil,Curacao,CW,44
+LatinAmericaExBrazil,Dominica,DM,44
+LatinAmericaExBrazil,Dominican Republic,DO,44
+LatinAmericaExBrazil,Ecuador,EC,44
+LatinAmericaExBrazil,El Salvador,SV,44
+LatinAmericaExBrazil,Falkland Islands,FK,44
+LatinAmericaExBrazil,French Guiana,GF,44
+LatinAmericaExBrazil,Grenada,GD,44
+LatinAmericaExBrazil,Guadeloupe,GP,44
+LatinAmericaExBrazil,Guatemala,GT,44
+LatinAmericaExBrazil,Guyana,GY,44
+LatinAmericaExBrazil,Haiti,HT,44
+LatinAmericaExBrazil,Honduras,HN,44
+LatinAmericaExBrazil,Jamaica,JM,44
+LatinAmericaExBrazil,Martinique,MQ,44
+LatinAmericaExBrazil,Montserrat,MS,44
+LatinAmericaExBrazil,Nicaragua,NI,44
+LatinAmericaExBrazil,Panama,PA,44
+LatinAmericaExBrazil,Paraguay,PY,44
+LatinAmericaExBrazil,Peru,PE,44
+LatinAmericaExBrazil,Saint Kitts and Nevis,KN,44
+LatinAmericaExBrazil,Saint Lucia,LC,44
+LatinAmericaExBrazil,Sint Maarten,MF,44
+LatinAmericaExBrazil,Saint Vincent and the Grenadines,VC,44
+LatinAmericaExBrazil,Suriname,SR,44
+LatinAmericaExBrazil,Trinidad and Tobago,TT,44
+LatinAmericaExBrazil,Turks,TC,44
+LatinAmericaExBrazil,Uruguay,UY,44
+LatinAmericaExBrazil,Venezuela,VE,44
+AfricaWoZA,Algeria,DZ,55
+AfricaWoZA,Angola,AO,55
+AfricaWoZA,Benin,BJ,55
+AfricaWoZA,Botswana,BW,55
+AfricaWoZA,Burkina Faso,BF,55
+AfricaWoZA,Burundi,BI,55
+AfricaWoZA,Cape Verde,CV,55
+AfricaWoZA,Cameroon,CM,55
+AfricaWoZA,Central African Republic,CF,55
+AfricaWoZA,Chad,TD,55
+AfricaWoZA,Comoros,KM,55
+AfricaWoZA,Cote d'Ivoire,CI,55
+AfricaWoZA,Djibouti,DJ,55
+AfricaWoZA,Egypt,EG,55
+AfricaWoZA,Equatorial Guinea,GQ,55
+AfricaWoZA,Eritrea,ER,55
+AfricaWoZA,Ethiopia,ET,55
+AfricaWoZA,Gabon,GA,55
+AfricaWoZA,Gambia,GM,55
+AfricaWoZA,Ghana,GH,55
+AfricaWoZA,Guinea,GN,55
+AfricaWoZA,GuineaBissau,GW,55
+AfricaWoZA,Kenya,KE,55
+AfricaWoZA,Lesotho,LS,55
+AfricaWoZA,Liberia,LR,55
+AfricaWoZA,Libya,LY,55
+AfricaWoZA,Madagascar,MG,55
+AfricaWoZA,Malawi,MW,55
+AfricaWoZA,Mali,ML,55
+AfricaWoZA,Mauritania,MR,55
+AfricaWoZA,Mauritius,MU,55
+AfricaWoZA,Morocco,MA,55
+AfricaWoZA,Mozambique,MZ,55
+AfricaWoZA,Namibia,"NA",55
+AfricaWoZA,Niger,NE,55
+AfricaWoZA,Nigeria,NG,55
+AfricaWoZA,Reunion,RE,55
+AfricaWoZA,Rwanda,RW,55
+AfricaWoZA,Sao Tome and Principe,ST,55
+AfricaWoZA,Senegal,SN,55
+AfricaWoZA,Seychelles,SC,55
+AfricaWoZA,Sierra Leone,SL,55
+AfricaWoZA,Somalia,SO,55
+AfricaWoZA,South Sudan,SS,55
+AfricaWoZA,Sudan,SD,55
+AfricaWoZA,Swaziland,SZ,55
+AfricaWoZA,Democratic Republic of the Congo,CD,55
+AfricaWoZA,Congo Republic,CG,55
+AfricaWoZA,United Republic of Tanzania,TZ,55
+AfricaWoZA,Togo,TG,55
+AfricaWoZA,Tunisia,TN,55
+AfricaWoZA,Uganda,UG,55
+AfricaWoZA,Western Sahara,EH,55
+AfricaWoZA,Zambia,ZM,55
+AfricaWoZA,Zimbabwe,ZW,55
+EEurope_EurasiaWoRU,Albania,AL,25
+EEurope_EurasiaWoRU,Armenia,AM,25
+EEurope_EurasiaWoRU,Azerbaijan,AZ,25
+EEurope_EurasiaWoRU,Belarus,BY,25
+EEurope_EurasiaWoRU,Bosnia and Herzegovina,BA,25
+EEurope_EurasiaWoRU,Bulgaria,BG,25
+EEurope_EurasiaWoRU,Croatia,HR,25
+EEurope_EurasiaWoRU,Cyprus,CY,25
+EEurope_EurasiaWoRU,Georgia,GE,25
+EEurope_EurasiaWoRU,Gibraltar,GI,25
+EEurope_EurasiaWoRU,Kazakhstan,KZ,25
+EEurope_EurasiaWoRU,Kosovo,RS,25
+EEurope_EurasiaWoRU,Kyrgyzstan,KG,25
+EEurope_EurasiaWoRU,Latvia,LV,25
+EEurope_EurasiaWoRU,Lithuania,LT,25
+EEurope_EurasiaWoRU,Malta,MT,25
+EEurope_EurasiaWoRU,Montenegro,ME,25
+EEurope_EurasiaWoRU,Republic of Macedonia,MK,25
+EEurope_EurasiaWoRU,Romania,RO,25
+EEurope_EurasiaWoRU,Serbia,RS,25
+EEurope_EurasiaWoRU,Tajikistan,TJ,25
+EEurope_EurasiaWoRU,Republic of Moldova,MD,25
+EEurope_EurasiaWoRU,Turkmenistan,TM,25
+EEurope_EurasiaWoRU,Ukraine,UA,25
+EEurope_EurasiaWoRU,Uzbekistan,UZ,25
+NonOECDAsiaRest,Bangladesh,BD,32
+NonOECDAsiaRest,Afghanistan,AF,32
+NonOECDAsiaRest,Bhutan,BT,32
+NonOECDAsiaRest,Brunei Darussalam,BN,32
+NonOECDAsiaRest,Cambodia,KH,32
+NonOECDAsiaRest,Cook Islands,CK,32
+NonOECDAsiaRest,Democratic People's Republic of Korea,KP,32
+NonOECDAsiaRest,Fiji,FJ,32
+NonOECDAsiaRest,French Polynesia,PF,32
+NonOECDAsiaRest,Indonesia,ID,32
+NonOECDAsiaRest,Kiribati,KI,32
+NonOECDAsiaRest,Lao People's Democratic Republic,LA,32
+NonOECDAsiaRest,Macau Special Administrative Region of China,MO,32
+NonOECDAsiaRest,Malaysia,MY,32
+NonOECDAsiaRest,Maldives,MV,32
+NonOECDAsiaRest,Mongolia,MN,32
+NonOECDAsiaRest,Myanmar,MM,32
+NonOECDAsiaRest,Nepal,NP,32
+NonOECDAsiaRest,New Caledonia,NC,32
+NonOECDAsiaRest,Pakistan,PK,32
+NonOECDAsiaRest,Palau,PW,32
+NonOECDAsiaRest,Papua New Guinea,PG,32
+NonOECDAsiaRest,Philippines,PH,32
+NonOECDAsiaRest,Samoa,WS,32
+NonOECDAsiaRest,Singapore,SG,32
+NonOECDAsiaRest,Solomon Islands,SB,32
+NonOECDAsiaRest,Sri Lanka,LK,32
+NonOECDAsiaRest,Thailand,TH,32
+NonOECDAsiaRest,TimorLeste,TL,32
+NonOECDAsiaRest,Tonga,TO,32
+NonOECDAsiaRest,Vanuatu,VU,32
+NonOECDAsiaRest,Vietnam,VN,32
+NonOECDRest,American Samoa,AS,47
+NonOECDRest,Andorra,AD,47
+NonOECDRest,Anguilla,AI,47
+NonOECDRest,Faroe Islands,FO,47
+NonOECDRest,Greenland,GL,47
+NonOECDRest,Guam,GU,47
+NonOECDRest,Guernsey,GG,47
+NonOECDRest,Isle of Man,IM,47
+NonOECDRest,Jersey,JE,47
+NonOECDRest,Marshall Islands,MH,47
+NonOECDRest,Mayotte,YT,47
+NonOECDRest,Micronesia (Federated States of),FM,47
+NonOECDRest,Puerto Rico,PR,47
+NonOECDRest,Taiwan,TW,47
+NonOECDRest,Tokelau,TK,47
+NonOECDRest,Tuvalu,TV,47
+NonOECDRest,Virgin Islands (US),VI,47
+NonOECDRest,Saint Barthelemy,BL,47
+NonOECDRest,"Saint Helena, Ascension and Tristan da Cunha",SH,47
+NonOECDRest,Saint Pierre and Miquelon,PM,47
+NonOECDRest,Antarctica,AQ,47
+NonOECDRest,Bouvet Island,BV,47
+NonOECDRest,British Indian Ocean Territory,IO,47
+NonOECDRest,Christmas Island,CX,47
+NonOECDRest,Cocos (Keeling) Islands,CC,47
+NonOECDRest,French Southern Territories,TF,47
+NonOECDRest,Heard Island and McDonald Mcdonald Islands,HM,47
+NonOECDRest,Holy See (Vatican City State),VA,47
+NonOECDRest,Liechtenstein,LI,47
+NonOECDRest,"Micronesia, Federated States of",FM,47
+NonOECDRest,Monaco,MC,47
+NonOECDRest,Nauru,NR,47
+NonOECDRest,Niue,NU,47
+NonOECDRest,Norfolk Island,NF,47
+NonOECDRest,Northern Mariana Islands,MP,47
+NonOECDRest,"Palestine, State of",PS,47
+NonOECDRest,Pitcairn,PN,47
+NonOECDRest,Saint Helena,SH,47
+NonOECDRest,San Marino,SM,47
+NonOECDRest,Sint Maarten (Dutch part),SX,47
+NonOECDRest,South Georgia and the South Sandwich Islands,GS,47
+NonOECDRest,Svalbard and Jan Mayen,SJ,47
+NonOECDRest,"Taiwan, Province of China",TW,47
+NonOECDRest,United States Minor Outlying Islands,UM,47
+NonOECDRest,US Virgin Islands,VI,47
+NonOECDRest,Wallis and Futuna,WF,47
+NonOECDRest,Aland Islands,AX,47
+NorthAmerica,Canada,CA,3
+NorthAmerica,Mexico,MX,3
+NorthAmerica,United States,US,3
+AsiaPacific,Afghanistan,AF,39
+AsiaPacific,Australia,AU,39
+AsiaPacific,Bangladesh,BD,39
+AsiaPacific,Bhutan,BT,39
+AsiaPacific,Brunei Darussalam,BN,39
+AsiaPacific,Cambodia,KH,39
+AsiaPacific,China,CN,39
+AsiaPacific,Cook Islands,CK,39
+AsiaPacific,Democratic People's Republic of Korea,KP,39
+AsiaPacific,Fiji,FJ,39
+AsiaPacific,French Polynesia,PF,39
+AsiaPacific,India,IN,39
+AsiaPacific,Indonesia,ID,39
+AsiaPacific,Japan,JP,39
+AsiaPacific,Kiribati,KI,39
+AsiaPacific,Lao People's Democratic Republic,LA,39
+AsiaPacific,Macau Special Administrative Region of China,MO,39
+AsiaPacific,Malaysia,MY,39
+AsiaPacific,Maldives,MV,39
+AsiaPacific,Mongolia,MN,39
+AsiaPacific,Myanmar,MM,39
+AsiaPacific,Nepal,NP,39
+AsiaPacific,New Caledonia,NC,39
+AsiaPacific,New Zealand,NZ,39
+AsiaPacific,Pakistan,PK,39
+AsiaPacific,Palau,PW,39
+AsiaPacific,Papua New Guinea,PG,39
+AsiaPacific,Philippines,PH,39
+AsiaPacific,Samoa,WS,39
+AsiaPacific,Singapore,SG,39
+AsiaPacific,Solomon Islands,SB,39
+AsiaPacific,South Korea,KR,39
+AsiaPacific,Sri Lanka,LK,39
+AsiaPacific,Thailand,TH,39
+AsiaPacific,TimorLeste,TL,39
+AsiaPacific,Tonga,TO,39
+AsiaPacific,Vanuatu,VU,39
+AsiaPacific,Vietnam,VN,39
+Europe,Albania,AL,43
+Europe,Austria,AT,43
+Europe,Belarus,BY,43
+Europe,Belgium,BE,43
+Europe,Bosnia and Herzegovina,BA,43
+Europe,Bulgaria,BG,43
+Europe,Croatia,HR,43
+Europe,Cyprus,CY,43
+Europe,Czech Republic,CZ,43
+Europe,Denmark,DK,43
+Europe,Estonia,EE,43
+Europe,Finland,FI,43
+Europe,France,FR,43
+Europe,Germany,DE,43
+Europe,Gibraltar,GI,43
+Europe,Greece,GR,43
+Europe,Hungary,HU,43
+Europe,Iceland,IS,43
+Europe,Ireland,IE,43
+Europe,Israel,IL,43
+Europe,Italy,IT,43
+Europe,Kosovo,RS,43
+Europe,Latvia,LV,43
+Europe,Lithuania,LT,43
+Europe,Luxembourg,LU,43
+Europe,Malta,MT,43
+Europe,Montenegro,ME,43
+Europe,Netherlands,NL,43
+Europe,Norway,NO,43
+Europe,Poland,PL,43
+Europe,Portugal,PT,43
+Europe,Republic of Macedonia,MK,43
+Europe,Republic of Moldova,MD,43
+Europe,Romania,RO,43
+Europe,Serbia,RS,43
+Europe,Slovakia,SK,43
+Europe,Slovenia,SI,43
+Europe,Spain,ES,43
+Europe,Sweden,SE,43
+Europe,Switzerland,CH,43
+Europe,Turkey,TR,43
+Europe,Ukraine,UA,43
+Europe,United Kingdom,GB,43
+ASEAN,Indonesia,ID,10
+ASEAN,Brunei Darussalam,BN,10
+ASEAN,Cambodia,KH,10
+ASEAN,Lao People's Democratic Republic,LA,10
+ASEAN,Malaysia,MY,10
+ASEAN,Myanmar,MM,10
+ASEAN,Philippines,PH,10
+ASEAN,Singapore,SG,10
+ASEAN,Thailand,TH,10
+ASEAN,Vietnam,VN,10
+Mexico,Mexico,MX,1
+R5OECD90+EU,Albania,AL,49
+R5OECD90+EU,Australia,AU,49
+R5OECD90+EU,Austria,AT,49
+R5OECD90+EU,Belgium,BE,49
+R5OECD90+EU,Bosnia and Herzegovina,BA,49
+R5OECD90+EU,Bulgaria,BG,49
+R5OECD90+EU,Canada,CA,49
+R5OECD90+EU,Croatia,HR,49
+R5OECD90+EU,Cyprus,CY,49
+R5OECD90+EU,Czech Republic,CZ,49
+R5OECD90+EU,Denmark,DK,49
+R5OECD90+EU,Estonia,EE,49
+R5OECD90+EU,Fiji,FJ,49
+R5OECD90+EU,Finland,FI,49
+R5OECD90+EU,France,FR,49
+R5OECD90+EU,French Polynesia,PF,49
+R5OECD90+EU,Germany,DE,49
+R5OECD90+EU,Greece,GR,49
+R5OECD90+EU,Guam,GU,49
+R5OECD90+EU,Hungary,HU,49
+R5OECD90+EU,Iceland,IS,49
+R5OECD90+EU,Ireland,IE,49
+R5OECD90+EU,Italy,IT,49
+R5OECD90+EU,Japan,JP,49
+R5OECD90+EU,Latvia,LV,49
+R5OECD90+EU,Lithuania,LT,49
+R5OECD90+EU,Luxembourg,LU,49
+R5OECD90+EU,Malta,MT,49
+R5OECD90+EU,Republic of Macedonia,MK,49
+R5OECD90+EU,Montenegro,ME,49
+R5OECD90+EU,Netherlands,NL,49
+R5OECD90+EU,New Caledonia,NC,49
+R5OECD90+EU,New Zealand,NZ,49
+R5OECD90+EU,Norway,NO,49
+R5OECD90+EU,Poland,PL,49
+R5OECD90+EU,Portugal,PT,49
+R5OECD90+EU,Romania,RO,49
+R5OECD90+EU,Samoa,WS,49
+R5OECD90+EU,Serbia,RS,49
+R5OECD90+EU,Slovakia,SK,49
+R5OECD90+EU,Slovenia,SI,49
+R5OECD90+EU,Solomon Islands,SB,49
+R5OECD90+EU,Spain,ES,49
+R5OECD90+EU,Sweden,SE,49
+R5OECD90+EU,Switzerland,CH,49
+R5OECD90+EU,Turkey,TR,49
+R5OECD90+EU,United Kingdom,GB,49
+R5OECD90+EU,United States,US,49
+R5OECD90+EU,Vanuatu,VU,49
+R5REF,Armenia,AM,12
+R5REF,Azerbaijan,AZ,12
+R5REF,Belarus,BY,12
+R5REF,Georgia,GE,12
+R5REF,Kazakhstan,KZ,12
+R5REF,Kyrgyzstan,KG,12
+R5REF,Republic of Moldova,MD,12
+R5REF,Russian Federation,RU,12
+R5REF,Tajikistan,TJ,12
+R5REF,Turkmenistan,TM,12
+R5REF,Ukraine,UA,12
+R5REF,Uzbekistan,UZ,12
+R5ASIA,Afghanistan,AF,27
+R5ASIA,Bangladesh,BD,27
+R5ASIA,Bhutan,BT,27
+R5ASIA,Brunei Darussalam,BN,27
+R5ASIA,Cambodia,KH,27
+R5ASIA,China,CN,27
+R5ASIA,Hong Kong Special Administrative Region of China,HK,27
+R5ASIA,Macau Special Administrative Region of China,MO,27
+R5ASIA,Democratic People's Republic of Korea,KR,27
+R5ASIA,TimorLeste,TL,27
+R5ASIA,India,IN,27
+R5ASIA,Indonesia,ID,27
+R5ASIA,Lao People's Democratic Republic,LA,27
+R5ASIA,Malaysia,MY,27
+R5ASIA,Maldives,MV,27
+R5ASIA,Mongolia,MN,27
+R5ASIA,Myanmar,MM,27
+R5ASIA,Nepal,NP,27
+R5ASIA,Pakistan,PK,27
+R5ASIA,Papua New Guinea,PG,27
+R5ASIA,Philippines,PH,27
+R5ASIA,Republic of Korea,KP,27
+R5ASIA,Singapore,SG,27
+R5ASIA,Sri Lanka,LK,27
+R5ASIA,Taiwan,TW,27
+R5ASIA,Thailand,TH,27
+R5ASIA,VietNam,VN,27
+R5MAF,Algeria,DZ,66
+R5MAF,Angola,AO,66
+R5MAF,Bahrain,BH,66
+R5MAF,Benin,BJ,66
+R5MAF,Botswana,BW,66
+R5MAF,Burkina Faso,BF,66
+R5MAF,Burundi,BI,66
+R5MAF,Cameroon,CM,66
+R5MAF,Cape Verde,CV,66
+R5MAF,Central African Republic,CF,66
+R5MAF,Chad,TD,66
+R5MAF,Comoros,KM,66
+R5MAF,Congo,CG,66
+R5MAF,Cote d'Ivoire,CI,66
+R5MAF,Democratic Republic of the Congo,CD,66
+R5MAF,Djibouti,DJ,66
+R5MAF,Egypt,EG,66
+R5MAF,Equatorial Guinea,GQ,66
+R5MAF,Eritrea,ER,66
+R5MAF,Ethiopia,ET,66
+R5MAF,Gabon,GA,66
+R5MAF,Gambia,GM,66
+R5MAF,Ghana,GH,66
+R5MAF,Guinea,GN,66
+R5MAF,GuineaBissau,GW,66
+R5MAF,Iran,IR,66
+R5MAF,Iraq,IQ,66
+R5MAF,Israel,IL,66
+R5MAF,Jordan,JO,66
+R5MAF,Kenya,KE,66
+R5MAF,Kuwait,KW,66
+R5MAF,Lebanon,LB,66
+R5MAF,Lesotho,LS,66
+R5MAF,Liberia,LR,66
+R5MAF,Libyan Arab Jamahiriya,LY,66
+R5MAF,Madagascar,MG,66
+R5MAF,Malawi,MW,66
+R5MAF,Mali,ML,66
+R5MAF,Mauritania,MR,66
+R5MAF,Mauritius,MU,66
+R5MAF,Morocco,MA,66
+R5MAF,Mozambique,MZ,66
+R5MAF,Namibia,"NA",66
+R5MAF,Niger,NE,66
+R5MAF,Nigeria,NG,66
+R5MAF,Oman,OM,66
+R5MAF,Qatar,QA,66
+R5MAF,Reunion,RE,66
+R5MAF,Rwanda,RW,66
+R5MAF,Saudi Arabia,SA,66
+R5MAF,Senegal,SN,66
+R5MAF,Sierra Leone,SL,66
+R5MAF,Somalia,SO,66
+R5MAF,South Africa,ZA,66
+R5MAF,Sudan,SD,66
+R5MAF,Swaziland,SZ,66
+R5MAF,Syrian Arab Republic,SY,66
+R5MAF,Togo,TG,66
+R5MAF,Tunisia,TN,66
+R5MAF,Uganda,UG,66
+R5MAF,United Arab Emirates,AE,66
+R5MAF,United Republic of Tanzania,TZ,66
+R5MAF,Western Sahara,EH,66
+R5MAF,Yemen,YE,66
+R5MAF,Zambia,ZM,66
+R5MAF,Zimbabwe,ZW,66
+R5LAM,Argentina,AR,30
+R5LAM,Bahamas,BS,30
+R5LAM,Barbados,BB,30
+R5LAM,Belize,BZ,30
+R5LAM,Bolivia,BO,30
+R5LAM,Brazil,BR,30
+R5LAM,Chile,CL,30
+R5LAM,Colombia,CO,30
+R5LAM,Costa Rica,CR,30
+R5LAM,Cuba,CU,30
+R5LAM,Dominican Republic,DO,30
+R5LAM,Ecuador,EC,30
+R5LAM,El Salvador,SV,30
+R5LAM,Guadeloupe,GP,30
+R5LAM,Guatemala,GT,30
+R5LAM,Guyana,GY,30
+R5LAM,Haiti,HT,30
+R5LAM,Honduras,HN,30
+R5LAM,Jamaica,JM,30
+R5LAM,Martinique,MQ,30
+R5LAM,Mexico,MX,30
+R5LAM,Nicaragua,NI,30
+R5LAM,Panama,PA,30
+R5LAM,Paraguay,PY,30
+R5LAM,Peru,PE,30
+R5LAM,Puerto Rico,PR,30
+R5LAM,Suriname,SR,30
+R5LAM,Trinidad and Tobago,TT,30
+R5LAM,Uruguay,UY,30
+R5LAM,Venezuela,VE,30
+USA,United States,US,1
+CHN,China,CN,1
+IND,India,IN,1
+AsiaPacific,Hong Kong,HK,39
+NorthAmericaExUS,Canada,CA,2
+NorthAmericaExUS,Mexico,MX,2
+Europe,Russia,EU,43
+Europe,Russia,RU,43
+LatinAmerica,Chile,CL,43
+Eurasia,Armenia,AM,9
+Eurasia,Azerbaijan,AZ,9
+Eurasia,Georgia,GE,9
+Eurasia,Kazakhstan,KZ,9
+Eurasia,Kyrgyzstan,KG,9
+Eurasia,Russian Federation,RU,9
+Eurasia,Tajikistan,TJ,9
+Eurasia,Turkmenistan,TM,9
+Eurasia,Uzbekistan,UZ,9
+Russia,Russia,RU,1
+OthersBalkans,Albania,AL,7
+OthersBalkans,Bosnia Herzegovina,BA,7
+OthersBalkans,Kosovo,RS,7
+OthersBalkans,Macedonia,MK,7
+OthersBalkans,Moldova,MD,7
+OthersBalkans,Montenegro,ME,7
+OthersBalkans,Serbia,RS,7
+OtherCIS,Armenia,AM,9
+OtherCIS,Azerbaijan,AZ,9
+OtherCIS,Belarus,BY,9
+OtherCIS,Georgia,GE,9
+OtherCIS,Kazakhstan,KZ,9
+OtherCIS,Kyrgyz Rep,KG,9
+OtherCIS,Tajikistan,TJ,9
+OtherCIS,Turkmenistan,TM,9
+OtherCIS,Uzbekistan,UZ,9
+Ukraine,Ukraine,UA,1
+Argentina,Argentina,AR,1
+Canada,Canada,CA,1
+Chile,Chile,CL,1
+US,United States,US,1
+RestCentralAmerica,Bahamas,BS,21
+RestCentralAmerica,Barbados,BB,21
+RestCentralAmerica,Belize,BZ,21
+RestCentralAmerica,Bermuda,BM,21
+RestCentralAmerica,Costa Rica,CR,21
+RestCentralAmerica,Cuba,CU,21
+RestCentralAmerica,Dominica,DM,21
+RestCentralAmerica,Dominican Republica,DO,21
+RestCentralAmerica,El Salvador,SV,21
+RestCentralAmerica,Grenada,GD,21
+RestCentralAmerica,Guatemala,GT,21
+RestCentralAmerica,Haiti,HT,21
+RestCentralAmerica,Honduras,HN,21
+RestCentralAmerica,Jamaica,JM,21
+RestCentralAmerica,Nicaragua,NI,21
+RestCentralAmerica,NL Antilles and Aruba,AW,21
+RestCentralAmerica,Panama,PA,21
+RestCentralAmerica,Sao Tome and Principe,ST,21
+RestCentralAmerica,St Lucia,LC,21
+RestCentralAmerica,St Vincent & Grenadines,VC,21
+RestCentralAmerica,Trinidad and Tobago,TT,21
+RestSouthAmerica,Bolivia,BO,9
+RestSouthAmerica,Colombia,CO,9
+RestSouthAmerica,Ecuador,EC,9
+RestSouthAmerica,Guyana,GY,9
+RestSouthAmerica,Paraguay,PY,9
+RestSouthAmerica,Peru,PE,9
+RestSouthAmerica,Suriname,SR,9
+RestSouthAmerica,Uruguay,UY,9
+RestSouthAmerica,Venezuela,VE,9
+Egypt,Egypt,EG,1
+Algeria&Libya,Algeria,DZ,2
+Algeria&Libya,Libya,LY,2
+Morocco&Tunisia,Morocco,MA,2
+Morocco&Tunisia,Tunisia,TN,2
+SouthAfrica,South Africa,ZA,1
+RestSubSaharanAfrica,Burkina Faso,BF,44
+RestSubSaharanAfrica,Burundi,BI,44
+RestSubSaharanAfrica,Cameroon,CM,44
+RestSubSaharanAfrica,Cape Verde,CV,44
+RestSubSaharanAfrica,Central African Republic,CF,44
+RestSubSaharanAfrica,Chad,TD,44
+RestSubSaharanAfrica,Comoros,KM,44
+RestSubSaharanAfrica,Congo,CG,44
+RestSubSaharanAfrica,Congo DR,CD,44
+RestSubSaharanAfrica,Cote d'ivoire,CI,44
+RestSubSaharanAfrica,Djibouti,DJ,44
+RestSubSaharanAfrica,Equatorial Guinea,GQ,44
+RestSubSaharanAfrica,Eritrea,ER,44
+RestSubSaharanAfrica,Ethiopia,ET,44
+RestSubSaharanAfrica,Gabon,GA,44
+RestSubSaharanAfrica,Gambia,GM,44
+RestSubSaharanAfrica,Ghana,GH,44
+RestSubSaharanAfrica,Guinea,GN,44
+RestSubSaharanAfrica,Guinea-Bissau,GW,44
+RestSubSaharanAfrica,kenya,KE,44
+RestSubSaharanAfrica,Lesotho,LS,44
+RestSubSaharanAfrica,Liberia,LR,44
+RestSubSaharanAfrica,Madagascar,MG,44
+RestSubSaharanAfrica,Malawi,MW,44
+RestSubSaharanAfrica,Mali,ML,44
+RestSubSaharanAfrica,Mauritania,MR,44
+RestSubSaharanAfrica,Mauritius,MU,44
+RestSubSaharanAfrica,Mozambique,MZ,44
+RestSubSaharanAfrica,Namibia,"NA",44
+RestSubSaharanAfrica,Niger,NE,44
+RestSubSaharanAfrica,Nigeria,NG,44
+RestSubSaharanAfrica,Rwanda,RW,44
+RestSubSaharanAfrica,Senegal,SN,44
+RestSubSaharanAfrica,Sierra Leone,SL,44
+RestSubSaharanAfrica,Somalia,SO,44
+RestSubSaharanAfrica,Sudan,SD,44
+RestSubSaharanAfrica,Swaziland,SZ,44
+RestSubSaharanAfrica,Tanzania,TZ,44
+RestSubSaharanAfrica,Togo,TG,44
+RestSubSaharanAfrica,Uganda,UG,44
+RestSubSaharanAfrica,Zambia,ZM,44
+RestSubSaharanAfrica,Angola,AO,44
+RestSubSaharanAfrica,Benin,BJ,44
+RestSubSaharanAfrica,Botswana,BW,44
+Iran,Iran,IR,1
+SaudiArabia,Saudi Arabia,SA,1
+Turkey,Turkey,TR,1
+MediteraneanMiddleEast,Israel,IL,4
+MediteraneanMiddleEast,Jordan,JO,4
+MediteraneanMiddleEast,Lebanon,LB,4
+MediteraneanMiddleEast,Syria,SY,4
+RestGulf,Bahrain,BH,7
+RestGulf,Iraq,IQ,7
+RestGulf,Kuwait,KW,7
+RestGulf,Oman,OM,7
+RestGulf,Qatar,QA,7
+RestGulf,United Arab Emirates,AE,7
+RestGulf,Yemen,YE,7
+Indonesia,Indonesia,ID,1
+Malaysia,Malaysia,MY,1
+Thailand,Thailand,TH,1
+Vietnam,Vietnam,VN,1
+RestSouthAsia,Afghanistan,AF,8
+RestSouthAsia,Bangladesh,BD,8
+RestSouthAsia,Bhutan,BT,8
+RestSouthAsia,Maldives,MV,8
+RestSouthAsia,Nepal,NP,8
+RestSouthAsia,Pakistan,PK,8
+RestSouthAsia,Seychelles,SC,8
+RestSouthAsia,Sri Lanka,LK,8
+RestSouthEastAsia,Brunei,BN,8
+RestSouthEastAsia,Cambodia,KH,8
+RestSouthEastAsia,Lao PDR,LA,8
+RestSouthEastAsia,Mongolia,MN,8
+RestSouthEastAsia,Myanmar,MM,8
+RestSouthEastAsia,North Korea,KP,8
+RestSouthEastAsia,Singapore,SG,8
+RestSouthEastAsia,Taiwan,TW,8
+Australia,Australia,AU,1
+SouthKorea,South Korea,KR,1
+NewZealand,New Zealand,NZ,1
+RestPacific,Fiji Island,FJ,7
+RestPacific,Kiribati,KI,7
+RestPacific,Papua New Guinea,PG,7
+RestPacific,Samoa (western),WS,7
+RestPacific,Solomon Islands,SB,7
+RestPacific,Tonga,TO,7
+RestPacific,Vanuatu,VU,7
+EFTA+UK,Switzerland,CH,5
+EFTA+UK,Norway,NO,5
+EFTA+UK,Iceland,IS,5
+EFTA+UK,Liechtenstein,LI,5
+EFTA+UK,United Kingdom,GB,5
+EU27,Austria,AT,27
+EU27,Belgium,BE,27
+EU27,Bulgaria,BG,27
+EU27,Croatia,HR,27
+EU27,Cyprus,CY,27
+EU27,Czech Republic,CZ,27
+EU27,Denmark,DK,27
+EU27,Estonia,EE,27
+EU27,Finland,FI,27
+EU27,France,FR,27
+EU27,Germany,DE,27
+EU27,Greece,GR,27
+EU27,Hungary,HU,27
+EU27,Ireland,IE,27
+EU27,Italy,IT,27
+EU27,Latvia,LV,27
+EU27,Lithuania,LT,27
+EU27,Luxembourg,LU,27
+EU27,Malta,MT,27
+EU27,Netherlands,NL,27
+EU27,Poland,PL,27
+EU27,Portugal,PT,27
+EU27,Romania,RO,27
+EU27,Slovakia,SK,27
+EU27,Slovenia,SI,27
+EU27,Spain,ES,27
+EU27,Sweden,SE,27
+EFTA,Switzerland,CH,4
+EFTA,Norway,NO,4
+EFTA,Iceland,IS,4
+EFTA,Liechtenstein,LI,4
+UK,United Kingdom,GB,1

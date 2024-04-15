@@ -2,7 +2,8 @@
 % Please edit documentation in R/interpolate_yearly.R
 \name{interpolate_yearly}
 \alias{interpolate_yearly}
-\title{Interpolate values in a dataset, by year.}
+\title{Interpolate values in a dataset, by year.
+Interpolate values in a dataset, by year.}
 \usage{
 interpolate_yearly(data, ...)
 }
@@ -17,5 +18,6 @@ A dataset with the column \code{value} interpolated linearly against the
 column \code{year}.
 }
 \description{
+Interpolate values in a dataset, by year.
 Interpolate values in a dataset, by year.
 }

@@ -1,6 +1,7 @@
 raw_data_env <- new.env()
 
 source(file = "data-raw/prepare_scenario_regions.R", local = raw_data_env)
+source(file = "data-raw/prepare_scenario_source_pacta_geography_bridge.R", local = raw_data_env)
 
 source(file = "data-raw/prepare_geco_2022_geography_bridge.R", local = raw_data_env)
 source(file = "data-raw/prepare_geco_2022_technology_bridge.R", local = raw_data_env)

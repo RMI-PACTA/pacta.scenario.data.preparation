@@ -7,11 +7,11 @@
 prepare_isf_2021_scenario(isf_2021_power_raw, isf_2021_not_power_raw)
 }
 \arguments{
-\item{isf_2021_power_raw}{A tidyxl data frame (with a \code{formats} attribute)
-containing a raw import of \code{NZAOA_raw_data_power.xlsx}.}
+\item{isf_2021_power_raw}{A tidyxl data frame containing a raw import of
+\code{NZAOA_raw_data_power.xlsx}.}
 
-\item{isf_2021_not_power_raw}{A tidyxl data frame (with a \code{formats}
-attribute) containing a raw import of \code{NZAOA_rawdata_notpower_P4I.xlsx}.}
+\item{isf_2021_not_power_raw}{A tidyxl data frame containing a raw import of
+\code{NZAOA_rawdata_notpower_P4I.xlsx}.}
 }
 \value{
 A prepared ISF 2021 scenario data-frame.

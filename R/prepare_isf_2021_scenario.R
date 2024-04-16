@@ -1,9 +1,9 @@
 #' Prepare ISF 2021 scenario data
 #'
-#' @param isf_2021_power_raw A tidyxl data frame (with a `formats` attribute)
-#'   containing a raw import of `NZAOA_raw_data_power.xlsx`.
-#' @param isf_2021_not_power_raw A tidyxl data frame (with a `formats`
-#'   attribute) containing a raw import of `NZAOA_rawdata_notpower_P4I.xlsx`.
+#' @param isf_2021_power_raw A tidyxl data frame containing a raw import of
+#'   `NZAOA_raw_data_power.xlsx`.
+#' @param isf_2021_not_power_raw A tidyxl data frame containing a raw import of
+#'   `NZAOA_rawdata_notpower_P4I.xlsx`.
 #'
 #' @return A prepared ISF 2021 scenario data-frame.
 #'

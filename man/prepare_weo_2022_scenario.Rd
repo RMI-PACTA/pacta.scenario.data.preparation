@@ -24,8 +24,8 @@ prepare_weo_2022_scenario(
 \item{weo_2022_fossil_fuels_raw}{A data frame containing a raw import of
 \code{weo2022_fossilfuel_demand_supply.csv}.}
 
-\item{weo_2022_nze_auto_raw}{A tidyxl data frame (with a \code{formats} attribute)
-with a raw \code{NZE2021_RawData_2050.xlsx} import.}
+\item{weo_2022_nze_auto_raw}{A tidyxl data frame with a raw
+\code{NZE2021_RawData_2050.xlsx} import.}
 
 \item{weo_2022_nze_steel_raw}{A data frame containing a raw import of
 \code{WEO2022_NZE_SteelData.csv}.}

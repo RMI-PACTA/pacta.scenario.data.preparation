@@ -4,13 +4,12 @@
 #'   `WEO2023_Extended_Data_Regions.csv` import.
 #' @param weo_2023_ext_data_world_raw A data frame containing a raw
 #'   `WEO2023_Extended_Data_World.csv` import.
-#' @param weo_2023_fig_chptr_3_raw A tidyxl data frame (with a `formats`
-#'   attribute) containing a raw import of `WEO2023_Figures_Chapter_03.xlsx`.
+#' @param weo_2023_fig_chptr_3_raw A tidyxl data frame containing a raw import
+#'   of `WEO2023_Figures_Chapter_03.xlsx`.
 #' @param iea_global_ev_raw A data frame containing a raw `IEA Global EV Data
 #'   2023.csv` import.
-#' @param mpp_ats_raw A tidyxl data frame (with a `formats` attribute)
-#'   containing a raw import of `2022-08-12 - MPP ATS - RPK and GHG
-#'   intensity.xlsx`.
+#' @param mpp_ats_raw A tidyxl data frame containing a raw import of `2022-08-12
+#'   - MPP ATS - RPK and GHG intensity.xlsx`.
 #'
 #' @return A prepared WEO 2023 scenario data-frame.
 #'

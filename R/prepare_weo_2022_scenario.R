@@ -6,8 +6,8 @@
 #'   `WEO2022_Extended_Data_World.csv`.
 #' @param weo_2022_fossil_fuels_raw A data frame containing a raw import of
 #'   `weo2022_fossilfuel_demand_supply.csv`.
-#' @param weo_2022_nze_auto_raw A tidyxl data frame (with a `formats` attribute)
-#'   with a raw `NZE2021_RawData_2050.xlsx` import.
+#' @param weo_2022_nze_auto_raw A tidyxl data frame with a raw
+#'   `NZE2021_RawData_2050.xlsx` import.
 #' @param weo_2022_nze_steel_raw A data frame containing a raw import of
 #'   `WEO2022_NZE_SteelData.csv`.
 #' @param weo_2022_sales_aps_auto_raw A data frame containing a raw import of

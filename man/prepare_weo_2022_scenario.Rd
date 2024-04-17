@@ -11,7 +11,7 @@ prepare_weo_2022_scenario(
   weo_2022_nze_auto_raw,
   weo_2022_nze_steel_raw,
   weo_2022_sales_aps_auto_raw,
-  weo_2022_electric_sales_aps_auto_raw
+  weo_2022_electric_sales_aps_auto_raw_text
 )
 }
 \arguments{
@@ -33,8 +33,8 @@ prepare_weo_2022_scenario(
 \item{weo_2022_sales_aps_auto_raw}{A data frame containing a raw import of
 \code{SalesAPS_rawdata.csv}.}
 
-\item{weo_2022_electric_sales_aps_auto_raw}{A data frame containing a raw
-import of \verb{IEA-EV-dataEV salesCarsProjection-APS.csv}.}
+\item{weo_2022_electric_sales_aps_auto_raw_text}{A vector of character
+strings containing each line of a raw import of \verb{IEA-EV-dataEV salesCarsProjection-APS.csv}.}
 }
 \value{
 A prepared WEO 2022 scenario data-frame.

@@ -12,8 +12,9 @@
 #'   `WEO2022_NZE_SteelData.csv`.
 #' @param weo_2022_sales_aps_auto_raw A data frame containing a raw import of
 #'   `SalesAPS_rawdata.csv`.
-#' @param weo_2022_electric_sales_aps_auto_raw A data frame containing a raw
-#'   import of `IEA-EV-dataEV salesCarsProjection-APS.csv`.
+#' @param weo_2022_electric_sales_aps_auto_raw_text A vector of character
+#'   strings containing each line of a raw import of `IEA-EV-dataEV
+#'   salesCarsProjection-APS.csv`.
 #'
 #' @return A prepared WEO 2022 scenario data-frame.
 #'
@@ -27,7 +28,19 @@ prepare_weo_2022_scenario <- function(weo_2022_ext_data_regions_raw,
                                       weo_2022_nze_auto_raw,
                                       weo_2022_nze_steel_raw,
                                       weo_2022_sales_aps_auto_raw,
-                                      weo_2022_electric_sales_aps_auto_raw) {
+                                      weo_2022_electric_sales_aps_auto_raw_text) {
+  lines_to_fix <- 3:length(weo_2022_electric_sales_aps_auto_raw_text)
+  weo_2022_electric_sales_aps_auto_raw_text[lines_to_fix] <-
+    paste0(
+      weo_2022_electric_sales_aps_auto_raw_text[lines_to_fix],
+      ",https://www.iea.org/reports/global-ev-outlook-2022/executive-summary"
+    )
+  weo_2022_electric_sales_aps_auto_raw <-
+    readr::read_csv(
+      file = I(weo_2022_electric_sales_aps_auto_raw_text),
+      show_col_types = FALSE
+    )
+
   fossil_fuel <-
     weo_2022_fossil_fuels_raw %>%
     dplyr::filter(.data[["Variable"]] == "Supply")

@@ -7,7 +7,7 @@
 
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/RMI-PACTA/pacta.scenario.data.preparation/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RMI-PACTA/pacta.scenario.data.preparation/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/RMI-PACTA/pacta.scenario.data.preparation/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RMI-PACTA/pacta.scenario.data.preparation?branch=main)
+[![Codecov test coverage](https://img.shields.io/codecov/c/github/rmi-pacta/pacta.scenario.data.preparation)](https://app.codecov.io/gh/RMI-PACTA/pacta.scenario.data.preparation?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/pacta.scenario.data.preparation)](https://CRAN.R-project.org/package=pacta.scenario.data.preparation)
 [![pacta.scenario.data.preparation status badge](https://rmi-pacta.r-universe.dev/badges/pacta.scenario.data.preparation)](https://rmi-pacta.r-universe.dev/ui#package:pacta.scenario.data.preparation)
 <!-- badges: end -->

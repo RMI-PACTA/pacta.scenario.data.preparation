@@ -15,6 +15,7 @@
 check_crucial_names <- function(x, expected_names) {
   stopifnot(rlang::is_named(x))
   stopifnot(is.character(expected_names))
+  x <- TRUE # DELETEME fake/test code change for PR CI testing
 
   ok <- all(unique(expected_names) %in% names(x))
   if (!ok) {

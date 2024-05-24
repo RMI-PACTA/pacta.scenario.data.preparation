@@ -7,10 +7,11 @@
 format_p4b(data)
 }
 \arguments{
-\item{data}{A scenario dataset.}
+\item{data}{A scenario data-frame following the format created in the
+prepare_*.R scripts.}
 }
 \value{
-A scenario dataset, with columns renamed to be consistent with
+A scenario data-frame with columns renamed to be consistent with
 r2dii.analysis target_market_share input requirements.
 }
 \description{

@@ -1,10 +1,15 @@
 #' Format scenario data for P4B
 #'
-#' @param data A scenario dataset.
-
+#' @param data A scenario data-frame following the format created in the
+#'   prepare_*.R scripts.
 #'
-#' @return A scenario dataset, with columns renamed to be consistent with
+#' @return A scenario data-frame with columns renamed to be consistent with
 #'   r2dii.analysis target_sda input requirements.
+#'
+#' @importFrom dplyr %>%
+#'
+#' @export
+
 format_p4b_ei <- function(data) {
   crucial_names <- c(
     "source",
@@ -28,7 +33,6 @@ format_p4b_ei <- function(data) {
     scenario_geography = tolower(.data$scenario_geography)
   )
 
-
   data <- dplyr::mutate(
     data,
     emission_factor_unit = dplyr::case_when(
@@ -39,10 +43,22 @@ format_p4b_ei <- function(data) {
     )
   )
 
-  data <- dplyr::left_join(data, dictionary_p4i_p4b(), by = c(source = "p4i_label"))
-  data <- dplyr::mutate(data, sector = ifelse(.data$sector == "oil&gas", "oil and gas", .data$sector))
+  data <- dplyr::left_join(
+    data,
+    dictionary_p4i_p4b(),
+    by = c(source = "p4i_label")
+  )
 
-  dplyr::transmute(
+  data <- dplyr::mutate(
+    data,
+    sector = dplyr::if_else(
+      .data$sector == "oil&gas",
+      "oil and gas",
+      .data$sector
+    )
+  )
+
+  data <- dplyr::transmute(
     data,
     scenario_source = as.character(.data$p4b_label),
     region = as.character(.data$scenario_geography),

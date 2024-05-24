@@ -137,3 +137,51 @@ fake_geco_2022_steel_raw <- function(Source = NULL,
     `2025` = `2025` %||% 1.2345
   )
 }
+#' See `fake_technology_bridge()`
+#' @noRd
+fake_format_p4b_input <- function(source = NULL,
+                                  scenario = NULL,
+                                  scenario_geography = NULL,
+                                  sector = NULL,
+                                  technology = NULL,
+                                  indicator = NULL,
+                                  units = NULL,
+                                  year = NULL,
+                                  tmsr = NULL,
+                                  smsp = NULL) {
+  dplyr::tibble(
+    source = source %||% "WEO2023",
+    scenario = scenario %||% "NZE_2050",
+    scenario_geography = scenario_geography %||% "Global",
+    sector = sector %||% "Oil&Gas",
+    technology = technology %||% "Oil",
+    indicator = indicator %||% "Production",
+    units = units %||% "mb/d",
+    year = year %||% 2020,
+    tmsr = tmsr %||% 5.4321,
+    smsp = smsp %||% 1.2345
+  )
+}
+#' See `fake_technology_bridge()`
+#' @noRd
+fake_format_p4b_ei_input <- function(source = NULL,
+                                     scenario = NULL,
+                                     scenario_geography = NULL,
+                                     sector = NULL,
+                                     technology = NULL,
+                                     indicator = NULL,
+                                     units = NULL,
+                                     year = NULL,
+                                     value = NULL) {
+  dplyr::tibble(
+    source = source %||% "WEO2023",
+    scenario = scenario %||% "NZE_2050",
+    scenario_geography = scenario_geography %||% "Global",
+    sector = sector %||% "Steel",
+    technology = technology %||% NA_character_,
+    indicator = indicator %||% "Emission Intensity",
+    units = units %||% "tCO2/t Steel",
+    year = year %||% 2020,
+    value = value %||% 5.4321
+  )
+}

@@ -43,6 +43,7 @@ bridge_technologies <- function(data, technology_bridge) {
 dictionary_p4i_p4b <- function() {
   dplyr::tribble(
     ~p4i_label, ~p4b_label,
+    "ISF2021", "isf_2021",
     "WEO2022", "weo_2022",
     "GECO2022", "geco_2022",
     "GECO2023", "geco_2023",

@@ -545,15 +545,14 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
       value = "VALUE"
     )
 
-  weo_2023_extended_data_steel_cement_nze <-
+  weo_2023_extended_data_steel_cement <-
     weo_2023_extended_data_world %>%
     dplyr::filter(
-      .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario",
       .data[["flow"]] %in%  c("Iron and steel", "Non-metallic minerals: cement")
     )
 
   weo_2023_steel_cement_production <-
-    weo_2023_extended_data_steel_cement_nze %>%
+    weo_2023_extended_data_steel_cement %>%
     dplyr::filter(.data[["category"]] == "Industrial material production") %>%
     dplyr::mutate(
       sector = dplyr::if_else(
@@ -562,11 +561,17 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
         "Cement"
       )
     ) %>%
-    dplyr::mutate(scenario = "NZE") %>%
-    dplyr::rename(production = "value")
+    dplyr::rename(production = "value") %>%
+    dplyr::mutate(
+      scenario = case_when(
+        scenario == "Stated Policies Scenario" ~ "STEPS",
+        scenario == "Announced Pledges Scenario" ~ "APS",
+        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
+      )
+    )
 
   weo_2023_steel_cement_emissions_scope1 <-
-    weo_2023_extended_data_steel_cement_nze %>%
+    weo_2023_extended_data_steel_cement %>%
     dplyr::filter(.data[["category"]] == "CO2 combustion and process") %>%
     dplyr::mutate(
       sector = dplyr::if_else(
@@ -574,8 +579,14 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
         "Steel",
         "Cement")
     ) %>%
-    dplyr::mutate(scenario = "NZE") %>%
-    dplyr::rename(absolute_emission_scope1 = "value")
+    dplyr::rename(absolute_emission_scope1 = "value")  %>%
+    dplyr::mutate(
+      scenario = case_when(
+        scenario == "Stated Policies Scenario" ~ "STEPS",
+        scenario == "Announced Pledges Scenario" ~ "APS",
+        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
+      )
+    )
 
   weo_2023_steel_cement_electricity_demand <-
     weo_2023_steel_cement_electricity_demand_raw %>%
@@ -609,27 +620,31 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
       year = as.integer(.data[["year"]]),
       electricity_demand = as.double(.data[["electricity_demand"]])) %>%
     dplyr::filter(
-      .data[["sector"]] %in% c("Iron and steel", "Cement"),
-      .data[["scenario"]] == "NZE") %>%
+      .data[["sector"]] %in% c("Iron and steel", "Cement")
+      ) %>%
     dplyr::mutate(
       sector = ifelse(.data[["sector"]] == "Iron and steel", "Steel", "Cement")
     )
 
-  weo_2023_electricity_generation_nze <-
+  weo_2023_electricity_generation <-
     weo_2023_extended_data_world %>%
     dplyr::filter(
-      .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario",
       .data[["flow"]] %in%  c("Electricity generation"),
       .data[["category"]] == "CO2 total intensity"
     ) %>%
-    dplyr::mutate(scenario = "NZE") %>%
-    dplyr::rename(emission_intensity_power = "value")
-
+    dplyr::rename(emission_intensity_power = "value") %>%
+    dplyr::mutate(
+      scenario = case_when(
+        scenario == "Stated Policies Scenario" ~ "STEPS",
+        scenario == "Announced Pledges Scenario" ~ "APS",
+        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
+      )
+    )
 
   weo_2023_steel_cement_emission_scope2 <-
     weo_2023_steel_cement_electricity_demand %>%
     dplyr::left_join(
-      weo_2023_electricity_generation_nze,
+      weo_2023_electricity_generation,
       by = c("scenario", "year")
     ) %>%
     dplyr::mutate(
@@ -899,7 +914,6 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
     dplyr::rename_with(.fn = tolower) %>%
     dplyr::filter(
       .data[["flow"]] == "Total aviation (domestic and bunkers)",
-      .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario",
       .data[["category"]] == "CO2 combustion"
     ) %>%
     dplyr::rename(emissions = "value")
@@ -909,7 +923,6 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
     dplyr::rename_with(.fn = tolower) %>%
     dplyr::filter(
       .data[["flow"]] == "Total aviation (domestic and bunkers)",
-      .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario",
       .data[["category"]] == "Activity of stock"
     ) %>%
     dplyr::rename(passenger_km = "value")
@@ -935,15 +948,19 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
         (.data[["emissions"]] * 1e6) / # convert Mt CO2 to t CO2
         (.data[["passenger_km"]] * 1e9) # convert billions passenger km to passenger km
     ) %>%
-    dplyr::select("value", "year") %>%
+    dplyr::select("value", "year", "scenario") %>%
     dplyr::mutate(
-      scenario = "NZE",
       source = "WEO2023",
       scenario_geography = "Global",
       units = "tCO2/pkm",
       indicator = "Emission Intensity",
       sector = "Aviation",
-      technology = "Passenger"
+      technology = "Passenger",
+      scenario = case_when(
+        scenario == "Stated Policies Scenario" ~ "STEPS",
+        scenario == "Announced Pledges Scenario" ~ "APS",
+        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
+      )
     )
 
   pacta.data.validation::validate_intermediate_scenario_output(weo_2023_aviation)

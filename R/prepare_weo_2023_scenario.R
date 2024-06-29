@@ -563,7 +563,7 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
     ) %>%
     dplyr::rename(production = "value") %>%
     dplyr::mutate(
-      scenario = case_when(
+      scenario = dplyr::case_when(
         scenario == "Stated Policies Scenario" ~ "STEPS",
         scenario == "Announced Pledges Scenario" ~ "APS",
         scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
@@ -581,7 +581,7 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
     ) %>%
     dplyr::rename(absolute_emission_scope1 = "value")  %>%
     dplyr::mutate(
-      scenario = case_when(
+      scenario = dplyr::case_when(
         scenario == "Stated Policies Scenario" ~ "STEPS",
         scenario == "Announced Pledges Scenario" ~ "APS",
         scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
@@ -634,7 +634,7 @@ weo_2023_extract_steel_cement <- function(weo_2023_ext_data_world_raw,
     ) %>%
     dplyr::rename(emission_intensity_power = "value") %>%
     dplyr::mutate(
-      scenario = case_when(
+      scenario = dplyr::case_when(
         scenario == "Stated Policies Scenario" ~ "STEPS",
         scenario == "Announced Pledges Scenario" ~ "APS",
         scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
@@ -956,7 +956,7 @@ weo_2023_extract_aviation <- function(mpp_ats_raw, weo_2023_ext_data_world_raw) 
       indicator = "Emission Intensity",
       sector = "Aviation",
       technology = "Passenger",
-      scenario = case_when(
+      scenario = dplyr::case_when(
         scenario == "Stated Policies Scenario" ~ "STEPS",
         scenario == "Announced Pledges Scenario" ~ "APS",
         scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"

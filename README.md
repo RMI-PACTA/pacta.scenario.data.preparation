@@ -1,4 +1,4 @@
-# pacta.scenario.data.preparation
+# pacta.scenario.data.preparation  <a href="https://rmi-pacta.github.io/pacta.scenario.data.preparation"><img src="man/figures/logo.png" align="right" height="31" /></a>
 
 <!-- badges: start -->
 

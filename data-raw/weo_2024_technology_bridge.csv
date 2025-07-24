@@ -22,3 +22,5 @@ Renewables,RenewablesCap
 RenewablesCap,RenewablesCap
 Solar PV,RenewablesCap
 Wind,RenewablesCap
+Electric,Electric
+Hybrid,Hybrid

@@ -20,7 +20,6 @@
 #' @importFrom dplyr %>%
 #'
 #' @export
-
 prepare_weo_2024_scenario <- function(weo_2024_ext_data_regions_raw,
                                       weo_2024_ext_data_world_raw,
                                       weo_2024_fig_chptr_3_raw,
@@ -184,9 +183,10 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       weo_2024_power_regions,
       weo_2024_extended_world
     ) %>%
+    dplyr::left_join(weo_2024_technology_bridge, by = c(technology = "scenario_technology_name")) %>%
     dplyr::filter(
       # for regional pathways, we must calculate renewables capacity in a more involved way below
-      .data[["technology"]] != "RenewablesCap" | .data[["region"]] == "World"
+      .data[["standardized_technology_name"]] != "RenewablesCap"
     )
 
   # If we sum all sub technology, we would miss geothermal or solar cpv
@@ -194,6 +194,9 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
   # (total renewables contains hydro)
   weo_2024_power_regions_renewables <-
     weo_2024_extended_regions %>%
+    dplyr::bind_rows(
+      weo_2024_extended_world
+    ) %>%
     dplyr::filter(.data[["technology"]] %in% c("Hydro", "Renewables")) %>%
     tidyr::pivot_wider(
       names_from = "technology",
@@ -212,6 +215,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
         .data[["scenario"]]
       )
     )
+
 
   weo_2024_power_regions_renewables_aps_baseline <-
     weo_2024_power_regions_renewables %>%
@@ -260,7 +264,6 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
         "value"
       )
     )
-
   weo_2024_power
 }
 
@@ -272,7 +275,7 @@ weo_2024_extract_automotive <- function(
     hybrid_methodology
 ) {
 
-  if(hybrid_methodology != "hybrid_in_ice"){
+  if(hybrid_methodology == "hybrid_in_ev"){
     # Prepare Global roadmap with 2 technologies
     # Electric Vehicles includes Battery Elevtric Vehicles (Electric in Asset Impact) and PHEV (Hybriod in Asset Impact)
     # This pathway is global
@@ -306,7 +309,7 @@ weo_2024_extract_automotive <- function(
         "Source: IEA. Licence: CC BY 4.0This data is subject to the IEA's terms and conditions: https://www.iea.org/t_c/termsandconditions/Units: %"
       )
       ) %>%
-      dplyr::pivot_wider(Scenario = case_when(
+      dplyr::mutate(Scenario = case_when(
         Scenario == "Stated Policies Scenario" ~ "STEPS",
         Scenario == "Announced Pledges Scenario" ~ "APS",
         Scenario == "Net Zero Scenario" ~ "NZE",
@@ -319,7 +322,7 @@ weo_2024_extract_automotive <- function(
       dplyr::left_join(iea_sales_longer_global, by = c("Year", "Scenario"))
 
     iea_ev_ice <- iea_ev %>%
-      dplyr::pivot_wider(
+      dplyr::mutate(
         ICE = Electric * (100 / `Sales share` - 1)
       )
 
@@ -330,14 +333,15 @@ weo_2024_extract_automotive <- function(
         names_to = "Technology",
         values_to = "Value"
       ) %>%
-      dplyr::pivot_wider(Unit = "Unit.y")
+      dplyr::rename(Units = "Unit.y") %>%
+      dplyr::mutate(Units = "# (in million)")
   } else{
     # Prepare Global roadmap with 2 technologies
     # Electric Vehicles includes Battery Elevtric Vehicles (Electric in Asset Impact) and PHEV (Hybriod in Asset Impact)
     # This pathway is global but may also be regional - except that we do assumption Sales = Production and we can't use regional pathway for Automotive pathway
 
     iea_sales_share_bev_phev_longer <- iea_sales_share_bev_phev %>%
-      dplyr::pivot_wider(
+      dplyr::mutate(
         `STEPS EV` = `STEPS BEV`+ `STEPS PHEV`,
         `APS EV` = `APS BEV`+ `APS PHEV`
       ) %>%
@@ -346,14 +350,14 @@ weo_2024_extract_automotive <- function(
         values_to = "Sales share"
       ) %>%
       dplyr::filter(`Vehicle type` == "Light-duty vehicles") %>%
-      tidyr::separate(
+      separate(
         col = "name",
         into = c("Scenario", "Technology"),
         sep = " "
       )
 
     iea_bev_phev <- iea_sales_share_bev_phev_longer %>%
-      dplyr::left_join(iea_sales_longer, by = c("Year", "Region", "Scenario"), relationship = "many-to-many") # We can also do the dplyr::filtering 4 lines after to avoid the many-to-many relationship, but it should remain a one-to-many
+      dplyr::left_join(iea_sales_longer, by = c("Year", "Region", "Scenario"), relationship = "many-to-many") # We can also do thedplyr::filtering 4 lines after to avoid the many-to-many relationship, but it should remain a one-to-many
 
     iea_bev_phev_ice_2035 <- iea_bev_phev %>%
       dplyr::select(-c("Technology.y", "Source.x", "Source.y")) %>%
@@ -365,13 +369,13 @@ weo_2024_extract_automotive <- function(
         names_from = `Technology.x`,
         values_from = `Sales share`
       ) %>%
-      dplyr::pivot_wider(
+      dplyr::rename(
         `Electric Absolute Sales` = "Electric",
         `BEV Share` = "BEV",
         `EV Share` = "EV",
         `PHEV Share` = "PHEV"
       ) %>%
-      dplyr::pivot_wider(
+      dplyr::mutate(
         ICE = `Electric Absolute Sales` * (100 / `EV Share` - 1),
         Hybrid = `PHEV Share` * `Electric Absolute Sales` / `EV Share`,
         Electric = `BEV Share` * `Electric Absolute Sales` / `EV Share`,
@@ -429,17 +433,17 @@ weo_2024_extract_automotive <- function(
 
 
     iea_auto_end_loop <- rbind(
-      iea_bev_phev_2023 %>% dplyr::pivot_wider(Value = 'Electric') %>% dplyr::select(-c("Source", "Region", "Unit")),
+      iea_bev_phev_2023 %>% dplyr::rename(Value = 'Electric') %>% dplyr::select(-c("Source", "Region", "Unit")),
       iea_ice_2023,
       iea_bev_phev_ice_final
     ) %>%
-      dplyr::pivot_wider(
+      dplyr::mutate(
         Units = "# (in million)",
         Region = "Global")
   }
 
   weo_2024_automotive <- iea_auto_end_loop %>%
-    dplyr::pivot_wider(
+    dplyr::mutate(
       sector = "Automotive",
       indicator = "Sales",
       Technology = case_when(

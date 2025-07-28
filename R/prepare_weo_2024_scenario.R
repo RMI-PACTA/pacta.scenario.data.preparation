@@ -388,7 +388,7 @@ weo_2024_extract_automotive <- function(
         names_to = "Technology",
         values_to = "Value"
       ) %>%
-      group_by(Year, Scenario, `Scenario Source`, Technology) %>%
+      dplyr::group_by(Year, Scenario, `Scenario Source`, Technology) %>%
       dplyr::summarize(
         Value = sum(
           Value, na.rm = TRUE
@@ -405,7 +405,7 @@ weo_2024_extract_automotive <- function(
 
 
     iea_ev_2023 <- iea_bev_phev_2023 %>%
-      group_by(Year, Scenario, `Scenario Source`, Unit, Region) %>%
+      dplyr::group_by(Year, Scenario, `Scenario Source`, Unit, Region) %>%
       dplyr::summarize(
         EV = sum(Electric)
       )

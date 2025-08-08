@@ -6,14 +6,14 @@
 #'   `WEO2024_Extended_Data_World.csv` import.
 #' @param weo_2024_fig_chptr_3_raw A tidyxl data frame containing a raw import
 #'   of `WEO2024_Figures_Chapter_03.xlsx`.
-#' @param iea_global_ev_raw A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
+#' @param iea_global_ev_2024_raw A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
 #' sheet : electric-vehicle-sales-by-regio
 #' @param mpp_ats_raw A tidyxl data frame containing a raw import of `2022-08-12
 #'   - MPP ATS - RPK and GHG intensity.xlsx`.
-#' @param hybrid_methodology A character chain explaining how to handle Hybrid Vehicles
+#' @param hybrid_methodology A string value explaining how to handle Hybrid Vehicles
 #' @param iea_sales_share_ev A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
 #' - sheet: electric vehicle share-ev
-#' @param iea_sales_share_ev A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
+#' @param iea_sales_share_bev_phev A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
 #' - sheet: electric-vehicle-share-bev-phev
 #' @return A prepared WEO 2024 scenario data-frame.
 #'
@@ -36,6 +36,7 @@ prepare_weo_2024_scenario <- function(weo_2024_ext_data_regions_raw,
   weo_2024_aviation <- weo_2024_extract_aviation(mpp_ats_raw, weo_2024_ext_data_world_raw)
   weo_2024_fossil_fuels <- weo_2024_extract_fossil_fuels(weo_2024_fig_chptr_3_raw)
   weo_2024_power <- weo_2024_extract_power(weo_2024_ext_data_regions_raw, weo_2024_ext_data_world_raw)
+  # We currently don't have steel and cement accurate data fr weo2024, but we've requested some additionnal data points from IEA, and see what's come from
   #weo_2024_steel_cement <- weo_2024_extract_steel_cement(weo_2024_ext_data_world_raw, weo_2024_fig_chptr_3_raw)
 
   out <-
@@ -142,13 +143,18 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       region = "REGION",
       year = "YEAR",
       value = "VALUE"
-    )
+    ) %>%
+    dplyr::filter(
+      .data[["unit"]] == "GW",
+      !(.data[["technology"]] %in% techs_out_of_pacta_scope)
+    ) %>%
+    mutate(year = as.double(year))
 
   weo_2024_power_regions_aps_baseline <-
     weo_2024_extended_regions %>%
     dplyr::filter(
       # assumption: prior to and inclusive 2022, APS is consistent with STEPS
-      .data[["year"]] <= 2022
+      .data[["year"]] <= substr(config_name, start = 1, stop = 4)
     ) %>%
     dplyr::filter(.data[["scenario"]] == "Stated Policies Scenario") %>%
     dplyr::mutate(scenario = "Announced Pledges Scenario")
@@ -157,7 +163,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
     weo_2024_extended_regions %>%
     dplyr::filter(
       # assumption: prior to and inclusive 2022, NZE is consistent with STEPS
-      .data[["year"]] <= 2022
+      .data[["year"]] <= substr(config_name, start = 1, stop = 4)
     ) %>%
     dplyr::filter(
       .data[["scenario"]] == "Stated Policies Scenario",
@@ -183,7 +189,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       weo_2024_power_regions,
       weo_2024_extended_world
     ) %>%
-    dplyr::left_join(weo_2024_technology_bridge, by = c(technology = "scenario_technology_name")) %>%
+    left_join(weo_2024_technology_bridge, by = c(technology = "scenario_technology_name")) %>%
     dplyr::filter(
       # for regional pathways, we must calculate renewables capacity in a more involved way below
       .data[["standardized_technology_name"]] != "RenewablesCap"
@@ -263,7 +269,8 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
         "year",
         "value"
       )
-    )
+    ) %>%
+    distinct() # some baseline figures may be duplicated
   weo_2024_power
 }
 

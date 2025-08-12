@@ -142,7 +142,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       .data[["unit"]] == "GW",
       !(.data[["technology"]] %in% techs_out_of_pacta_scope)
     ) %>%
-    mutate(year = as.double(year))
+    dplyr::mutate(year = as.double(year))
 
   weo_2024_power_regions_aps_baseline <-
     weo_2024_extended_regions %>%
@@ -183,7 +183,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       weo_2024_power_regions,
       weo_2024_extended_world
     ) %>%
-    left_join(weo_2024_technology_bridge, by = c(technology = "scenario_technology_name")) %>%
+    dplyr::left_join(weo_2024_technology_bridge, by = c(technology = "scenario_technology_name")) %>%
     dplyr::filter(
       # for regional pathways, we must calculate renewables capacity in a more involved way below
       .data[["standardized_technology_name"]] != "RenewablesCap"
@@ -305,7 +305,7 @@ weo_2024_ecb_extract_automotive <- function(
       "Source: IEA. Licence: CC BY 4.0This data is subject to the IEA's terms and conditions: https://www.iea.org/t_c/termsandconditions/Units: %"
     )
     ) %>%
-    dplyr::mutate(Scenario = case_when(
+    dplyr::mutate(Scenario = dplyr::case_when(
       Scenario == "Stated Policies Scenario" ~ "STEPS",
       Scenario == "Announced Pledges Scenario" ~ "APS",
       Scenario == "Net Zero Scenario" ~ "NZE",
@@ -336,7 +336,7 @@ weo_2024_ecb_extract_automotive <- function(
     dplyr::mutate(
       sector = "Automotive",
       indicator = "Sales",
-      Technology = case_when(
+      Technology = dplyr::case_when(
         Technology == "BEV" ~ "Electric",
         Technology == "PHEV" ~ "Hybrid",
         TRUE ~ Technology

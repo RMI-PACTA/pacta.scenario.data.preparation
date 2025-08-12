@@ -23,7 +23,7 @@ prepare_weo_2024_ecb_scenario <- function(weo_2024_ext_data_regions_raw,
                                       iea_global_ev_2024_raw,
                                       iea_sales_share_ev,
                                       mpp_ats_raw) {
-  weo_2024_ecb_automotive <- weo_2024_extract_automotive(
+  weo_2024_ecb_automotive <- weo_2024_ecb_extract_automotive(
     iea_global_ev_2024_raw,
     iea_sales_share_ev
   )

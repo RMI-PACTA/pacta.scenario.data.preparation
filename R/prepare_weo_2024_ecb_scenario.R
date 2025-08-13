@@ -264,7 +264,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
         "value"
       )
     ) %>%
-    distinct() # some baseline figures may be duplicated
+    dplyr::distinct() # some baseline figures may be duplicated
   weo_2024_power
 }
 

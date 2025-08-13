@@ -787,7 +787,6 @@ weo_2024_extract_aviation <- function(mpp_ats_raw, weo_2024_ext_data_world_raw) 
       by = c("scenario", "year", "publication", "product", "region", "flow"),
       suffix = c("_emissions", "_pkm")
     ) %>%
-    mutate(year = as.integer(year)) %>%
     dplyr::left_join(
       mpp_commercial_aviation,
       by = "year",

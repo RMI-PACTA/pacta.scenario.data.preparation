@@ -17,13 +17,13 @@
 #' @importFrom dplyr %>%
 #'
 #' @export
-prepare_weo_2024_ecb_scenario <- function(weo_2024_ext_data_regions_raw,
+prepare_weo_2024_hybrid_in_ev_scenario <- function(weo_2024_ext_data_regions_raw,
                                       weo_2024_ext_data_world_raw,
                                       weo_2024_fig_chptr_3_raw,
                                       iea_global_ev_2024_raw,
                                       iea_sales_share_ev,
                                       mpp_ats_raw) {
-  weo_2024_ecb_automotive <- weo_2024_ecb_extract_automotive(
+  weo_2024_hybrid_in_ev_automotive <- weo_2024_hybrid_in_ev_extract_automotive(
     iea_global_ev_2024_raw,
     iea_sales_share_ev
   )
@@ -35,7 +35,7 @@ prepare_weo_2024_ecb_scenario <- function(weo_2024_ext_data_regions_raw,
 
   out <-
     dplyr::bind_rows(
-      weo_2024_ecb_automotive,
+      weo_2024_hybrid_in_ev_automotive,
       weo_2024_aviation,
       weo_2024_fossil_fuels,
       weo_2024_power,
@@ -269,7 +269,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
 }
 
 
-weo_2024_ecb_extract_automotive <- function(
+weo_2024_hybrid_in_ev_extract_automotive <- function(
     iea_global_ev_2024_raw,
     iea_sales_share_ev
 ) {

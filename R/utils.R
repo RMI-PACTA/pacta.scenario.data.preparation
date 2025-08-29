@@ -48,6 +48,7 @@ dictionary_p4i_p4b <- function() {
     "GECO2022", "geco_2022",
     "GECO2023", "geco_2023",
     "WEO2023", "weo_2023",
-    "ISF2023", "isf_2023"
+    "ISF2023", "isf_2023",
+    "WEO2024", "weo_2024"
   )
 }

@@ -144,7 +144,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
   weo_2024_power_regions_aps_baseline <-
     weo_2024_extended_regions %>%
     dplyr::filter(
-      # assumption: prior to and inclusive 2022, APS is consistent with STEPS
+      # assumption: prior to and inclusive start year, APS is consistent with STEPS
       .data[["year"]] <= substr(config_name, start = 1, stop = 4)
     ) %>%
     dplyr::filter(.data[["scenario"]] == "Stated Policies Scenario") %>%
@@ -153,7 +153,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
   weo_2024_power_regions_nze_baseline <-
     weo_2024_extended_regions %>%
     dplyr::filter(
-      # assumption: prior to and inclusive 2022, NZE is consistent with STEPS
+      # assumption: prior to and inclusive start year, NZE is consistent with STEPS
       .data[["year"]] <= substr(config_name, start = 1, stop = 4)
     ) %>%
     dplyr::filter(
@@ -271,7 +271,7 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
     iea_sales_share_ev
 ) {
   # Prepare Global roadmap with 2 technologies
-  # Electric Vehicles includes Battery Elevtric Vehicles (Electric in Asset Impact) and PHEV (Hybriod in Asset Impact)
+  # Electric Vehicles includes Battery Elevtric Vehicles (Electric in Asset Impact) and PHEV (Hybrid in Asset Impact)
   # This pathway is global
 
   iea_sales_longer <- iea_global_ev_2024_raw %>%
@@ -338,14 +338,23 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
         Technology == "PHEV" ~ "Hybrid",
         TRUE ~ Technology
       )) %>%
-    dplyr::select(
+    dplyr::rename(
       source = "Scenario Source",
       scenario = "Scenario",
       scenario_geography = "Region",
       technology = "Technology",
       units = "Units",
       year = "Year",
-      value = "Value",
+      value = "Value"
+    ) %>%
+    dplyr::select(
+      source,
+      scenario,
+      scenario_geography,
+      technology,
+      units,
+      year,
+      value,
       sector,
       indicator
     )
@@ -637,3 +646,4 @@ weo_2024_extract_aviation <- function(mpp_ats_raw, weo_2024_ext_data_world_raw) 
 
   weo_2024_aviation
 }
+

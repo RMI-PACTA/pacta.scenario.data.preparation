@@ -30,16 +30,13 @@ prepare_weo_2024_hybrid_in_ev_scenario <- function(weo_2024_ext_data_regions_raw
   weo_2024_aviation <- weo_2024_extract_aviation(mpp_ats_raw, weo_2024_ext_data_world_raw)
   weo_2024_fossil_fuels <- weo_2024_extract_fossil_fuels(weo_2024_fig_chptr_3_raw)
   weo_2024_power <- weo_2024_extract_power(weo_2024_ext_data_regions_raw, weo_2024_ext_data_world_raw)
-  # We currently don't have steel and cement accurate data fr weo2024, but we've requested some additionnal data points from IEA, and see what's come from
-  #weo_2024_steel_cement <- weo_2024_extract_steel_cement(weo_2024_ext_data_world_raw, weo_2024_fig_chptr_3_raw)
 
   out <-
     dplyr::bind_rows(
       weo_2024_hybrid_in_ev_automotive,
       weo_2024_aviation,
       weo_2024_fossil_fuels,
-      weo_2024_power,
-      #weo_2024_steel_cement
+      weo_2024_power
     ) %>%
     dplyr::mutate(
       source =
@@ -387,185 +384,6 @@ weo_2024_extract_fossil_fuels <- function(weo_2024_fig_chptr_3_raw) {
 
   weo_2024_fossil_fuels
 }
-
-
-weo_2024_extract_steel_cement <- function(weo_2024_ext_data_world_raw,
-                                          weo_2024_fig_chptr_3_raw) {
-  weo_2024_steel_cement_electricity_demand_raw <-
-    weo_2024_fig_chptr_3_raw %>%
-    dplyr::filter(.data[["sheet"]] == "3.6") %>%
-    dplyr::filter(dplyr::between(.data[["row"]], 42, 51)) %>%
-    dplyr::filter(dplyr::between(.data[["col"]], 2, 11)) %>%
-    unpivotr::rectify() %>%
-    dplyr::select(-"row/col") %>%
-    dplyr::rename(
-      "sector" = 1L,
-      "2022" = 2L,
-      "empty_1" = 3L,
-      "STEPS_2030" = 4L,
-      "APS_2030" = 5L,
-      "NZE_2030" = 6L,
-      "empty_2" = 7L,
-      "STEPS_2050" = 8L,
-      "APS_2050" = 9L,
-      "NZE_2050" = 10L
-    )
-
-  weo_2024_extended_data_world <-
-    weo_2024_ext_data_world_raw %>%
-    dplyr::rename(
-      publication = "PUBLICATION",
-      scenario = "SCENARIO",
-      category = "CATEGORY",
-      flow = "FLOW",
-      unit = "UNIT",
-      region = "REGION",
-      year = "YEAR",
-      value = "VALUE"
-    )
-
-  weo_2024_extended_data_steel_cement <-
-    weo_2024_extended_data_world %>%
-    dplyr::filter(
-      .data[["flow"]] %in%  c("Iron and steel", "Non-metallic minerals: cement")
-    )
-
-  weo_2024_steel_cement_production <-
-    weo_2024_extended_data_steel_cement %>%
-    dplyr::filter(.data[["category"]] == "Industrial material production") %>%
-    dplyr::mutate(
-      sector = dplyr::if_else(
-        .data[["flow"]] == "Iron and steel",
-        "Steel",
-        "Cement"
-      )
-    ) %>%
-    dplyr::rename(production = "value") %>%
-    dplyr::mutate(
-      scenario = dplyr::case_when(
-        scenario == "Stated Policies Scenario" ~ "STEPS",
-        scenario == "Announced Pledges Scenario" ~ "APS",
-        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
-      )
-    )
-
-  weo_2024_steel_cement_emissions_scope1 <-
-    weo_2024_extended_data_steel_cement %>%
-    dplyr::filter(.data[["category"]] == "CO2 combustion and process") %>%
-    dplyr::mutate(
-      sector = dplyr::if_else(
-        .data[["flow"]] == "Iron and steel",
-        "Steel",
-        "Cement")
-    ) %>%
-    dplyr::rename(absolute_emission_scope1 = "value")  %>%
-    dplyr::mutate(
-      scenario = dplyr::case_when(
-        scenario == "Stated Policies Scenario" ~ "STEPS",
-        scenario == "Announced Pledges Scenario" ~ "APS",
-        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
-      )
-    )
-
-  weo_2024_steel_cement_electricity_demand <-
-    weo_2024_steel_cement_electricity_demand_raw %>%
-    dplyr::select(-c("empty_1", "empty_2")) %>%
-    dplyr::mutate(
-      STEPS_2022 = .data[["2022"]],
-      NZE_2022 = .data[["2022"]],
-      APS_2022 = .data[["2022"]],
-      `2022` = NULL
-    ) %>%
-    tidyr::pivot_longer(
-      cols = c(
-        "NZE_2022",
-        "APS_2022",
-        "STEPS_2022",
-        "NZE_2030",
-        "APS_2030",
-        "STEPS_2030",
-        "NZE_2050",
-        "APS_2050",
-        "STEPS_2050"
-      ),
-      values_to = "electricity_demand"
-    ) %>%
-    tidyr::separate(
-      col = "name",
-      into = c("scenario", "year"),
-      sep = "_"
-    ) %>%
-    dplyr::mutate(
-      year = as.integer(.data[["year"]]),
-      electricity_demand = as.double(.data[["electricity_demand"]])) %>%
-    dplyr::filter(
-      .data[["sector"]] %in% c("Iron and steel", "Cement")
-    ) %>%
-    dplyr::mutate(
-      sector = ifelse(.data[["sector"]] == "Iron and steel", "Steel", "Cement")
-    )
-
-  weo_2024_electricity_generation <-
-    weo_2024_extended_data_world %>%
-    dplyr::filter(
-      .data[["flow"]] %in%  c("Electricity generation"),
-      .data[["category"]] == "CO2 total intensity"
-    ) %>%
-    dplyr::rename(emission_intensity_power = "value") %>%
-    dplyr::mutate(
-      scenario = dplyr::case_when(
-        scenario == "Stated Policies Scenario" ~ "STEPS",
-        scenario == "Announced Pledges Scenario" ~ "APS",
-        scenario == "Net Zero Emissions by 2050 Scenario" ~ "NZE"
-      )
-    )
-
-  weo_2024_steel_cement_emission_scope2 <-
-    weo_2024_steel_cement_electricity_demand %>%
-    dplyr::left_join(
-      weo_2024_electricity_generation,
-      by = c("scenario", "year")
-    ) %>%
-    dplyr::mutate(
-      absolute_emission_scope2 =
-        .data[["electricity_demand"]] * .data[["emission_intensity_power"]] / 1000,
-      unit = "Mt CO2"
-    ) %>%
-    dplyr::select("sector", "scenario", "year", "unit", "absolute_emission_scope2")
-
-  weo_2024_steel_cement <-
-    weo_2024_steel_cement_emissions_scope1 %>%
-    dplyr::left_join(
-      weo_2024_steel_cement_emission_scope2,
-      by = c("scenario", "year", "sector", "unit")
-    ) %>%
-    dplyr::left_join(
-      weo_2024_steel_cement_production,
-      by = c("scenario", "year", "publication", "sector", "flow", "region"),
-      suffix = c("_emission_scope2", "_emission_scope1")
-    ) %>%
-    dplyr::mutate(
-      value = (.data[["absolute_emission_scope1"]] + .data[["absolute_emission_scope2"]]) / .data[["production"]],
-      source = "WEO2024"
-    ) %>%
-    dplyr::distinct(source, .data[["scenario"]], .data[["sector"]], .data[["year"]], .data[["value"]]) %>%
-    dplyr::mutate(
-      scenario_geography = "Global",
-      units = dplyr::if_else(
-        .data[["sector"]] == "Steel",
-        "tCO2/t Steel",
-        "tCO2/t Cement"
-      ),
-      indicator = "Emission Intensity",
-      technology = NA_character_
-    ) %>%
-    dplyr::filter(!is.na(.data[["value"]]))
-
-  pacta.data.validation::validate_intermediate_scenario_output(weo_2024_steel_cement)
-
-  weo_2024_steel_cement
-}
-
 
 weo_2024_extract_oil <- function(weo_2024_fig_chptr_3_raw) {
   data <-

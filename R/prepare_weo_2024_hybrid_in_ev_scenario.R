@@ -8,10 +8,10 @@
 #'   of `WEO2024_Figures_Chapter_03.xlsx`.
 #' @param iea_global_ev_2024_raw A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
 #' sheet : electric-vehicle-sales-by-regio
-#' @param mpp_ats_raw A tidyxl data frame containing a raw import of `2022-08-12
-#'   - MPP ATS - RPK and GHG intensity.xlsx`.
 #' @param iea_sales_share_ev A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
 #' - sheet: electric vehicle share-ev
+#' @param mpp_ats_raw A tidyxl data frame containing a raw import of `2022-08-12
+#'   - MPP ATS - RPK and GHG intensity.xlsx`.
 #' @return A prepared WEO 2024 scenario data-frame.
 #'
 #' @importFrom dplyr %>%

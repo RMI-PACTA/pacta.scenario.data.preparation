@@ -139,7 +139,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       .data[["unit"]] == "GW",
       !(.data[["technology"]] %in% techs_out_of_pacta_scope)
     ) %>%
-    dplyr::mutate(year = as.double(year))
+    dplyr::mutate(year = as.double(.data[["year"]]))
 
   weo_2024_power_regions_aps_baseline <-
     weo_2024_extended_regions %>%
@@ -241,7 +241,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       indicator = "variable"
     ) %>%
     dplyr::mutate(
-      sector = "Power",
+      sector= "Power",
       technology = dplyr::if_else(
         .data[["technology"]] == "Oil",
         "OilCap",
@@ -287,12 +287,12 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
 
   iea_sales_longer_global <- iea_sales_longer %>%
     dplyr::filter(
-      Region == "Global",
-      Technology == "Electric vehicle"
+      .data[["Region"]] == "Global",
+      .data[["Technology"]] == "Electric vehicle"
     )
 
   iea_sales_share_ev_ldv <- iea_sales_share_ev %>%
-    dplyr::filter(`Vehicle Type` == "Light-duty vehicle") %>%
+    dplyr::filter(.data[["Vehicle Type"]] == "Light-duty vehicle") %>%
     tidyr::pivot_longer(
       cols = c("Stated Policies Scenario", "Announced Pledges Scenario", "Net Zero Scenario"),
       names_to = "Scenario",
@@ -302,12 +302,13 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
       "Source: IEA. Licence: CC BY 4.0This data is subject to the IEA's terms and conditions: https://www.iea.org/t_c/termsandconditions/Units: %"
     )
     ) %>%
-    dplyr::mutate(Scenario = dplyr::case_when(
-      Scenario == "Stated Policies Scenario" ~ "STEPS",
-      Scenario == "Announced Pledges Scenario" ~ "APS",
-      Scenario == "Net Zero Scenario" ~ "NZE",
-      TRUE ~ Scenario
-    ),
+    dplyr::mutate(
+      Scenario = dplyr::case_when(
+        .data[["Scenario"]] == "Stated Policies Scenario" ~ "STEPS",
+        .data[["Scenario"]] == "Announced Pledges Scenario" ~ "APS",
+        .data[["Scenario"]] == "Net Zero Scenario" ~ "NZE",
+        TRUE ~ .data[["Scenario"]]
+      ),
     Source = "WEO2024")
 
 
@@ -316,11 +317,11 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
 
   iea_ev_ice <- iea_ev %>%
     dplyr::mutate(
-      ICE = Electric * (100 / `Sales share` - 1)
+      ICE = .data[["Electric"]] * (100 / .data[["Sales share"]] - 1)
     )
 
   iea_auto_end_loop <- iea_ev_ice %>%
-    dplyr::select(-c("Unit.x", "Source.x", "Source.y", "Sales share", "Technology", `Vehicle Type`)) %>%
+    dplyr::select(-c("Unit.x", "Source.x", "Source.y", "Sales share", "Technology", "Vehicle Type")) %>%
     tidyr::pivot_longer(
       cols = c("Electric", "ICE"),
       names_to = "Technology",
@@ -334,9 +335,9 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
       sector = "Automotive",
       indicator = "Sales",
       Technology = dplyr::case_when(
-        Technology == "BEV" ~ "Electric",
-        Technology == "PHEV" ~ "Hybrid",
-        TRUE ~ Technology
+        .data[["Technology"]] == "BEV" ~ "Electric",
+        .data[["Technology"]] == "PHEV" ~ "Hybrid",
+        TRUE ~ .data[["Technology"]]
       )) %>%
     dplyr::rename(
       source = "Scenario Source",
@@ -348,15 +349,15 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
       value = "Value"
     ) %>%
     dplyr::select(
-      source,
-      scenario,
-      scenario_geography,
-      technology,
-      units,
-      year,
-      value,
-      sector,
-      indicator
+      "source",
+      "scenario",
+      "scenario_geography",
+      "technology",
+      "units",
+      "year",
+      "value",
+      "sector",
+      "indicator"
     )
 
   pacta.data.validation::validate_intermediate_scenario_output(weo_2024_automotive)
@@ -419,13 +420,13 @@ weo_2024_extract_oil <- function(weo_2024_fig_chptr_3_raw) {
       values_from = "value"
       ) |>
     dplyr::mutate(
-      STEPS_2023 = start_year_2023,
-      APS_2023 = start_year_2023,
-      NZE_2023 = start_year_2023
+      STEPS_2023 = .data[["start_year_2023"]],
+      APS_2023 = .data[["start_year_2023"]],
+      NZE_2023 = .data[["start_year_2023"]],
     ) |>
     dplyr::select(-"start_year_2023") |>
     tidyr::pivot_longer(
-      cols = -technology,
+      cols = -"technology",
       names_to = c("scenario", "year"),
       names_sep = "_",
       names_transform = list(year = as.integer)
@@ -447,7 +448,7 @@ weo_2024_extract_oil <- function(weo_2024_fig_chptr_3_raw) {
       technology = "Oil",
       units = "mb/d"
     ) |>
-    dplyr::arrange(technology, scenario, year)
+    dplyr::arrange("technology", "scenario", "year")
 }
 
 
@@ -467,25 +468,25 @@ weo_2024_extract_gas <- function(weo_2024_fig_chptr_3_raw) {
     unpivotr::enhead(scenario_headers, "up-ish") %>%
     unpivotr::behead("up", "year") %>%
     unpivotr::behead("left", "technology") %>%
-    dplyr::select(technology, scenario, year, value = numeric) %>%
+    dplyr::select("technology", "scenario", "year", value = "numeric") %>%
     dplyr::filter(.data[["technology"]] == "Natural gas production (bcm)") %>%
     tidyr::pivot_wider(
       names_from = c("scenario", "year"),
       values_from = "value"
       ) %>%
     dplyr::mutate(
-      STEPS_2023 = start_year_2023,
-      APS_2023 = start_year_2023,
-      NZE_2023 = start_year_2023
+      STEPS_2023 = .data[["start_year_2023"]],
+      APS_2023 = .data[["start_year_2023"]],
+      NZE_2023 = .data[["start_year_2023"]]
     ) %>%
-    dplyr::select(-start_year_2023) %>%
+    dplyr::select(-"start_year_2023") %>%
     tidyr::pivot_longer(
-      cols = -technology,
+      cols = -"technology",
       names_to = c("scenario", "year"),
       names_sep = "_",
       names_transform = list(year = as.integer)
     ) %>%
-    dplyr::arrange(technology, scenario, year) %>%
+    dplyr::arrange("technology", "scenario", "year") %>%
     dplyr::mutate(
       sector = "Oil&Gas",
       technology = "Gas",
@@ -509,18 +510,18 @@ weo_2024_extract_coal <- function(weo_2024_fig_chptr_3_raw) {
       names_from = c("scenario", "year"),
       values_from = "value") %>%
     dplyr::mutate(
-      STEPS_2023 = NA_2023,
-      APS_2023 = NA_2023,
-      NZE_2023 = NA_2023
+      STEPS_2023 = .data[["NA_2023"]],
+      APS_2023 = .data[["NA_2023"]],
+      NZE_2023 = .data[["NA_2023"]]
     ) %>%
-    dplyr::select(-NA_2023) %>%
+    dplyr::select(-"NA_2023") %>%
     tidyr::pivot_longer(
-      cols = -technology,
+      cols = -"technology",
       names_to = c("scenario", "year"),
       names_sep = "_",
       names_transform = list(year = as.integer)
     ) %>%
-    dplyr::arrange(technology, scenario, year) %>%
+    dplyr::arrange("technology", "scenario", "year") %>%
     dplyr::mutate(
       sector = "Coal",
       technology = "Coal",

@@ -241,7 +241,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       indicator = "variable"
     ) %>%
     dplyr::mutate(
-      sector= "Power",
+      sector = "Power",
       technology = dplyr::if_else(
         .data[["technology"]] == "Oil",
         "OilCap",

@@ -12,6 +12,7 @@
 #' - sheet: electric vehicle share-ev
 #' @param mpp_ats_raw A tidyxl data frame containing a raw import of `2022-08-12
 #'   - MPP ATS - RPK and GHG intensity.xlsx`.
+#' @param config_name A string providing the timestamp used to prepare scenario
 #' @return A prepared WEO 2024 scenario data-frame.
 #'
 #' @importFrom dplyr %>%
@@ -22,7 +23,9 @@ prepare_weo_2024_hybrid_in_ev_scenario <- function(weo_2024_ext_data_regions_raw
                                       weo_2024_fig_chptr_3_raw,
                                       iea_global_ev_2024_raw,
                                       iea_sales_share_ev,
-                                      mpp_ats_raw) {
+                                      mpp_ats_raw,
+                                      config_name
+                                      ) {
   weo_2024_hybrid_in_ev_automotive <- weo_2024_hybrid_in_ev_extract_automotive(
     iea_global_ev_2024_raw,
     iea_sales_share_ev
@@ -74,7 +77,8 @@ prepare_weo_2024_hybrid_in_ev_scenario <- function(weo_2024_ext_data_regions_raw
 
 
 weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
-                                   weo_2024_ext_data_world_raw) {
+                                   weo_2024_ext_data_world_raw,
+                                   config_name) {
   techs_out_of_pacta_scope <- c(
     # the following technologies are removed either because:
     # * they are out of PACTA scope
@@ -464,7 +468,7 @@ weo_2024_extract_gas <- function(weo_2024_fig_chptr_3_raw) {
     dplyr::filter(.data[["sheet"]] == "Table 3.2") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 10, 33)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 6, 19)) %>%
-    dplyr::filter(!all(is_blank), .by = "col") %>%
+    dplyr::filter(!all(xfun::is_blank), .by = "col") %>%
     unpivotr::enhead(scenario_headers, "up-ish") %>%
     unpivotr::behead("up", "year") %>%
     unpivotr::behead("left", "technology") %>%
@@ -500,7 +504,7 @@ weo_2024_extract_coal <- function(weo_2024_fig_chptr_3_raw) {
     dplyr::filter(.data[["sheet"]] == "Table 3.3") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 13, 28)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 5, 17)) %>%
-    dplyr::filter(!all(is_blank), .by = "col") %>%
+    dplyr::filter(!all(xfun::is_blank), .by = "col") %>%
     unpivotr::behead("up-left", "scenario") %>%
     unpivotr::behead("up", "year") %>%
     unpivotr::behead("left", "technology") %>%

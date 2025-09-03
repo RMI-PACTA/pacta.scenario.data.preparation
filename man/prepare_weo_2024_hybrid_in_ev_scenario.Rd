@@ -10,7 +10,8 @@ prepare_weo_2024_hybrid_in_ev_scenario(
   weo_2024_fig_chptr_3_raw,
   iea_global_ev_2024_raw,
   iea_sales_share_ev,
-  mpp_ats_raw
+  mpp_ats_raw,
+  config_name
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ sheet : electric-vehicle-sales-by-regio}
 \itemize{
 \item MPP ATS - RPK and GHG intensity.xlsx`.
 }}
+
+\item{config_name}{A string providing the timestamp used to prepare scenario}
 }
 \value{
 A prepared WEO 2024 scenario data-frame.

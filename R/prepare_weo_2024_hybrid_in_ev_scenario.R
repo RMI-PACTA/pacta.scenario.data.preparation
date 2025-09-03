@@ -413,14 +413,17 @@ weo_2024_extract_oil <- function(weo_2024_fig_chptr_3_raw) {
     unpivotr::behead("up", "year") |>
     unpivotr::behead("left", "technology") |>
     dplyr::filter(!is.na(numeric)) |>
-    dplyr::select(technology, scenario, year, value = numeric) |>
-    tidyr::pivot_wider(names_from = c(scenario, year), values_from = value) |>
+    dplyr::select("technology", "scenario", "year", value = "numeric") |>
+    tidyr::pivot_wider(
+      names_from = c("scenario", "year"),
+      values_from = "value"
+      ) |>
     dplyr::mutate(
       STEPS_2023 = start_year_2023,
       APS_2023 = start_year_2023,
       NZE_2023 = start_year_2023
     ) |>
-    dplyr::select(-start_year_2023) |>
+    dplyr::select(-"start_year_2023") |>
     tidyr::pivot_longer(
       cols = -technology,
       names_to = c("scenario", "year"),
@@ -466,7 +469,10 @@ weo_2024_extract_gas <- function(weo_2024_fig_chptr_3_raw) {
     unpivotr::behead("left", "technology") %>%
     dplyr::select(technology, scenario, year, value = numeric) %>%
     dplyr::filter(.data[["technology"]] == "Natural gas production (bcm)") %>%
-    tidyr::pivot_wider(names_from = c(scenario, year), values_from = value) %>%
+    tidyr::pivot_wider(
+      names_from = c("scenario", "year"),
+      values_from = "value"
+      ) %>%
     dplyr::mutate(
       STEPS_2023 = start_year_2023,
       APS_2023 = start_year_2023,
@@ -497,9 +503,11 @@ weo_2024_extract_coal <- function(weo_2024_fig_chptr_3_raw) {
     unpivotr::behead("up-left", "scenario") %>%
     unpivotr::behead("up", "year") %>%
     unpivotr::behead("left", "technology") %>%
-    dplyr::select(technology, scenario, year, value = numeric) %>%
+    dplyr::select("technology", "scenario", "year", value = "numeric") %>%
     dplyr::filter(.data[["technology"]] == "World coal production") %>%
-    tidyr::pivot_wider(names_from = c(scenario, year), values_from = value) %>%
+    tidyr::pivot_wider(
+      names_from = c("scenario", "year"),
+      values_from = "value") %>%
     dplyr::mutate(
       STEPS_2023 = NA_2023,
       APS_2023 = NA_2023,

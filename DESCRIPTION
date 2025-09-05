@@ -39,7 +39,6 @@ Imports:
     stringr,
     tidyr,
     unpivotr,
-    xfun,
     zoo
 Remotes: 
     RMI-PACTA/pacta.data.validation

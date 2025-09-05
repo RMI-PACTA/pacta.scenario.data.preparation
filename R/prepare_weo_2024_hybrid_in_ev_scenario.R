@@ -468,7 +468,7 @@ weo_2024_extract_gas <- function(weo_2024_fig_chptr_3_raw) {
     dplyr::filter(.data[["sheet"]] == "Table 3.2") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 10, 33)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 6, 19)) %>%
-    dplyr::filter(!all(xfun::is_blank), .by = "col") %>%
+    dplyr::filter(!all(.data[["is_blank"]]), .by = "col") %>%
     unpivotr::enhead(scenario_headers, "up-ish") %>%
     unpivotr::behead("up", "year") %>%
     unpivotr::behead("left", "technology") %>%
@@ -504,7 +504,7 @@ weo_2024_extract_coal <- function(weo_2024_fig_chptr_3_raw) {
     dplyr::filter(.data[["sheet"]] == "Table 3.3") %>%
     dplyr::filter(dplyr::between(.data[["row"]], 13, 28)) %>%
     dplyr::filter(dplyr::between(.data[["col"]], 5, 17)) %>%
-    dplyr::filter(!all(xfun::is_blank), .by = "col") %>%
+    dplyr::filter(!all(.data[["is_blank"]]), .by = "col") %>%
     unpivotr::behead("up-left", "scenario") %>%
     unpivotr::behead("up", "year") %>%
     unpivotr::behead("left", "technology") %>%

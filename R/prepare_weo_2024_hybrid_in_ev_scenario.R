@@ -138,8 +138,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
     dplyr::filter(
       .data[["unit"]] == "GW",
       !(.data[["technology"]] %in% techs_out_of_pacta_scope)
-    ) %>%
-    dplyr::mutate(year = as.double(.data[["year"]]))
+    )
 
   weo_2024_power_regions_aps_baseline <-
     weo_2024_extended_regions %>%

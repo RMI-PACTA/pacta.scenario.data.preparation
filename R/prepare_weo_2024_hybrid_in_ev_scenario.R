@@ -145,9 +145,8 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
   weo_2024_power_regions_aps_baseline <-
     weo_2024_extended_regions %>%
     dplyr::filter(
-      # assumption: prior to and inclusive start year (2024), APS is consistent
-      # with STEPS
-      .data[["year"]] <= 2024
+      # assumption: prior to start year (2024), APS is consistent with STEPS
+      .data[["year"]] <= 2023
     ) %>%
     dplyr::filter(.data[["scenario"]] == "Stated Policies Scenario") %>%
     dplyr::mutate(scenario = "Announced Pledges Scenario")
@@ -155,9 +154,8 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
   weo_2024_power_regions_nze_baseline <-
     weo_2024_extended_regions %>%
     dplyr::filter(
-      # assumption: prior to and inclusive start year (2024), NZE is consistent
-      # with STEPS
-      .data[["year"]] <= 2024
+      # assumption: prior to start year (2024), NZE is consistent with STEPS
+      .data[["year"]] <= 2023
     ) %>%
     dplyr::filter(
       .data[["scenario"]] == "Stated Policies Scenario",

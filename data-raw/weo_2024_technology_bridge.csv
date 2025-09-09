@@ -1,0 +1,15 @@
+scenario_technology_name,standardized_technology_name
+Coal,Coal
+Coal: unabated,CoalCap
+Coal: with CCUS,CoalCap
+Gas,Gas
+Hydro,HydroCap
+ICE,ICE
+Natural gas: unabated,GasCap
+Natural gas: with CCUS,GasCap
+Nuclear,NuclearCap
+Oil,Oil
+OilCap,OilCap
+Passenger,Passenger
+RenewablesCap,RenewablesCap
+Electric,Electric

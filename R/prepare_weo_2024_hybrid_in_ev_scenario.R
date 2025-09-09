@@ -48,7 +48,6 @@ prepare_weo_2024_hybrid_in_ev_scenario <- function(weo_2024_ext_data_regions_raw
     dplyr::mutate(
       scenario = dplyr::case_when(
         .data[["scenario"]] == "Announced Pledges Scenario" ~ "APS",
-        .data[["scenario"]] == "Sustainable Development Scenario" ~ "SDS",
         .data[["scenario"]] == "Stated Policies Scenario" ~ "STEPS",
         .data[["scenario"]] == "Net Zero Emissions by 2050 Scenario" ~ "NZE_2050",
         .data[["scenario"]] == "NZE" ~ "NZE_2050",

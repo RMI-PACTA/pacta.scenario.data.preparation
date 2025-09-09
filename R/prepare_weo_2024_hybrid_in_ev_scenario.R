@@ -12,7 +12,6 @@
 #' - sheet: electric vehicle share-ev
 #' @param mpp_ats_raw A tidyxl data frame containing a raw import of `2022-08-12
 #'   - MPP ATS - RPK and GHG intensity.xlsx`.
-#' @param config_name A string providing the timestamp used to prepare scenario
 #' @return A prepared WEO 2024 scenario data-frame.
 #'
 #' @importFrom dplyr %>%
@@ -23,8 +22,7 @@ prepare_weo_2024_hybrid_in_ev_scenario <- function(weo_2024_ext_data_regions_raw
                                       weo_2024_fig_chptr_3_raw,
                                       iea_global_ev_2024_raw,
                                       iea_sales_share_ev,
-                                      mpp_ats_raw,
-                                      config_name
+                                      mpp_ats_raw
                                       ) {
   weo_2024_hybrid_in_ev_automotive <- weo_2024_hybrid_in_ev_extract_automotive(
     iea_global_ev_2024_raw,
@@ -77,8 +75,7 @@ prepare_weo_2024_hybrid_in_ev_scenario <- function(weo_2024_ext_data_regions_raw
 
 
 weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
-                                   weo_2024_ext_data_world_raw,
-                                   config_name) {
+                                   weo_2024_ext_data_world_raw) {
   techs_out_of_pacta_scope <- c(
     # the following technologies are removed either because:
     # * they are out of PACTA scope
@@ -148,8 +145,8 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
   weo_2024_power_regions_aps_baseline <-
     weo_2024_extended_regions %>%
     dplyr::filter(
-      # assumption: prior to and inclusive start year, APS is consistent with STEPS
-      .data[["year"]] <= substr(config_name, start = 1, stop = 4)
+      # assumption: prior to start year (2024), APS is consistent with STEPS
+      .data[["year"]] <= 2023
     ) %>%
     dplyr::filter(.data[["scenario"]] == "Stated Policies Scenario") %>%
     dplyr::mutate(scenario = "Announced Pledges Scenario")
@@ -157,8 +154,8 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
   weo_2024_power_regions_nze_baseline <-
     weo_2024_extended_regions %>%
     dplyr::filter(
-      # assumption: prior to and inclusive start year, NZE is consistent with STEPS
-      .data[["year"]] <= substr(config_name, start = 1, stop = 4)
+      # assumption: prior to start year (2024), NZE is consistent with STEPS
+      .data[["year"]] <= 2023
     ) %>%
     dplyr::filter(
       .data[["scenario"]] == "Stated Policies Scenario",

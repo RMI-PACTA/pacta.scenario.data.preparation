@@ -202,7 +202,7 @@ weo_2024_extract_power <- function(weo_2024_ext_data_regions_raw,
       value = .data[["Renewables"]] - .data[["Hydro"]],
       Renewables = NULL,
       Hydro = NULL,
-      technology = "RenewablesCap"
+      technology = "Renewables"
     ) %>%
     dplyr::mutate(
       scenario = dplyr::if_else(

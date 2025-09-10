@@ -2,14 +2,20 @@ scenario_technology_name,standardized_technology_name
 Coal,Coal
 Coal: unabated,CoalCap
 Coal: with CCUS,CoalCap
+Concentrating solar power,RenewablesCap
+Electric,Electric
 Gas,Gas
+Geothermal,RenewablesCap
 Hydro,HydroCap
 ICE,ICE
+Marine,RenewablesCap
+Modern bioenergy and renewable waste,RenewablesCap
 Natural gas: unabated,GasCap
 Natural gas: with CCUS,GasCap
 Nuclear,NuclearCap
 Oil,Oil
 OilCap,OilCap
 Passenger,Passenger
-RenewablesCap,RenewablesCap
-Electric,Electric
+Renewables,RenewablesCap
+Solar PV,RenewablesCap
+Wind,RenewablesCap

@@ -332,29 +332,16 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
   weo_2024_automotive <- iea_auto_end_loop %>%
     dplyr::mutate(
       sector = "Automotive",
-      indicator = "Sales",
-      Technology = dplyr::case_when(
-        .data[["Technology"]] == "BEV" ~ "Electric",
-        .data[["Technology"]] == "PHEV" ~ "Hybrid",
-        TRUE ~ .data[["Technology"]]
-      )) %>%
-    dplyr::rename(
-      source = "Scenario Source",
-      scenario = "Scenario",
-      scenario_geography = "Region",
-      technology = "Technology",
-      units = "Units",
-      year = "Year",
-      value = "Value"
+      indicator = "Sales"
     ) %>%
     dplyr::select(
-      "source",
-      "scenario",
-      "scenario_geography",
-      "technology",
-      "units",
-      "year",
-      "value",
+      "source" = "Scenario Source",
+      "scenario" = "Scenario",
+      "scenario_geography" = "Region",
+      "technology" = "Technology",
+      "units" = "Units",
+      "year" = "Year",
+      "value" = "Value",
       "sector",
       "indicator"
     )

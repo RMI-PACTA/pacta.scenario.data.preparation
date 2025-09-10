@@ -273,7 +273,7 @@ weo_2024_hybrid_in_ev_extract_automotive <- function(
     iea_sales_share_ev
 ) {
   # Prepare Global roadmap with 2 technologies
-  # Electric Vehicles includes Battery Elevtric Vehicles (Electric in Asset Impact) and PHEV (Hybrid in Asset Impact)
+  # Electric Vehicles includes Battery Electric Vehicles (Electric in Asset Impact) and PHEV (Hybrid in Asset Impact)
   # This pathway is global
 
   iea_sales_longer <- iea_global_ev_2024_raw %>%

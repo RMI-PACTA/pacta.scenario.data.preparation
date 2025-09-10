@@ -23,13 +23,13 @@ prepare_weo_2024_hybrid_in_ev_scenario(
 \item{weo_2024_fig_chptr_3_raw}{A tidyxl data frame containing a raw import
 of \code{WEO2024_Figures_Chapter_03.xlsx}.}
 
-\item{iea_global_ev_2024_raw}{A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
-sheet : electric-vehicle-sales-by-regio}
+\item{iea_global_ev_2024_raw}{A data frame containing a raw import of
+\verb{electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx} sheet:
+'electric-vehicle-sales-by-regio'.}
 
-\item{iea_sales_share_ev}{A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
-\itemize{
-\item sheet: electric vehicle share-ev
-}}
+\item{iea_sales_share_ev}{A data frame containing a raw import of
+\verb{electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx} sheet:
+'electric vehicle share-ev'.}
 
 \item{mpp_ats_raw}{A tidyxl data frame containing a raw import of `2022-08-12
 \itemize{

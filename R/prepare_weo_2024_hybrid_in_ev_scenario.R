@@ -6,10 +6,12 @@
 #'   `WEO2024_Extended_Data_World.csv` import.
 #' @param weo_2024_fig_chptr_3_raw A tidyxl data frame containing a raw import
 #'   of `WEO2024_Figures_Chapter_03.xlsx`.
-#' @param iea_global_ev_2024_raw A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
-#' sheet : electric-vehicle-sales-by-regio
-#' @param iea_sales_share_ev A data frame containing a raw import of 'electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx'
-#' - sheet: electric vehicle share-ev
+#' @param iea_global_ev_2024_raw A data frame containing a raw import of
+#'   `electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx` sheet:
+#'   'electric-vehicle-sales-by-regio'.
+#' @param iea_sales_share_ev A data frame containing a raw import of
+#'   `electric-vehicle-sales-by-region-and-scenario-2030-and-2035.xlsx` sheet:
+#'   'electric vehicle share-ev'.
 #' @param mpp_ats_raw A tidyxl data frame containing a raw import of `2022-08-12
 #'   - MPP ATS - RPK and GHG intensity.xlsx`.
 #' @return A prepared WEO 2024 scenario data-frame.
@@ -17,6 +19,7 @@
 #' @importFrom dplyr %>%
 #'
 #' @export
+
 prepare_weo_2024_hybrid_in_ev_scenario <- function(weo_2024_ext_data_regions_raw,
                                       weo_2024_ext_data_world_raw,
                                       weo_2024_fig_chptr_3_raw,
@@ -394,6 +397,7 @@ weo_2024_extract_fossil_fuels <- function(weo_2024_fig_chptr_3_raw) {
   weo_2024_fossil_fuels
 }
 
+
 weo_2024_extract_oil <- function(weo_2024_fig_chptr_3_raw) {
   data <-
     weo_2024_fig_chptr_3_raw %>%
@@ -654,4 +658,3 @@ weo_2024_extract_aviation <- function(mpp_ats_raw, weo_2024_ext_data_world_raw) 
 
   weo_2024_aviation
 }
-

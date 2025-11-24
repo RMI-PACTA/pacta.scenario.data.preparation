@@ -1,0 +1,23 @@
+# pacta.scenario.data.preparation
+
+The goal of pacta.data.preparation is to prepare all input scenario
+datasets required to run both the [PACTA for investors
+tool](https://rmi-pacta.github.io/pactaverse/), and the PACTA for Banks
+[r2dii](https://rmi-pacta.github.io/r2dii.analysis/) packages.
+
+## Installation
+
+You can install the development version of
+pacta.scenario.data.preparation from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("RMI-PACTA/pacta.scenario.data.preparation")
+```
+
+## Running Scenario Data Preparation
+
+The primary way this package is intended to be used is through the
+[workflow.scenario.preparation](https://github.com/RMI-PACTA/workflow.scenario.preparation)
+repo. See there for an example workflow of how to use the functions of
+this package to complete a scenario data preparation process properly.

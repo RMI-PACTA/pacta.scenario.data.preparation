@@ -24,4 +24,7 @@ source(file = "data-raw/prepare_weo_2022_technology_bridge.R", local = raw_data_
 source(file = "data-raw/prepare_weo_2023_geography_bridge.R", local = raw_data_env)
 source(file = "data-raw/prepare_weo_2023_technology_bridge.R", local = raw_data_env)
 
+source(file = "data-raw/prepare_weo_2024_geography_bridge.R", local = raw_data_env)
+source(file = "data-raw/prepare_weo_2024_technology_bridge.R", local = raw_data_env)
+
 save(list = names(raw_data_env), file = "R/sysdata.rda", envir = raw_data_env)

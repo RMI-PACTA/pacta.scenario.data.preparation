@@ -14,12 +14,12 @@
 
 ## Citation
 
-Yetman C, Hoffart J (2025). *pacta.scenario.data.preparation: What the
+Yetman C, Hoffart J (2026). *pacta.scenario.data.preparation: What the
 Package Does (One Line, Title Case)*. R package version 0.0.0.9000.
 
     @Manual{,
       title = {pacta.scenario.data.preparation: What the Package Does (One Line, Title Case)},
       author = {CJ Yetman and Jackson Hoffart},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.0.0.9000},
     }

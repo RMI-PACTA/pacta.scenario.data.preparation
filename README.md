@@ -1,5 +1,9 @@
 # pacta.scenario.data.preparation  <a href="https://rmi-pacta.github.io/pacta.scenario.data.preparation"><img src="man/figures/logo.png" align="right" height="31" /></a>
 
+[![Project Status: Unsupported](https://www.repostatus.org/badges/latest/unsupported.svg)](https://www.repostatus.org/#unsupported)
+
+**This project is archived for future reference, but no new work is expected in this repository.**
+
 <!-- badges: start -->
 
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)

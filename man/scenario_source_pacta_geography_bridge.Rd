@@ -6,7 +6,7 @@
 \title{A dataset that maps scenario regions as defined by their source, to a list of
 PACTA compatible scenario regions.}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 15 rows and 3 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 16 rows and 3 columns.
 }
 \usage{
 scenario_source_pacta_geography_bridge
